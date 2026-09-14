@@ -1,509 +1,840 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyAI</title>
 
-  <title>StudyAI - Estudia mejor con IA</title>
+<style>
+:root{
+  --navy:#0b1f3a;
+  --navy2:#173b68;
+  --light:#e8f1ff;
+  --bg:#f7f9fc;
+  --white:#fff;
+  --text:#101828;
+  --gray:#667085;
+  --border:#e4e7ec;
+  --green:#16804b;
+  --red:#c93636;
+}
 
-  <style>
-    :root {
-      --navy: #0b1f3a;
-      --navy-light: #16345c;
-      --blue: #dcecff;
-      --blue-hover: #c9e0ff;
-      --text: #101828;
-      --gray: #667085;
-      --border: #e4e7ec;
-      --background: #ffffff;
-      --soft: #f7faff;
-    }
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+body{
+  background:var(--bg);
+  color:var(--text);
+}
 
-    body {
-      background: var(--background);
-      color: var(--text);
-    }
+header{
+  height:70px;
+  background:white;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
 
-    header {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 7%;
-      border-bottom: 1px solid var(--border);
-      background: white;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+.logo{
+  color:var(--navy);
+  font-size:25px;
+  font-weight:800;
+}
 
-    .logo {
-      color: var(--navy);
-      font-size: 25px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
+.header-buttons{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
 
-    .login {
-      background: var(--navy);
-      color: white;
-      border: none;
-      padding: 11px 19px;
-      border-radius: 9px;
-      font-size: 14px;
-      cursor: pointer;
-    }
+.streak-mini{
+  background:var(--light);
+  color:var(--navy);
+  padding:9px 13px;
+  border-radius:9px;
+  font-weight:bold;
+  font-size:14px;
+}
 
-    .login:hover {
-      background: var(--navy-light);
-    }
+.login{
+  background:var(--navy);
+  color:white;
+  border:0;
+  padding:10px 16px;
+  border-radius:9px;
+  cursor:pointer;
+}
 
-    /* INICIO */
+/* HERO */
 
-    .hero {
-      max-width: 950px;
-      margin: auto;
-      text-align: center;
-      padding: 105px 20px 75px;
-    }
+.hero{
+  max-width:950px;
+  margin:auto;
+  text-align:center;
+  padding:95px 20px 70px;
+}
 
-    .badge {
-      display: inline-block;
-      background: var(--blue);
-      color: var(--navy);
-      padding: 8px 14px;
-      border-radius: 50px;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 22px;
-    }
+.badge{
+  display:inline-block;
+  background:var(--light);
+  color:var(--navy);
+  padding:8px 14px;
+  border-radius:50px;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:20px;
+}
 
-    .hero h1 {
-      color: var(--navy);
-      font-size: 54px;
-      line-height: 1.08;
-      letter-spacing: -2px;
-      margin-bottom: 22px;
-    }
+.hero h1{
+  color:var(--navy);
+  font-size:53px;
+  line-height:1.08;
+  letter-spacing:-2px;
+  margin-bottom:20px;
+}
 
-    .hero h1 span {
-      color: var(--navy-light);
-    }
+.hero h1 span{
+  color:var(--navy2);
+}
 
-    .hero p {
-      max-width: 650px;
-      margin: auto;
-      color: var(--gray);
-      font-size: 18px;
-      line-height: 1.7;
-    }
+.hero p{
+  max-width:680px;
+  margin:auto;
+  color:var(--gray);
+  line-height:1.7;
+  font-size:18px;
+}
 
-    .start {
-      margin-top: 32px;
-      padding: 15px 28px;
-      border: none;
-      border-radius: 10px;
-      background: var(--navy);
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+.primary{
+  background:var(--navy);
+  color:white;
+  border:0;
+  border-radius:10px;
+  padding:14px 22px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-    .start:hover {
-      background: var(--navy-light);
-      transform: translateY(-1px);
-    }
+.primary:hover{
+  background:var(--navy2);
+}
 
-    .features {
-      max-width: 1000px;
-      margin: auto;
-      display: flex;
-      gap: 18px;
-      justify-content: center;
-      padding: 20px 20px 90px;
-      flex-wrap: wrap;
-    }
+.start{
+  margin-top:28px;
+  font-size:16px;
+}
 
-    .card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      padding: 26px;
-      width: 290px;
-      box-shadow: 0 8px 25px rgba(11, 31, 58, 0.05);
-    }
+.features{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:18px;
+  max-width:1000px;
+  margin:auto;
+  padding:10px 20px 80px;
+}
 
-    .card-icon {
-      width: 42px;
-      height: 42px;
-      background: var(--blue);
-      color: var(--navy);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      margin-bottom: 18px;
-    }
+.card{
+  width:290px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:24px;
+  box-shadow:0 5px 20px rgba(11,31,58,.04);
+}
 
-    .card h3 {
-      color: var(--navy);
-      margin-bottom: 9px;
-      font-size: 18px;
-    }
+.card-icon{
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  background:var(--light);
+  margin-bottom:15px;
+}
 
-    .card p {
-      color: var(--gray);
-      line-height: 1.55;
-      font-size: 14px;
-    }
+.card h3{
+  color:var(--navy);
+  margin-bottom:8px;
+}
 
-    /* ESTUDIAR */
+.card p{
+  color:var(--gray);
+  line-height:1.5;
+  font-size:14px;
+}
 
-    #study {
-      display: none;
-      max-width: 900px;
-      margin: auto;
-      padding: 55px 20px 80px;
-    }
+/* APP */
 
-    .study-header {
-      margin-bottom: 28px;
-    }
+#app{
+  display:none;
+  max-width:1100px;
+  margin:auto;
+  padding:35px 20px 80px;
+}
 
-    .study-header h2 {
-      color: var(--navy);
-      font-size: 34px;
-      margin-bottom: 9px;
-    }
+.app-title{
+  color:var(--navy);
+  font-size:32px;
+  margin-bottom:8px;
+}
 
-    .study-header p {
-      color: var(--gray);
-    }
+.app-subtitle{
+  color:var(--gray);
+  margin-bottom:25px;
+}
 
-    .section {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px;
-      margin-bottom: 18px;
-      box-shadow: 0 6px 20px rgba(11, 31, 58, 0.04);
-    }
+.nav-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:22px;
+}
 
-    .section-title {
-      color: var(--navy);
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 7px;
-    }
+.tab{
+  border:1px solid var(--border);
+  background:white;
+  color:var(--navy);
+  padding:10px 14px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:bold;
+}
 
-    .section-description {
-      color: var(--gray);
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
+.tab.active{
+  background:var(--navy);
+  color:white;
+}
 
-    textarea {
-      width: 100%;
-      min-height: 190px;
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      padding: 15px;
-      font-size: 15px;
-      resize: vertical;
-      outline: none;
-      color: var(--text);
-      background: #fcfdff;
-    }
+.page{
+  display:none;
+}
 
-    textarea:focus {
-      border-color: var(--navy-light);
-      box-shadow: 0 0 0 3px var(--blue);
-    }
+.page.active{
+  display:block;
+}
 
-    .photo-counter {
-      color: var(--gray);
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
+.box{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:0 5px 20px rgba(11,31,58,.04);
+}
 
-    .photo-button {
-      display: inline-block;
-      background: var(--navy);
-      color: white;
-      padding: 12px 17px;
-      border-radius: 9px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: bold;
-    }
+.box h3{
+  color:var(--navy);
+  margin-bottom:8px;
+}
 
-    .photo-button:hover {
-      background: var(--navy-light);
-    }
+.description{
+  color:var(--gray);
+  font-size:14px;
+  margin-bottom:17px;
+}
 
-    #photoInput {
-      display: none;
-    }
+/* COURSE */
 
-    #photos {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 12px;
-      margin-top: 18px;
-    }
+select,input,textarea{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px;
+  background:white;
+  outline:none;
+  font-size:15px;
+}
 
-    .photo {
-      position: relative;
-      height: 145px;
-      border-radius: 11px;
-      overflow: hidden;
-      background: var(--soft);
-      border: 1px solid var(--border);
-    }
+select:focus,input:focus,textarea:focus{
+  border-color:var(--navy2);
+}
 
-    .photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.course-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
 
-    .delete-photo {
-      position: absolute;
-      top: 7px;
-      right: 7px;
-      width: 28px;
-      height: 28px;
-      border: none;
-      border-radius: 50%;
-      background: rgba(11, 31, 58, 0.85);
-      color: white;
-      cursor: pointer;
-      font-size: 18px;
-    }
+/* NOTES */
 
-    .explain {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 10px;
-      background: var(--navy);
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+textarea{
+  min-height:170px;
+  resize:vertical;
+}
 
-    .explain:hover {
-      background: var(--navy-light);
-    }
+.photo-button{
+  display:inline-block;
+  background:var(--navy);
+  color:white;
+  padding:12px 16px;
+  border-radius:9px;
+  cursor:pointer;
+  margin-top:10px;
+}
 
-    #result {
-      display: none;
-      margin-top: 18px;
-      background: var(--soft);
-      border: 1px solid var(--blue-hover);
-      border-radius: 14px;
-      padding: 22px;
-      line-height: 1.65;
-      color: var(--text);
-    }
+#photoInput{
+  display:none;
+}
 
-    /* VIDEO */
+#photos{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  gap:10px;
+  margin-top:15px;
+}
 
-    .video-section {
-      display: none;
-      margin-top: 25px;
-    }
+.photo{
+  height:130px;
+  border-radius:10px;
+  overflow:hidden;
+  position:relative;
+  border:1px solid var(--border);
+}
 
-    .video-box {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px;
-      box-shadow: 0 6px 20px rgba(11, 31, 58, 0.04);
-    }
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-    .video-box h3 {
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
+.delete-photo{
+  position:absolute;
+  right:6px;
+  top:6px;
+  border:0;
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  background:rgba(11,31,58,.85);
+  color:white;
+  cursor:pointer;
+}
 
-    .video-box p {
-      color: var(--gray);
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
+/* DIFFICULTY */
 
-    .youtube-button {
-      display: inline-block;
-      background: var(--navy);
-      color: white;
-      text-decoration: none;
-      padding: 11px 16px;
-      border-radius: 9px;
-      font-size: 14px;
-      font-weight: bold;
-    }
+.difficulty{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
 
-    .back {
-      margin-top: 22px;
-      border: none;
-      background: transparent;
-      color: var(--navy-light);
-      cursor: pointer;
-      font-weight: bold;
-    }
+.diff{
+  flex:1;
+  min-width:100px;
+  padding:13px;
+  border:1px solid var(--border);
+  background:white;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  color:var(--navy);
+}
 
-    /* RESPONSIVE */
+.diff.selected{
+  background:var(--navy);
+  color:white;
+}
 
-    @media (max-width: 650px) {
+/* TEST */
 
-      header {
-        padding: 0 20px;
-      }
+.question-number{
+  color:var(--gray);
+  font-size:14px;
+  margin-bottom:8px;
+}
 
-      .hero {
-        padding: 75px 20px 60px;
-      }
+.question{
+  color:var(--navy);
+  font-size:22px;
+  line-height:1.4;
+  margin-bottom:20px;
+}
 
-      .hero h1 {
-        font-size: 40px;
-        letter-spacing: -1.2px;
-      }
+.answers{
+  display:grid;
+  gap:10px;
+}
 
-      .hero p {
-        font-size: 16px;
-      }
+.answer{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:14px;
+  text-align:left;
+  cursor:pointer;
+  font-size:15px;
+}
 
-      .features {
-        padding-bottom: 60px;
-      }
+.answer:hover{
+  background:var(--light);
+}
 
-      .card {
-        width: 100%;
-      }
+.answer.correct{
+  background:#e6f7ee;
+  border-color:var(--green);
+}
 
-      #study {
-        padding-top: 35px;
-      }
-    }
-  </style>
+.answer.wrong{
+  background:#fdeaea;
+  border-color:var(--red);
+}
+
+.test-info{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:18px;
+  color:var(--gray);
+}
+
+#testArea,#examResult{
+  display:none;
+}
+
+.result-score{
+  font-size:42px;
+  color:var(--navy);
+  font-weight:bold;
+  margin:15px 0;
+}
+
+/* CALENDAR */
+
+.calendar-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+}
+
+.day-name{
+  text-align:center;
+  font-weight:bold;
+  color:var(--gray);
+  padding:7px;
+  font-size:13px;
+}
+
+.day{
+  min-height:65px;
+  background:#fbfcfe;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:7px;
+  cursor:pointer;
+}
+
+.day:hover{
+  background:var(--light);
+}
+
+.day-number{
+  font-weight:bold;
+  color:var(--navy);
+}
+
+.event{
+  margin-top:5px;
+  font-size:11px;
+  background:var(--light);
+  color:var(--navy);
+  padding:3px;
+  border-radius:4px;
+  overflow:hidden;
+}
+
+/* STREAK */
+
+.streak-card{
+  text-align:center;
+  padding:35px;
+}
+
+.streak-number{
+  font-size:65px;
+  font-weight:800;
+  color:var(--navy);
+}
+
+.streak-fire{
+  font-size:45px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.stat{
+  background:var(--light);
+  border-radius:12px;
+  padding:18px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:25px;
+  color:var(--navy);
+}
+
+.stat span{
+  color:var(--gray);
+  font-size:13px;
+}
+
+/* PLAN */
+
+.plan-day{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:10px;
+}
+
+.plan-day strong{
+  color:var(--navy);
+}
+
+.plan-day p{
+  color:var(--gray);
+  margin-top:6px;
+  line-height:1.5;
+}
+
+/* VIDEO */
+
+.video-box{
+  background:var(--light);
+  border-radius:14px;
+  padding:20px;
+}
+
+.video-box h3{
+  color:var(--navy);
+}
+
+.youtube{
+  display:inline-block;
+  margin-top:12px;
+  background:var(--navy);
+  color:white;
+  text-decoration:none;
+  padding:11px 16px;
+  border-radius:9px;
+  font-weight:bold;
+}
+
+.back{
+  margin-top:25px;
+  border:0;
+  background:transparent;
+  color:var(--navy2);
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.hidden{
+  display:none!important;
+}
+
+@media(max-width:700px){
+
+  .hero h1{
+    font-size:40px;
+  }
+
+  .course-grid{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .calendar-grid{
+    gap:2px;
+  }
+
+  .day{
+    min-height:55px;
+    padding:4px;
+  }
+
+  .event{
+    font-size:9px;
+  }
+
+  .header-buttons .login{
+    display:none;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">StudyAI</div>
-    <button class="login">Iniciar sesión</button>
-  </header>
+<header>
+  <div class="logo">StudyAI</div>
 
-
-  <!-- INICIO -->
-
-  <section class="hero" id="home">
-
-    <div class="badge">
-      TU ASISTENTE DE ESTUDIO
+  <div class="header-buttons">
+    <div class="streak-mini" id="miniStreak">
+      🔥 0 días
     </div>
 
-    <h1>
-      Estudia mejor<br>
-      <span>con inteligencia artificial.</span>
-    </h1>
+    <button class="login">
+      Iniciar sesión
+    </button>
+  </div>
+</header>
 
+
+<!-- INICIO -->
+
+<section class="hero" id="home">
+
+  <div class="badge">
+    TU ASISTENTE DE ESTUDIO
+  </div>
+
+  <h1>
+    Estudia mejor<br>
+    <span>con inteligencia artificial.</span>
+  </h1>
+
+  <p>
+    Organiza tus estudios, prepara exámenes,
+    practica con tests y aprende de tus apuntes.
+  </p>
+
+  <button
+    class="primary start"
+    onclick="openApp()"
+  >
+    Empezar a estudiar
+  </button>
+
+</section>
+
+
+<section class="features" id="features">
+
+  <div class="card">
+    <div class="card-icon">🤖</div>
+    <h3>IA para estudiar</h3>
     <p>
-      Sube tus apuntes, haz fotos y utiliza StudyAI
-      para comprender tus temas, practicar y prepararte
-      para tus exámenes.
+      Explicaciones, resúmenes, preguntas y ayuda
+      personalizada con tus apuntes.
     </p>
+  </div>
 
-    <button class="start" onclick="startStudying()">
-      Empezar a estudiar
+  <div class="card">
+    <div class="card-icon">📝</div>
+    <h3>Exámenes y tests</h3>
+    <p>
+      Elige la dificultad y practica hasta estar
+      preparado para tu examen.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">📅</div>
+    <h3>Organiza tu tiempo</h3>
+    <p>
+      Añade exámenes y tareas y crea un plan
+      de estudio para cada día.
+    </p>
+  </div>
+
+</section>
+
+
+<!-- APP -->
+
+<section id="app">
+
+  <h2 class="app-title">
+    Mi zona de estudio
+  </h2>
+
+  <p class="app-subtitle">
+    Todo lo que necesitas para prepararte.
+  </p>
+
+
+  <div class="nav-tabs">
+
+    <button
+      class="tab active"
+      onclick="showPage('dashboard',this)"
+    >
+      🏠 Inicio
     </button>
 
-  </section>
+    <button
+      class="tab"
+      onclick="showPage('notesPage',this)"
+    >
+      📚 Apuntes
+    </button>
+
+    <button
+      class="tab"
+      onclick="showPage('testPage',this)"
+    >
+      📝 Tests
+    </button>
+
+    <button
+      class="tab"
+      onclick="showPage('calendarPage',this)"
+    >
+      📅 Calendario
+    </button>
+
+    <button
+      class="tab"
+      onclick="showPage('streakPage',this)"
+    >
+      🔥 Racha
+    </button>
+
+  </div>
 
 
-  <section class="features" id="features">
+  <!-- DASHBOARD -->
 
-    <div class="card">
+  <div
+    class="page active"
+    id="dashboard"
+  >
 
-      <div class="card-icon">🤖</div>
+    <div class="box">
 
-      <h3>Explicaciones inteligentes</h3>
+      <h3>🎓 ¿En qué curso estás?</h3>
 
-      <p>
-        StudyAI podrá explicarte tus apuntes
-        de una manera sencilla y fácil de entender.
+      <p class="description">
+        Esto ayudará a adaptar la dificultad de los ejercicios.
       </p>
+
+      <select id="course">
+
+        <option value="">
+          Selecciona tu curso
+        </option>
+
+        <option>1.º de Primaria</option>
+        <option>2.º de Primaria</option>
+        <option>3.º de Primaria</option>
+        <option>4.º de Primaria</option>
+        <option>5.º de Primaria</option>
+        <option>6.º de Primaria</option>
+
+        <option>1.º de ESO</option>
+        <option>2.º de ESO</option>
+        <option>3.º de ESO</option>
+        <option>4.º de ESO</option>
+
+        <option>1.º de Bachillerato</option>
+        <option>2.º de Bachillerato</option>
+
+      </select>
+
+      <br><br>
+
+      <button
+        class="primary"
+        onclick="saveCourse()"
+      >
+        Guardar curso
+      </button>
 
     </div>
 
 
-    <div class="card">
+    <div class="box">
 
-      <div class="card-icon">📝</div>
+      <h3>📊 Tu progreso</h3>
 
-      <h3>Tests personalizados</h3>
+      <div class="stats">
 
-      <p>
-        Genera preguntas sobre lo que estás estudiando
-        y descubre cuánto sabes.
-      </p>
+        <div class="stat">
+          <strong id="statTests">0</strong>
+          <span>Tests realizados</span>
+        </div>
 
-    </div>
+        <div class="stat">
+          <strong id="statCorrect">0%</strong>
+          <span>Aciertos</span>
+        </div>
 
+        <div class="stat">
+          <strong id="statDays">0</strong>
+          <span>Días estudiados</span>
+        </div>
 
-    <div class="card">
-
-      <div class="card-icon">📸</div>
-
-      <h3>Apuntes en fotos</h3>
-
-      <p>
-        Haz fotos de tus apuntes y prepáralos
-        para estudiarlos con StudyAI.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ESTUDIAR -->
-
-  <section id="study">
-
-    <div class="study-header">
-
-      <h2>Vamos a estudiar</h2>
-
-      <p>
-        Escribe tus apuntes o haz fotos de ellos.
-      </p>
-
-    </div>
-
-
-    <div class="section">
-
-      <div class="section-title">
-        📝 Tus apuntes
       </div>
 
-      <div class="section-description">
-        Puedes escribir directamente aquí.
-      </div>
+    </div>
+
+
+    <div class="box">
+
+      <h3>🎯 Tu próximo objetivo</h3>
+
+      <p
+        class="description"
+        id="nextExamText"
+      >
+        Añade un examen en el calendario para crear
+        automáticamente tu plan de estudio.
+      </p>
+
+      <button
+        class="primary"
+        onclick="showPageById('calendarPage')"
+      >
+        📅 Añadir examen
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- APUNTES -->
+
+  <div
+    class="page"
+    id="notesPage"
+  >
+
+    <div class="box">
+
+      <h3>📝 Escribe tus apuntes</h3>
+
+      <p class="description">
+        Escribe aquí el contenido que quieres estudiar.
+      </p>
 
       <textarea
         id="notes"
@@ -513,23 +844,21 @@
     </div>
 
 
-    <div class="section">
+    <div class="box">
 
-      <div class="section-title">
-        📸 Fotos de tus apuntes
-      </div>
+      <h3>📸 Fotos de tus apuntes</h3>
 
-      <div class="section-description">
-        Puedes hacer fotos de tus apuntes o seleccionarlas
-        desde tu dispositivo.
-      </div>
+      <p class="description">
+        Puedes hacer fotos o seleccionarlas desde tu dispositivo.
+        Máximo 8 fotos cada 24 horas.
+      </p>
 
-      <div
-        class="photo-counter"
+      <p
         id="counter"
+        class="description"
       >
         8 fotos disponibles
-      </div>
+      </p>
 
       <label
         class="photo-button"
@@ -551,446 +880,1730 @@
     </div>
 
 
-    <button
-      class="explain"
-      onclick="explainNotes()"
-    >
-      🤖 Explicar mis apuntes
-    </button>
+    <div class="box">
 
+      <h3>🤖 Explicar mis apuntes</h3>
 
-    <div id="result"></div>
+      <p class="description">
+        La IA analizará tus apuntes y te los explicará
+        de forma sencilla.
+      </p>
 
+      <button
+        class="primary"
+        onclick="explainNotes()"
+      >
+        Explicar apuntes
+      </button>
 
-    <!-- VIDEO -->
+      <div
+        id="result"
+        style="
+          margin-top:18px;
+          background:#f7f9fc;
+          border-radius:12px;
+          padding:18px;
+          display:none;
+          line-height:1.6;
+        "
+      ></div>
+
+    </div>
+
 
     <div
-      class="video-section"
       id="videoSection"
+      class="box hidden"
     >
 
       <div class="video-box">
 
-        <h3>
-          🎥 Vídeo recomendado
-        </h3>
+        <h3>🎥 Vídeo recomendado</h3>
 
-        <p>
-          Cuando conectemos la inteligencia artificial,
-          StudyAI buscará un vídeo relacionado con el
-          tema que estés estudiando.
+        <p class="description">
+          Hemos preparado una búsqueda de YouTube
+          relacionada con el tema.
         </p>
 
         <a
-          class="youtube-button"
           id="youtubeButton"
+          class="youtube"
           href="#"
           target="_blank"
         >
-          ▶ Ver vídeo en YouTube
+          ▶ Ver vídeo
         </a>
 
       </div>
 
     </div>
 
+  </div>
 
-    <button
-      class="back"
-      onclick="goBack()"
+
+  <!-- TESTS -->
+
+  <div
+    class="page"
+    id="testPage"
+  >
+
+    <div
+      class="box"
+      id="testSetup"
     >
-      ← Volver al inicio
-    </button>
 
-  </section>
+      <h3>📝 Crear un test</h3>
 
+      <p class="description">
+        Elige cómo quieres practicar.
+      </p>
 
-  <script>
 
-    const MAX_PHOTOS = 8;
+      <label>
+        Número de preguntas
+      </label>
 
-    const LIMIT_TIME =
-      24 * 60 * 60 * 1000;
+      <select id="questionCount">
 
-    let photos = [];
+        <option value="5">5 preguntas</option>
+        <option value="10">10 preguntas</option>
+        <option value="15">15 preguntas</option>
+        <option value="20">20 preguntas</option>
 
+      </select>
 
-    function startStudying() {
+      <br><br>
 
-      document.getElementById("home")
-        .style.display = "none";
 
-      document.getElementById("features")
-        .style.display = "none";
+      <label>
+        Dificultad
+      </label>
 
-      document.getElementById("study")
-        .style.display = "block";
+      <div class="difficulty">
 
-      updateCounter();
+        <button
+          class="diff selected"
+          data-level="easy"
+          onclick="selectDifficulty('easy',this)"
+        >
+          Fácil
+        </button>
 
-      window.scrollTo(0, 0);
-    }
+        <button
+          class="diff"
+          data-level="medium"
+          onclick="selectDifficulty('medium',this)"
+        >
+          Medio
+        </button>
 
+        <button
+          class="diff"
+          data-level="hard"
+          onclick="selectDifficulty('hard',this)"
+        >
+          Difícil
+        </button>
 
-    function goBack() {
+      </div>
 
-      document.getElementById("study")
-        .style.display = "none";
+      <br>
 
-      document.getElementById("home")
-        .style.display = "block";
+      <button
+        class="primary"
+        onclick="startTest(false)"
+      >
+        📝 Empezar test
+      </button>
 
-      document.getElementById("features")
-        .style.display = "flex";
+      <button
+        class="primary"
+        style="margin-left:8px"
+        onclick="startTest(true)"
+      >
+        🎯 Modo examen
+      </button>
 
-      window.scrollTo(0, 0);
-    }
+    </div>
 
 
-    function getUsage() {
+    <div
+      class="box"
+      id="testArea"
+    >
 
-      const data =
-        localStorage.getItem(
-          "studyAIPhotoUsage"
-        );
+      <div class="test-info">
 
+        <span id="questionProgress">
+          Pregunta 1
+        </span>
 
-      if (!data) {
+        <span id="currentDifficulty">
+          Fácil
+        </span>
 
-        return {
-          count: 0,
-          startTime: Date.now()
-        };
+      </div>
 
-      }
 
+      <div
+        class="question"
+        id="question"
+      ></div>
 
-      const usage =
-        JSON.parse(data);
 
+      <div
+        class="answers"
+        id="answers"
+      ></div>
 
-      if (
-        Date.now() - usage.startTime
-        >= LIMIT_TIME
-      ) {
+      <br>
 
-        const newUsage = {
-          count: 0,
-          startTime: Date.now()
-        };
+      <button
+        id="nextQuestion"
+        class="primary hidden"
+        onclick="nextQuestion()"
+      >
+        Siguiente
+      </button>
 
+    </div>
 
-        localStorage.setItem(
-          "studyAIPhotoUsage",
-          JSON.stringify(newUsage)
-        );
 
+    <div
+      class="box"
+      id="examResult"
+    >
 
-        return newUsage;
+      <h3>🎉 Has terminado</h3>
 
-      }
+      <div
+        class="result-score"
+        id="finalScore"
+      >
+        0/5
+      </div>
 
+      <p
+        id="finalMessage"
+        class="description"
+      ></p>
 
-      return usage;
-    }
+      <button
+        class="primary"
+        onclick="resetTest()"
+      >
+        Volver a hacer un test
+      </button>
 
+    </div>
 
-    function updateCounter() {
+  </div>
 
-      const usage =
-        getUsage();
 
+  <!-- CALENDARIO -->
 
-      const remaining =
-        MAX_PHOTOS - usage.count;
+  <div
+    class="page"
+    id="calendarPage"
+  >
 
+    <div class="box">
 
-      const counter =
-        document.getElementById("counter");
+      <h3>📅 Calendario de estudio</h3>
 
+      <p class="description">
+        Añade tus exámenes y tareas.
+      </p>
 
-      if (remaining > 0) {
 
-        counter.textContent =
-          remaining +
-          (
-            remaining === 1
-              ? " foto disponible"
-              : " fotos disponibles"
-          );
+      <div class="course-grid">
 
-      } else {
+        <div>
+          <label>Fecha</label>
+          <input
+            type="date"
+            id="eventDate"
+          >
+        </div>
 
-        const timeLeft =
-          LIMIT_TIME -
-          (
-            Date.now() -
-            usage.startTime
-          );
+        <div>
+          <label>Tipo</label>
 
+          <select id="eventType">
+            <option>Examen</option>
+            <option>Tarea</option>
+          </select>
 
-        const hours =
-          Math.ceil(
-            timeLeft /
-            (60 * 60 * 1000)
-          );
+        </div>
 
+      </div>
 
-        counter.textContent =
-          "Límite alcanzado. " +
-          "Podrás subir fotos de nuevo " +
-          "en aproximadamente " +
-          hours +
-          (
-            hours === 1
-              ? " hora."
-              : " horas."
-          );
+      <br>
 
-      }
-    }
+      <input
+        id="eventTitle"
+        placeholder="Ej: Examen de Matemáticas"
+      >
 
+      <br><br>
 
-    document
-      .getElementById("photoInput")
-      .addEventListener(
-        "change",
-        function(event) {
+      <button
+        class="primary"
+        onclick="addEvent()"
+      >
+        + Añadir al calendario
+      </button>
 
-          const selectedFiles =
-            Array.from(
-              event.target.files
-            );
+    </div>
 
 
-          const usage =
-            getUsage();
+    <div class="box">
 
+      <div class="calendar-top">
 
-          const remaining =
-            MAX_PHOTOS -
-            usage.count;
+        <button
+          class="tab"
+          onclick="changeMonth(-1)"
+        >
+          ←
+        </button>
 
+        <h3 id="monthTitle"></h3>
 
-          if (remaining <= 0) {
+        <button
+          class="tab"
+          onclick="changeMonth(1)"
+        >
+          →
+        </button>
 
-            alert(
-              "Has alcanzado el límite de 8 fotos. " +
-              "Podrás volver a subir fotos cuando pasen 24 horas."
-            );
+      </div>
 
 
-            event.target.value = "";
+      <div
+        class="calendar-grid"
+        id="calendar"
+      ></div>
 
-            return;
-          }
+    </div>
 
 
-          if (
-            selectedFiles.length >
-            remaining
-          ) {
+    <div class="box">
 
-            alert(
-              "Solo puedes añadir " +
-              remaining +
-              " foto" +
-              (
-                remaining === 1
-                  ? ""
-                  : "s"
-              ) +
-              " más."
-            );
+      <h3>📚 Plan de estudio</h3>
 
+      <p class="description">
+        Cuando añadas un examen, StudyAI preparará
+        una propuesta de estudio para los días anteriores.
+      </p>
 
-            event.target.value = "";
+      <div id="studyPlan">
+        Añade un examen para generar el plan.
+      </div>
 
-            return;
-          }
+    </div>
 
+  </div>
 
-          selectedFiles.forEach(
-            file => {
 
-              photos.push(file);
+  <!-- RACHA -->
 
-              showPhoto(file);
+  <div
+    class="page"
+    id="streakPage"
+  >
 
-            }
-          );
+    <div class="box streak-card">
 
+      <div class="streak-fire">
+        🔥
+      </div>
 
-          usage.count +=
-            selectedFiles.length;
+      <div
+        class="streak-number"
+        id="bigStreak"
+      >
+        0
+      </div>
 
+      <h3>
+        días de racha
+      </h3>
 
-          localStorage.setItem(
-            "studyAIPhotoUsage",
-            JSON.stringify(usage)
-          );
+      <p class="description">
+        Estudia cada día para mantener tu racha.
+      </p>
 
+      <button
+        class="primary"
+        onclick="registerStudy()"
+      >
+        📚 Estudiar hoy
+      </button>
 
-          updateCounter();
+    </div>
 
 
-          event.target.value = "";
+    <div class="box">
 
-        }
+      <h3>🏆 Estadísticas</h3>
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong id="totalStudyDays">0</strong>
+          <span>Días estudiados</span>
+        </div>
+
+        <div class="stat">
+          <strong id="totalTests">0</strong>
+          <span>Tests</span>
+        </div>
+
+        <div class="stat">
+          <strong id="totalQuestions">0</strong>
+          <span>Preguntas</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="back"
+    onclick="closeApp()"
+  >
+    ← Volver al inicio
+  </button>
+
+</section>
+
+
+<script>
+
+/* =========================
+   DATOS
+========================= */
+
+let selectedDifficulty = "easy";
+
+let testQuestions = [];
+
+let currentQuestion = 0;
+
+let testScore = 0;
+
+let isExam = false;
+
+let events =
+  JSON.parse(
+    localStorage.getItem("studyAIEvents") || "[]"
+  );
+
+let calendarDate = new Date();
+
+
+/* =========================
+   APP
+========================= */
+
+function openApp(){
+
+  document.getElementById("home").style.display="none";
+
+  document.getElementById("features").style.display="none";
+
+  document.getElementById("app").style.display="block";
+
+  registerStudy();
+
+  updateStats();
+
+  updateStreak();
+
+  renderCalendar();
+
+}
+
+
+function closeApp(){
+
+  document.getElementById("app").style.display="none";
+
+  document.getElementById("home").style.display="block";
+
+  document.getElementById("features").style.display="flex";
+
+  window.scrollTo(0,0);
+
+}
+
+
+/* =========================
+   PÁGINAS
+========================= */
+
+function showPage(id,button){
+
+  document.querySelectorAll(".page")
+    .forEach(page =>
+      page.classList.remove("active")
+    );
+
+  document.getElementById(id)
+    .classList.add("active");
+
+  document.querySelectorAll(".tab")
+    .forEach(tab =>
+      tab.classList.remove("active")
+    );
+
+  if(button)
+    button.classList.add("active");
+
+  if(id==="calendarPage")
+    renderCalendar();
+
+  if(id==="streakPage")
+    updateStreak();
+
+  updateStats();
+
+}
+
+
+function showPageById(id){
+
+  document.querySelectorAll(".page")
+    .forEach(page =>
+      page.classList.remove("active")
+    );
+
+  document.getElementById(id)
+    .classList.add("active");
+
+  document.querySelectorAll(".tab")
+    .forEach(tab =>
+      tab.classList.remove("active")
+    );
+
+  const tabs =
+    document.querySelectorAll(".tab");
+
+  tabs.forEach(tab=>{
+    if(tab.textContent.includes("Calendario"))
+      tab.classList.add("active");
+  });
+
+  renderCalendar();
+
+}
+
+
+/* =========================
+   CURSO
+========================= */
+
+function saveCourse(){
+
+  const course =
+    document.getElementById("course").value;
+
+  if(!course){
+
+    alert("Selecciona tu curso.");
+
+    return;
+
+  }
+
+  localStorage.setItem(
+    "studyAICourse",
+    course
+  );
+
+  alert(
+    "Curso guardado: " + course
+  );
+
+}
+
+
+/* =========================
+   FOTOS
+========================= */
+
+const MAX_PHOTOS = 8;
+
+const LIMIT_TIME =
+  24*60*60*1000;
+
+let photos=[];
+
+
+function getPhotoUsage(){
+
+  const saved =
+    localStorage.getItem(
+      "studyAIPhotoUsage"
+    );
+
+  if(!saved){
+
+    return {
+      count:0,
+      startTime:Date.now()
+    };
+
+  }
+
+  const usage =
+    JSON.parse(saved);
+
+  if(
+    Date.now()-usage.startTime
+    >= LIMIT_TIME
+  ){
+
+    const reset={
+      count:0,
+      startTime:Date.now()
+    };
+
+    localStorage.setItem(
+      "studyAIPhotoUsage",
+      JSON.stringify(reset)
+    );
+
+    return reset;
+
+  }
+
+  return usage;
+
+}
+
+
+function updateCounter(){
+
+  const usage =
+    getPhotoUsage();
+
+  const remaining =
+    MAX_PHOTOS-usage.count;
+
+  const counter =
+    document.getElementById("counter");
+
+  if(!counter) return;
+
+  if(remaining>0){
+
+    counter.textContent =
+      remaining +
+      (
+        remaining===1
+        ?" foto disponible"
+        :" fotos disponibles"
       );
 
+  }else{
 
-    function showPhoto(file) {
+    const left =
+      LIMIT_TIME-
+      (
+        Date.now()-
+        usage.startTime
+      );
+
+    const hours =
+      Math.ceil(
+        left/(60*60*1000)
+      );
+
+    counter.textContent =
+      "Límite alcanzado. " +
+      "Vuelve en aproximadamente " +
+      hours +
+      (hours===1?" hora.":" horas.");
+
+  }
+
+}
+
+
+document
+.getElementById("photoInput")
+.addEventListener(
+  "change",
+  function(e){
+
+    const files =
+      Array.from(e.target.files);
+
+    const usage =
+      getPhotoUsage();
+
+    const remaining =
+      MAX_PHOTOS-usage.count;
+
+    if(remaining<=0){
+
+      alert(
+        "Has alcanzado el límite de 8 fotos."
+      );
+
+      e.target.value="";
+
+      return;
+
+    }
+
+    if(files.length>remaining){
+
+      alert(
+        "Solo puedes añadir "+
+        remaining+
+        " foto"+
+        (remaining===1?"":"s")+
+        " más."
+      );
+
+      e.target.value="";
+
+      return;
+
+    }
+
+    files.forEach(file=>{
+
+      photos.push(file);
 
       const reader =
         new FileReader();
 
+      reader.onload=function(event){
 
-      reader.onload =
-        function(event) {
+        const container =
+          document.createElement("div");
 
-          const container =
-            document.createElement(
-              "div"
-            );
+        container.className="photo";
 
+        container.innerHTML=`
+          <img src="${event.target.result}">
+          <button class="delete-photo"
+          onclick="this.parentElement.remove()">
+          ×
+          </button>
+        `;
 
-          container.className =
-            "photo";
+        document
+        .getElementById("photos")
+        .appendChild(container);
 
-
-          const img =
-            document.createElement(
-              "img"
-            );
-
-
-          img.src =
-            event.target.result;
-
-
-          const button =
-            document.createElement(
-              "button"
-            );
-
-
-          button.className =
-            "delete-photo";
-
-
-          button.textContent =
-            "×";
-
-
-          button.onclick =
-            function() {
-
-              container.remove();
-
-            };
-
-
-          container.appendChild(img);
-
-          container.appendChild(button);
-
-
-          document
-            .getElementById("photos")
-            .appendChild(container);
-
-        };
-
+      };
 
       reader.readAsDataURL(file);
 
-    }
+    });
 
+    usage.count+=files.length;
 
-    function explainNotes() {
-
-      const notes =
-        document
-          .getElementById("notes")
-          .value
-          .trim();
-
-
-      const result =
-        document.getElementById(
-          "result"
-        );
-
-
-      const videoSection =
-        document.getElementById(
-          "videoSection"
-        );
-
-
-      if (
-        !notes &&
-        photos.length === 0
-      ) {
-
-        alert(
-          "Escribe unos apuntes o añade alguna foto."
-        );
-
-        return;
-      }
-
-
-      result.style.display =
-        "block";
-
-
-      result.innerHTML = `
-        <strong>StudyAI</strong>
-        <br><br>
-        Hemos recibido tus apuntes.
-        <br><br>
-        La inteligencia artificial se conectará
-        próximamente para analizar el contenido
-        y explicártelo automáticamente.
-      `;
-
-
-      /*
-        Esta sección se activará cuando
-        conectemos la IA y detectemos el tema.
-      */
-
-      videoSection.style.display =
-        "block";
-
-
-      const topic =
-        notes
-          ? notes.substring(0, 80)
-          : "tema de estudio";
-
-
-      const youtubeUrl =
-        "https://www.youtube.com/results?search_query=" +
-        encodeURIComponent(
-          topic + " explicado"
-        );
-
-
-      document
-        .getElementById(
-          "youtubeButton"
-        )
-        .href = youtubeUrl;
-
-    }
-
+    localStorage.setItem(
+      "studyAIPhotoUsage",
+      JSON.stringify(usage)
+    );
 
     updateCounter();
 
-  </script>
+    e.target.value="";
+
+  }
+);
+
+
+/* =========================
+   APUNTES
+========================= */
+
+function explainNotes(){
+
+  const notes =
+    document.getElementById("notes")
+    .value.trim();
+
+  if(!notes && photos.length===0){
+
+    alert(
+      "Escribe apuntes o añade fotos."
+    );
+
+    return;
+
+  }
+
+  const result =
+    document.getElementById("result");
+
+  result.style.display="block";
+
+  result.innerHTML=`
+    <strong>🤖 StudyAI</strong>
+    <br><br>
+    Tus apuntes están preparados.
+    <br><br>
+    Cuando conectemos la inteligencia artificial,
+    analizará tus apuntes y te dará:
+    <br><br>
+    • Una explicación sencilla<br>
+    • Un resumen<br>
+    • Conceptos importantes<br>
+    • Preguntas para practicar
+  `;
+
+  const videoSection =
+    document.getElementById("videoSection");
+
+  videoSection.classList.remove("hidden");
+
+  const topic =
+    notes.substring(0,100);
+
+  document.getElementById(
+    "youtubeButton"
+  ).href =
+    "https://www.youtube.com/results?search_query="+
+    encodeURIComponent(
+      topic+" explicado"
+    );
+
+}
+
+
+/* =========================
+   DIFICULTAD
+========================= */
+
+function selectDifficulty(level,button){
+
+  selectedDifficulty=level;
+
+  document
+  .querySelectorAll(".diff")
+  .forEach(x=>
+    x.classList.remove("selected")
+  );
+
+  button.classList.add("selected");
+
+}
+
+
+/* =========================
+   TEST
+========================= */
+
+function generateDemoQuestions(){
+
+  const difficulty =
+    selectedDifficulty;
+
+  const course =
+    localStorage.getItem(
+      "studyAICourse"
+    ) || "tu curso";
+
+  let questions=[];
+
+
+  if(difficulty==="easy"){
+
+    questions=[
+      {
+        q:"¿Qué debes hacer primero cuando estudias un tema nuevo?",
+        a:["Leer y comprender","Memorizar sin leer","No hacer nada","Solo mirar vídeos"],
+        c:0
+      },
+      {
+        q:"¿Qué sirve para comprobar si has aprendido?",
+        a:["Hacer un test","Cerrar el libro","No repasar","Dormir"],
+        c:0
+      },
+      {
+        q:"¿Qué es un resumen?",
+        a:["Las ideas principales","Todo el libro","Una pregunta","Un examen"],
+        c:0
+      },
+      {
+        q:"¿Qué ayuda a recordar información?",
+        a:["Repasar","No estudiar","Evitar preguntas","Dejarlo todo para el último día"],
+        c:0
+      },
+      {
+        q:"¿Qué puedes usar para organizar un examen?",
+        a:["Un calendario","Nada","Solo videojuegos","Una calculadora"],
+        c:0
+      }
+    ];
+
+  }else if(difficulty==="medium"){
+
+    questions=[
+      {
+        q:"¿Cuál es una buena estrategia para preparar un examen?",
+        a:["Repasar durante varios días","Estudiar todo cinco minutos antes","No practicar","No revisar errores"],
+        c:0
+      },
+      {
+        q:"¿Por qué es útil hacer preguntas después de estudiar?",
+        a:["Porque compruebas lo que recuerdas","Porque elimina el estudio","Porque no necesitas apuntes","Porque sustituye todas las clases"],
+        c:0
+      },
+      {
+        q:"¿Qué técnica consiste en recuperar información sin mirar los apuntes?",
+        a:["Recuperación activa","Copiar","Leer pasivamente","Subrayar todo"],
+        c:0
+      },
+      {
+        q:"¿Qué puede indicar que necesitas repasar un tema?",
+        a:["Cometes muchos errores","Lo recuerdas perfectamente","Nunca lo estudiaste","No tienes examen"],
+        c:0
+      },
+      {
+        q:"¿Cuál es una ventaja de distribuir el estudio?",
+        a:["Mejora la retención","Hace innecesario estudiar","Elimina los exámenes","Reduce todas las asignaturas"],
+        c:0
+      }
+    ];
+
+  }else{
+
+    questions=[
+      {
+        q:"¿Qué estrategia suele favorecer una mejor retención a largo plazo?",
+        a:["Práctica espaciada","Memorización de última hora","Leer sin recuperar información","Estudiar una sola vez"],
+        c:0
+      },
+      {
+        q:"¿Qué significa recuperación activa?",
+        a:["Intentar recordar sin consultar la respuesta","Leer varias veces","Copiar el texto","Subrayar cada palabra"],
+        c:0
+      },
+      {
+        q:"¿Por qué conviene analizar los errores de un test?",
+        a:["Para detectar conceptos que necesitan refuerzo","Para evitar estudiar","Para eliminar preguntas","Para cambiar de asignatura"],
+        c:0
+      },
+      {
+        q:"¿Qué combinación puede ser más eficaz?",
+        a:["Explicación + práctica + repaso","Solo lectura","Solo subrayado","No practicar"],
+        c:0
+      },
+      {
+        q:"¿Qué permite un plan de estudio antes de un examen?",
+        a:["Distribuir el trabajo en el tiempo","Eliminar la necesidad de estudiar","Garantizar un 10","Evitar todas las tareas"],
+        c:0
+      }
+    ];
+
+  }
+
+  return questions;
+
+}
+
+
+function startTest(exam){
+
+  isExam=exam;
+
+  const count =
+    Number(
+      document.getElementById(
+        "questionCount"
+      ).value
+    );
+
+  testQuestions =
+    generateDemoQuestions();
+
+  while(testQuestions.length<count){
+
+    testQuestions =
+      testQuestions.concat(
+        generateDemoQuestions()
+      );
+
+  }
+
+  testQuestions =
+    testQuestions.slice(0,count);
+
+  currentQuestion=0;
+
+  testScore=0;
+
+  document.getElementById(
+    "testSetup"
+  ).style.display="none";
+
+  document.getElementById(
+    "examResult"
+  ).style.display="none";
+
+  document.getElementById(
+    "testArea"
+  ).style.display="block";
+
+  showQuestion();
+
+}
+
+
+function showQuestion(){
+
+  const q =
+    testQuestions[currentQuestion];
+
+  document.getElementById(
+    "questionProgress"
+  ).textContent =
+    "Pregunta "+
+    (currentQuestion+1)+
+    " de "+
+    testQuestions.length;
+
+  document.getElementById(
+    "currentDifficulty"
+  ).textContent =
+    difficultyName();
+
+  document.getElementById(
+    "question"
+  ).textContent=q.q;
+
+  const answers =
+    document.getElementById(
+      "answers"
+    );
+
+  answers.innerHTML="";
+
+  q.a.forEach((answer,index)=>{
+
+    const button =
+      document.createElement("button");
+
+    button.className="answer";
+
+    button.textContent=
+      answer;
+
+    button.onclick=()=>{
+      answerQuestion(
+        index,
+        button
+      );
+    };
+
+    answers.appendChild(button);
+
+  });
+
+  document.getElementById(
+    "nextQuestion"
+  ).classList.add("hidden");
+
+}
+
+
+function difficultyName(){
+
+  if(selectedDifficulty==="easy")
+    return "Fácil";
+
+  if(selectedDifficulty==="medium")
+    return "Medio";
+
+  return "Difícil";
+
+}
+
+
+function answerQuestion(index,button){
+
+  const q =
+    testQuestions[currentQuestion];
+
+  const buttons =
+    document
+    .querySelectorAll(".answer");
+
+  buttons.forEach(b=>
+    b.disabled=true
+  );
+
+  if(index===q.c){
+
+    button.classList.add("correct");
+
+    testScore++;
+
+    increaseDifficulty();
+
+  }else{
+
+    button.classList.add("wrong");
+
+    buttons[q.c]
+      .classList.add("correct");
+
+    decreaseDifficulty();
+
+  }
+
+  document.getElementById(
+    "nextQuestion"
+  ).classList.remove("hidden");
+
+}
+
+
+function increaseDifficulty(){
+
+  if(selectedDifficulty==="easy")
+    selectedDifficulty="medium";
+  else if(selectedDifficulty==="medium")
+    selectedDifficulty="hard";
+
+}
+
+
+function decreaseDifficulty(){
+
+  if(selectedDifficulty==="hard")
+    selectedDifficulty="medium";
+  else if(selectedDifficulty==="medium")
+    selectedDifficulty="easy";
+
+}
+
+
+function nextQuestion(){
+
+  currentQuestion++;
+
+  if(
+    currentQuestion>=
+    testQuestions.length
+  ){
+
+    finishTest();
+
+    return;
+
+  }
+
+  showQuestion();
+
+}
+
+
+function finishTest(){
+
+  document.getElementById(
+    "testArea"
+  ).style.display="none";
+
+  document.getElementById(
+    "examResult"
+  ).style.display="block";
+
+  const total =
+    testQuestions.length;
+
+  const percentage =
+    Math.round(
+      testScore/total*100
+    );
+
+  document.getElementById(
+    "finalScore"
+  ).textContent =
+    testScore+"/"+total+
+    " ("+percentage+"%)";
+
+  let message;
+
+  if(percentage>=90)
+    message="¡Excelente! Estás muy preparado.";
+
+  else if(percentage>=70)
+    message="Muy bien. Un poco más de repaso y lo tendrás.";
+
+  else if(percentage>=50)
+    message="Vas por buen camino. Te conviene repasar los errores.";
+
+  else
+    message="Necesitas repasar el tema antes de volver a intentarlo.";
+
+  document.getElementById(
+    "finalMessage"
+  ).textContent=message;
+
+
+  let stats =
+    JSON.parse(
+      localStorage.getItem(
+        "studyAIStats"
+      ) || '{"tests":0,"correct":0,"questions":0}'
+    );
+
+  stats.tests++;
+
+  stats.correct+=testScore;
+
+  stats.questions+=total;
+
+  localStorage.setItem(
+    "studyAIStats",
+    JSON.stringify(stats)
+  );
+
+  updateStats();
+
+}
+
+
+function resetTest(){
+
+  document.getElementById(
+    "examResult"
+  ).style.display="none";
+
+  document.getElementById(
+    "testSetup"
+  ).style.display="block";
+
+}
+
+
+/* =========================
+   CALENDARIO
+========================= */
+
+function addEvent(){
+
+  const date =
+    document.getElementById(
+      "eventDate"
+    ).value;
+
+  const type =
+    document.getElementById(
+      "eventType"
+    ).value;
+
+  const title =
+    document.getElementById(
+      "eventTitle"
+    ).value.trim();
+
+  if(!date || !title){
+
+    alert(
+      "Pon una fecha y un nombre."
+    );
+
+    return;
+
+  }
+
+  events.push({
+    date:date,
+    type:type,
+    title:title
+  });
+
+  localStorage.setItem(
+    "studyAIEvents",
+    JSON.stringify(events)
+  );
+
+  document.getElementById(
+    "eventTitle"
+  ).value="";
+
+  renderCalendar();
+
+  if(type==="Examen")
+    createStudyPlan(date,title);
+
+  alert(
+    type+" añadido al calendario."
+  );
+
+}
+
+
+function renderCalendar(){
+
+  const calendar =
+    document.getElementById(
+      "calendar"
+    );
+
+  if(!calendar) return;
+
+  calendar.innerHTML="";
+
+  const year =
+    calendarDate.getFullYear();
+
+  const month =
+    calendarDate.getMonth();
+
+  const monthNames=[
+    "Enero","Febrero","Marzo",
+    "Abril","Mayo","Junio",
+    "Julio","Agosto","Septiembre",
+    "Octubre","Noviembre","Diciembre"
+  ];
+
+  document.getElementById(
+    "monthTitle"
+  ).textContent =
+    monthNames[month]+" "+year;
+
+
+  const names=[
+    "Lun","Mar","Mié",
+    "Jue","Vie","Sáb","Dom"
+  ];
+
+  names.forEach(name=>{
+
+    const d=
+      document.createElement("div");
+
+    d.className="day-name";
+
+    d.textContent=name;
+
+    calendar.appendChild(d);
+
+  });
+
+
+  let first =
+    new Date(year,month,1)
+    .getDay();
+
+  first =
+    first===0 ? 6 : first-1;
+
+
+  for(let i=0;i<first;i++){
+
+    const empty=
+      document.createElement("div");
+
+    calendar.appendChild(empty);
+
+  }
+
+
+  const days =
+    new Date(
+      year,
+      month+1,
+      0
+    ).getDate();
+
+
+  for(let day=1;day<=days;day++){
+
+    const cell =
+      document.createElement("div");
+
+    cell.className="day";
+
+    const number =
+      document.createElement("div");
+
+    number.className="day-number";
+
+    number.textContent=day;
+
+    cell.appendChild(number);
+
+
+    const dateString =
+      year+"-"+
+      String(month+1).padStart(2,"0")+
+      "-"+
+      String(day).padStart(2,"0");
+
+
+    events
+    .filter(e=>e.date===dateString)
+    .forEach(e=>{
+
+      const event =
+        document.createElement("div");
+
+      event.className="event";
+
+      event.textContent =
+        (e.type==="Examen"?"📝 ":"📌 ")+
+        e.title;
+
+      cell.appendChild(event);
+
+    });
+
+
+    calendar.appendChild(cell);
+
+  }
+
+}
+
+
+function changeMonth(amount){
+
+  calendarDate.setMonth(
+    calendarDate.getMonth()+amount
+  );
+
+  renderCalendar();
+
+}
+
+
+/* =========================
+   PLAN DE ESTUDIO
+========================= */
+
+function createStudyPlan(date,title){
+
+  const container =
+    document.getElementById(
+      "studyPlan"
+    );
+
+  if(!container) return;
+
+  const examDate =
+    new Date(date+"T12:00:00");
+
+  const today =
+    new Date();
+
+  const daysLeft =
+    Math.ceil(
+      (examDate-today)/
+      (1000*60*60*24)
+    );
+
+
+  if(daysLeft<=0){
+
+    container.innerHTML=
+      "El examen es hoy o ya ha pasado.";
+
+    return;
+
+  }
+
+
+  const days =
+    Math.min(daysLeft,7);
+
+  let html="";
+
+
+  for(let i=days;i>=1;i--){
+
+    let d =
+      new Date(examDate);
+
+    d.setDate(
+      examDate.getDate()-i
+    );
+
+    let task;
+
+    if(i===days)
+      task="Lee y comprende el tema.";
+
+    else if(i>2)
+      task="Repasa conceptos y haz un pequeño test.";
+
+    else if(i===2)
+      task="Haz un examen de práctica y revisa tus errores.";
+
+    else
+      task="Repaso final y descanso. No estudies todo a última hora.";
+
+
+    html+=`
+      <div class="plan-day">
+        <strong>
+          ${formatDate(d)}
+        </strong>
+        <p>
+          <b>${title}</b><br>
+          ${task}
+        </p>
+      </div>
+    `;
+
+  }
+
+
+  html+=`
+    <div class="plan-day">
+      <strong>📝 Día del examen</strong>
+      <p>
+        Repaso muy ligero y después realiza el examen
+        con tranquilidad.
+      </p>
+    </div>
+  `;
+
+
+  container.innerHTML=html;
+
+}
+
+
+function formatDate(date){
+
+  return date.toLocaleDateString(
+    "es-ES",
+    {
+      weekday:"long",
+      day:"numeric",
+      month:"long"
+    }
+  );
+
+}
+
+
+/* =========================
+   RACHA
+========================= */
+
+function todayString(){
+
+  return new Date()
+    .toISOString()
+    .split("T")[0];
+
+}
+
+
+function registerStudy(){
+
+  let data =
+    JSON.parse(
+      localStorage.getItem(
+        "studyAIRacha"
+      ) ||
+      '{"streak":0,"last":"","days":[]}'
+    );
+
+
+  const today =
+    todayString();
+
+
+  if(
+    !data.days.includes(today)
+  ){
+
+    data.days.push(today);
+
+  }
+
+
+  if(data.last===today){
+
+    localStorage.setItem(
+      "studyAIRacha",
+      JSON.stringify(data)
+    );
+
+    updateStreak();
+
+    return;
+
+  }
+
+
+  const yesterday =
+    new Date();
+
+  yesterday.setDate(
+    yesterday.getDate()-1
+  );
+
+  const yString =
+    yesterday
+    .toISOString()
+    .split("T")[0];
+
+
+  if(data.last===yString){
+
+    data.streak++;
+
+  }else{
+
+    data.streak=1;
+
+  }
+
+
+  data.last=today;
+
+
+  localStorage.setItem(
+    "studyAIRacha",
+    JSON.stringify(data)
+  );
+
+
+  updateStreak();
+
+}
+
+
+function updateStreak(){
+
+  const data =
+    JSON.parse(
+      localStorage.getItem(
+        "studyAIRacha"
+      ) ||
+      '{"streak":0,"last":"","days":[]}'
+    );
+
+
+  const streak =
+    data.streak || 0;
+
+
+  document.getElementById(
+    "bigStreak"
+  ).textContent=streak;
+
+
+  document.getElementById(
+    "miniStreak"
+  ).textContent=
+    "🔥 "+streak+" días";
+
+
+  document.getElementById(
+    "totalStudyDays"
+  ).textContent=
+    data.days.length;
+
+
+  document.getElementById(
+    "statDays"
+  ).textContent=
+    data.days.length;
+
+}
+
+
+function updateStats(){
+
+  const stats =
+    JSON.parse(
+      localStorage.getItem(
+        "studyAIStats"
+      ) ||
+      '{"tests":0,"correct":0,"questions":0}'
+    );
+
+
+  const percentage =
+    stats.questions>0
+    ? Math.round(
+        stats.correct/
+        stats.questions*
+        100
+      )
+    : 0;
+
+
+  const testElement =
+    document.getElementById(
+      "statTests"
+    );
+
+  const correctElement =
+    document.getElementById(
+      "statCorrect"
+    );
+
+
+  if(testElement)
+    testElement.textContent=
+      stats.tests;
+
+
+  if(correctElement)
+    correctElement.textContent=
+      percentage+"%";
+
+
+  const totalTests =
+    document.getElementById(
+      "totalTests"
+    );
+
+  const totalQuestions =
+    document.getElementById(
+      "totalQuestions"
+    );
+
+
+  if(totalTests)
+    totalTests.textContent=
+      stats.tests;
+
+
+  if(totalQuestions)
+    totalQuestions.textContent=
+      stats.questions;
+
+
+  updateStreak();
+
+}
+
+
+/* =========================
+   INICIO
+========================= */
+
+updateCounter();
+
+updateStreak();
+
+updateStats();
+
+</script>
 
 </body>
 </html>
