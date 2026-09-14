@@ -1,184 +1,265 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StudyAI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyAI</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 
-    body {
-      background: #f5f7fb;
-      color: #172033;
-    }
+body {
+  background: #f5f7fb;
+  color: #172033;
+}
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 8%;
-      background: white;
-      border-bottom: 1px solid #e5e7eb;
-    }
+header {
+  background: white;
+  padding: 20px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+}
 
-    .logo {
-      font-size: 25px;
-      font-weight: bold;
-    }
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
 
-    .logo span {
-      color: #5b5bf7;
-    }
+.logo span {
+  color: #5b5bf7;
+}
 
-    .login {
-      padding: 10px 18px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      background: white;
-      cursor: pointer;
-    }
+button {
+  cursor: pointer;
+}
 
-    .hero {
-      text-align: center;
-      padding: 80px 20px 50px;
-    }
+.login {
+  padding: 10px 18px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 10px;
+}
 
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+}
 
-    .hero h1 span {
-      color: #5b5bf7;
-    }
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
 
-    .hero p {
-      font-size: 19px;
-      color: #667085;
-      max-width: 650px;
-      margin: auto;
-      line-height: 1.6;
-    }
+.hero h1 span {
+  color: #5b5bf7;
+}
 
-    .container {
-      max-width: 1000px;
-      margin: 30px auto 80px;
-      padding: 20px;
-    }
+.hero p {
+  max-width: 650px;
+  margin: auto;
+  color: #667085;
+  font-size: 19px;
+  line-height: 1.6;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
+.start {
+  margin-top: 30px;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 12px;
+  background: #5b5bf7;
+  color: white;
+  font-size: 17px;
+}
 
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 18px;
-      border: 1px solid #e5e7eb;
-      text-align: center;
-    }
+#study {
+  display: none;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
 
-    .icon {
-      font-size: 40px;
-      margin-bottom: 15px;
-    }
+.box {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 20px;
+}
 
-    .card h2 {
-      margin-bottom: 10px;
-    }
+.box h2 {
+  margin-bottom: 15px;
+}
 
-    .card p {
-      color: #667085;
-      line-height: 1.5;
-    }
+textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  resize: vertical;
+  font-size: 16px;
+}
 
-    .start {
-      display: block;
-      margin: 35px auto 0;
-      background: #5b5bf7;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 12px;
-      font-size: 17px;
-      cursor: pointer;
-    }
+.action {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #5b5bf7;
+  color: white;
+  font-size: 16px;
+}
 
-    .start:hover {
-      opacity: 0.9;
-    }
+.result {
+  margin-top: 20px;
+  padding: 20px;
+  background: #f5f7fb;
+  border-radius: 12px;
+  line-height: 1.6;
+  display: none;
+}
 
-    @media (max-width: 700px) {
-      .cards {
-        grid-template-columns: 1fr;
-      }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
 
-      .hero h1 {
-        font-size: 36px;
-      }
-    }
-  </style>
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #667085;
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">Study<span>AI</span></div>
-    <button class="login">Iniciar sesión</button>
-  </header>
+<header>
+  <div class="logo">Study<span>AI</span></div>
+  <button class="login">Iniciar sesión</button>
+</header>
 
-  <section class="hero">
-    <h1>Estudia mejor con <span>IA</span></h1>
+<section class="hero" id="home">
+  <h1>Estudia mejor con <span>IA</span></h1>
 
-    <p>
-      Sube tus apuntes, entiende cualquier tema,
-      practica con tests y mejora tus resultados con tu profesor personal de IA.
+  <p>
+    Tu profesor personal de inteligencia artificial.
+    Aprende, practica y prepárate para tus exámenes.
+  </p>
+
+  <button class="start" onclick="startStudying()">
+    Empezar a estudiar
+  </button>
+</section>
+
+<section id="study">
+
+  <div class="box">
+    <h2>📚 Tus apuntes</h2>
+
+    <p style="margin-bottom:15px;">
+      Escribe o pega aquí tus apuntes:
     </p>
 
-    <button class="start" onclick="alert('¡Muy pronto podrás empezar a estudiar!')">
-      Empezar a estudiar
+    <textarea id="notes" placeholder="Ejemplo: La Revolución Francesa comenzó en 1789..."></textarea>
+
+    <button class="action" onclick="explainNotes()">
+      🤖 Explicar mis apuntes
     </button>
-  </section>
 
-  <div class="container">
+    <div class="result" id="explanation">
+    </div>
+  </div>
 
-    <div class="cards">
+  <div class="cards">
 
-      <div class="card">
-        <div class="icon">📚</div>
-        <h2>Explica tus apuntes</h2>
-        <p>
-          La IA convierte tus apuntes en explicaciones fáciles de entender.
-        </p>
-      </div>
+    <div class="card">
+      <h3>🧠 Explicar</h3>
+      <p>
+        Convierte tus apuntes complicados en explicaciones fáciles.
+      </p>
+    </div>
 
-      <div class="card">
-        <div class="icon">🧠</div>
-        <h2>Aprende</h2>
-        <p>
-          Pregunta cualquier cosa y recibe explicaciones adaptadas a tu nivel.
-        </p>
-      </div>
+    <div class="card">
+      <h3>📝 Tests</h3>
+      <p>
+        Crea preguntas para comprobar cuánto has aprendido.
+      </p>
+    </div>
 
-      <div class="card">
-        <div class="icon">📝</div>
-        <h2>Haz tests</h2>
-        <p>
-          Genera preguntas y descubre qué partes necesitas repasar.
-        </p>
-      </div>
-
+    <div class="card">
+      <h3>🎯 Repasar</h3>
+      <p>
+        Descubre qué partes necesitas estudiar más.
+      </p>
     </div>
 
   </div>
+
+</section>
+
+<script>
+
+function startStudying() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("study").style.display = "block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+function explainNotes() {
+
+  const notes = document.getElementById("notes").value;
+  const result = document.getElementById("explanation");
+
+  if (notes.trim() === "") {
+    alert("Primero escribe tus apuntes.");
+    return;
+  }
+
+  result.style.display = "block";
+
+  result.innerHTML = `
+    <strong>🤖 StudyAI</strong><br><br>
+    He recibido tus apuntes correctamente.<br><br>
+    <strong>Siguiente paso:</strong> vamos a conectar la inteligencia artificial
+    para que pueda analizar este contenido y explicártelo automáticamente.
+  `;
+}
+
+</script>
 
 </body>
 </html>
