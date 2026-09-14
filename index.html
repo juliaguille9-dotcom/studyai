@@ -3,20 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StudyAI</title>
+
+<title>StudyAI - Tu asistente de estudio</title>
 
 <style>
+
 :root{
   --navy:#0b1f3a;
   --navy2:#173b68;
-  --light:#e8f1ff;
-  --bg:#f7f9fc;
-  --white:#fff;
+  --blue:#dcecff;
+  --blue2:#eef5ff;
+  --bg:#f6f8fc;
+  --white:#ffffff;
   --text:#101828;
   --gray:#667085;
   --border:#e4e7ec;
   --green:#16804b;
-  --red:#c93636;
+  --red:#d93636;
+  --gold:#d99b00;
 }
 
 *{
@@ -31,6 +35,17 @@ body{
   color:var(--text);
 }
 
+button,
+input,
+select,
+textarea{
+  font-family:inherit;
+}
+
+/* =========================
+   HEADER
+========================= */
+
 header{
   height:70px;
   background:white;
@@ -38,10 +53,10 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 6%;
+  padding:0 5%;
   position:sticky;
   top:0;
-  z-index:20;
+  z-index:100;
 }
 
 .logo{
@@ -50,14 +65,14 @@ header{
   font-weight:800;
 }
 
-.header-buttons{
+.header-right{
   display:flex;
-  gap:10px;
   align-items:center;
+  gap:9px;
 }
 
 .streak-mini{
-  background:var(--light);
+  background:var(--blue);
   color:var(--navy);
   padding:9px 13px;
   border-radius:9px;
@@ -65,27 +80,36 @@ header{
   font-size:14px;
 }
 
-.login{
+.header-btn{
+  border:0;
   background:var(--navy);
   color:white;
-  border:0;
-  padding:10px 16px;
+  padding:10px 15px;
   border-radius:9px;
   cursor:pointer;
+  font-weight:bold;
 }
 
-/* HERO */
+.register-header{
+  background:white;
+  color:var(--navy);
+  border:1px solid var(--border);
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
-  max-width:950px;
+  max-width:1000px;
   margin:auto;
   text-align:center;
-  padding:95px 20px 70px;
+  padding:90px 20px 65px;
 }
 
 .badge{
   display:inline-block;
-  background:var(--light);
+  background:var(--blue);
   color:var(--navy);
   padding:8px 14px;
   border-radius:50px;
@@ -96,8 +120,8 @@ header{
 
 .hero h1{
   color:var(--navy);
-  font-size:53px;
-  line-height:1.08;
+  font-size:55px;
+  line-height:1.06;
   letter-spacing:-2px;
   margin-bottom:20px;
 }
@@ -107,7 +131,7 @@ header{
 }
 
 .hero p{
-  max-width:680px;
+  max-width:700px;
   margin:auto;
   color:var(--gray);
   line-height:1.7;
@@ -119,7 +143,7 @@ header{
   color:white;
   border:0;
   border-radius:10px;
-  padding:14px 22px;
+  padding:14px 21px;
   font-weight:bold;
   cursor:pointer;
 }
@@ -133,33 +157,37 @@ header{
   font-size:16px;
 }
 
+/* =========================
+   FEATURES
+========================= */
+
 .features{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
   gap:18px;
-  max-width:1000px;
+  max-width:1050px;
   margin:auto;
-  padding:10px 20px 80px;
+  padding:10px 20px 70px;
 }
 
 .card{
-  width:290px;
+  width:300px;
   background:white;
   border:1px solid var(--border);
-  border-radius:15px;
-  padding:24px;
+  border-radius:16px;
+  padding:25px;
   box-shadow:0 5px 20px rgba(11,31,58,.04);
 }
 
 .card-icon{
-  width:42px;
-  height:42px;
+  width:43px;
+  height:43px;
+  background:var(--blue);
+  border-radius:10px;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:10px;
-  background:var(--light);
   margin-bottom:15px;
 }
 
@@ -174,7 +202,110 @@ header{
   font-size:14px;
 }
 
-/* APP */
+/* =========================
+   PRICING
+========================= */
+
+.pricing-section{
+  max-width:1100px;
+  margin:auto;
+  padding:30px 20px 90px;
+  text-align:center;
+}
+
+.section-title{
+  color:var(--navy);
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.section-subtitle{
+  color:var(--gray);
+  margin-bottom:30px;
+}
+
+.plans{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  text-align:left;
+}
+
+.plan{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:27px;
+  position:relative;
+}
+
+.plan.featured{
+  border:2px solid var(--navy);
+  transform:translateY(-5px);
+}
+
+.plan-badge{
+  position:absolute;
+  top:-13px;
+  right:20px;
+  background:var(--navy);
+  color:white;
+  padding:6px 11px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.plan h3{
+  color:var(--navy);
+  font-size:23px;
+  margin-bottom:8px;
+}
+
+.plan-description{
+  color:var(--gray);
+  font-size:14px;
+  min-height:42px;
+}
+
+.price{
+  color:var(--navy);
+  font-size:35px;
+  font-weight:800;
+  margin:20px 0;
+}
+
+.price span{
+  font-size:14px;
+  color:var(--gray);
+  font-weight:normal;
+}
+
+.plan ul{
+  list-style:none;
+  margin-bottom:22px;
+}
+
+.plan li{
+  padding:8px 0;
+  color:#344054;
+  font-size:14px;
+}
+
+.plan li::before{
+  content:"✓";
+  color:var(--green);
+  font-weight:bold;
+  margin-right:8px;
+}
+
+.plan-button{
+  width:100%;
+}
+
+/* =========================
+   APP
+========================= */
 
 #app{
   display:none;
@@ -186,7 +317,7 @@ header{
 .app-title{
   color:var(--navy);
   font-size:32px;
-  margin-bottom:8px;
+  margin-bottom:7px;
 }
 
 .app-subtitle{
@@ -244,9 +375,15 @@ header{
   margin-bottom:17px;
 }
 
-/* COURSE */
+.course-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
 
-select,input,textarea{
+select,
+input,
+textarea{
   width:100%;
   border:1px solid var(--border);
   border-radius:10px;
@@ -256,22 +393,20 @@ select,input,textarea{
   font-size:15px;
 }
 
-select:focus,input:focus,textarea:focus{
-  border-color:var(--navy2);
-}
-
-.course-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
-
-/* NOTES */
-
 textarea{
   min-height:170px;
   resize:vertical;
 }
+
+select:focus,
+input:focus,
+textarea:focus{
+  border-color:var(--navy2);
+}
+
+/* =========================
+   PHOTOS
+========================= */
 
 .photo-button{
   display:inline-block;
@@ -312,16 +447,18 @@ textarea{
   position:absolute;
   right:6px;
   top:6px;
-  border:0;
   width:27px;
   height:27px;
+  border:0;
   border-radius:50%;
   background:rgba(11,31,58,.85);
   color:white;
   cursor:pointer;
 }
 
-/* DIFFICULTY */
+/* =========================
+   TEST
+========================= */
 
 .difficulty{
   display:flex;
@@ -345,8 +482,6 @@ textarea{
   background:var(--navy);
   color:white;
 }
-
-/* TEST */
 
 .question-number{
   color:var(--gray);
@@ -377,7 +512,7 @@ textarea{
 }
 
 .answer:hover{
-  background:var(--light);
+  background:var(--blue2);
 }
 
 .answer.correct{
@@ -397,7 +532,8 @@ textarea{
   color:var(--gray);
 }
 
-#testArea,#examResult{
+#testArea,
+#examResult{
   display:none;
 }
 
@@ -408,13 +544,14 @@ textarea{
   margin:15px 0;
 }
 
-/* CALENDAR */
+/* =========================
+   CALENDAR
+========================= */
 
 .calendar-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
   margin-bottom:15px;
 }
 
@@ -438,11 +575,6 @@ textarea{
   border:1px solid var(--border);
   border-radius:8px;
   padding:7px;
-  cursor:pointer;
-}
-
-.day:hover{
-  background:var(--light);
 }
 
 .day-number{
@@ -453,14 +585,16 @@ textarea{
 .event{
   margin-top:5px;
   font-size:11px;
-  background:var(--light);
+  background:var(--blue);
   color:var(--navy);
   padding:3px;
   border-radius:4px;
   overflow:hidden;
 }
 
-/* STREAK */
+/* =========================
+   STREAK
+========================= */
 
 .streak-card{
   text-align:center;
@@ -485,7 +619,7 @@ textarea{
 }
 
 .stat{
-  background:var(--light);
+  background:var(--blue);
   border-radius:12px;
   padding:18px;
   text-align:center;
@@ -502,7 +636,9 @@ textarea{
   font-size:13px;
 }
 
-/* PLAN */
+/* =========================
+   PLAN
+========================= */
 
 .plan-day{
   border:1px solid var(--border);
@@ -521,40 +657,90 @@ textarea{
   line-height:1.5;
 }
 
-/* VIDEO */
+/* =========================
+   MODALES
+========================= */
 
-.video-box{
-  background:var(--light);
-  border-radius:14px;
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(5,20,40,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
   padding:20px;
+  z-index:300;
 }
 
-.video-box h3{
-  color:var(--navy);
+.modal-content{
+  background:white;
+  width:100%;
+  max-width:500px;
+  max-height:90vh;
+  overflow:auto;
+  border-radius:18px;
+  padding:28px;
+  position:relative;
 }
 
-.youtube{
-  display:inline-block;
-  margin-top:12px;
-  background:var(--navy);
-  color:white;
-  text-decoration:none;
-  padding:11px 16px;
-  border-radius:9px;
-  font-weight:bold;
-}
-
-.back{
-  margin-top:25px;
+.close{
+  position:absolute;
+  right:18px;
+  top:15px;
   border:0;
-  background:transparent;
-  color:var(--navy2);
+  background:none;
+  font-size:25px;
   cursor:pointer;
-  font-weight:bold;
+  color:var(--gray);
 }
 
-.hidden{
-  display:none!important;
+.modal h2{
+  color:var(--navy);
+  margin-bottom:8px;
+}
+
+.form-group{
+  margin-top:15px;
+}
+
+.form-group label{
+  display:block;
+  color:var(--navy);
+  font-size:14px;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.modal .primary{
+  width:100%;
+  margin-top:18px;
+}
+
+/* =========================
+   ACCOUNT
+========================= */
+
+.account-card{
+  background:var(--blue2);
+  border-radius:12px;
+  padding:18px;
+  margin-top:15px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+
+  .plans{
+    grid-template-columns:1fr;
+  }
+
+  .plan.featured{
+    transform:none;
+  }
+
 }
 
 @media(max-width:700px){
@@ -571,6 +757,10 @@ textarea{
     grid-template-columns:1fr;
   }
 
+  .header-right .register-header{
+    display:none;
+  }
+
   .calendar-grid{
     gap:2px;
   }
@@ -584,33 +774,64 @@ textarea{
     font-size:9px;
   }
 
-  .header-buttons .login{
-    display:none;
-  }
 }
+
+.hidden{
+  display:none!important;
+}
+
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">StudyAI</div>
 
-  <div class="header-buttons">
-    <div class="streak-mini" id="miniStreak">
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+  <div class="logo">
+    StudyAI
+  </div>
+
+  <div class="header-right">
+
+    <div
+      class="streak-mini"
+      id="miniStreak"
+    >
       🔥 0 días
     </div>
 
-    <button class="login">
+    <button
+      class="header-btn register-header"
+      onclick="openRegister()"
+    >
+      Registrarse
+    </button>
+
+    <button
+      class="header-btn"
+      onclick="openLogin()"
+    >
       Iniciar sesión
     </button>
+
   </div>
+
 </header>
 
 
-<!-- INICIO -->
+<!-- =========================
+     HERO
+========================= -->
 
-<section class="hero" id="home">
+<section
+  class="hero"
+  id="home"
+>
 
   <div class="badge">
     TU ASISTENTE DE ESTUDIO
@@ -618,12 +839,12 @@ textarea{
 
   <h1>
     Estudia mejor<br>
-    <span>con inteligencia artificial.</span>
+    <span>con StudyAI.</span>
   </h1>
 
   <p>
-    Organiza tus estudios, prepara exámenes,
-    practica con tests y aprende de tus apuntes.
+    Organiza tus apuntes, practica con tests,
+    prepara exámenes y crea tu propio plan de estudio.
   </p>
 
   <button
@@ -636,48 +857,252 @@ textarea{
 </section>
 
 
-<section class="features" id="features">
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section
+  class="features"
+  id="features"
+>
 
   <div class="card">
-    <div class="card-icon">🤖</div>
-    <h3>IA para estudiar</h3>
+
+    <div class="card-icon">
+      🤖
+    </div>
+
+    <h3>
+      Inteligencia artificial
+    </h3>
+
     <p>
-      Explicaciones, resúmenes, preguntas y ayuda
-      personalizada con tus apuntes.
+      Explicaciones sencillas, resúmenes,
+      preguntas y ayuda personalizada.
     </p>
+
   </div>
 
-  <div class="card">
-    <div class="card-icon">📝</div>
-    <h3>Exámenes y tests</h3>
-    <p>
-      Elige la dificultad y practica hasta estar
-      preparado para tu examen.
-    </p>
-  </div>
 
   <div class="card">
-    <div class="card-icon">📅</div>
-    <h3>Organiza tu tiempo</h3>
+
+    <div class="card-icon">
+      📝
+    </div>
+
+    <h3>
+      Tests y exámenes
+    </h3>
+
     <p>
-      Añade exámenes y tareas y crea un plan
-      de estudio para cada día.
+      Elige asignatura, tema y dificultad
+      para practicar.
     </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="card-icon">
+      📅
+    </div>
+
+    <h3>
+      Organización
+    </h3>
+
+    <p>
+      Calendario, tareas, exámenes,
+      rachas y planes de estudio.
+    </p>
+
   </div>
 
 </section>
 
 
-<!-- APP -->
+<!-- =========================
+     PLANES
+========================= -->
 
-<section id="app">
+<section
+  class="pricing-section"
+  id="pricing"
+>
+
+  <h2 class="section-title">
+    Elige tu plan
+  </h2>
+
+  <p class="section-subtitle">
+    Empieza gratis y mejora tu experiencia cuando quieras.
+  </p>
+
+
+  <div class="plans">
+
+
+    <!-- GRATIS -->
+
+    <div class="plan">
+
+      <h3>
+        Gratis
+      </h3>
+
+      <p class="plan-description">
+        Para empezar a estudiar con StudyAI.
+      </p>
+
+      <div class="price">
+        0€
+        <span>/mes</span>
+      </div>
+
+      <ul>
+
+        <li>Tests y exámenes básicos</li>
+
+        <li>8 fotos cada 24 horas</li>
+
+        <li>Calendario</li>
+
+        <li>Racha de estudio</li>
+
+        <li>Plan de estudio básico</li>
+
+        <li>Estadísticas</li>
+
+      </ul>
+
+      <button
+        class="primary plan-button"
+        onclick="openApp()"
+      >
+        Empezar gratis
+      </button>
+
+    </div>
+
+
+    <!-- PRO -->
+
+    <div class="plan featured">
+
+      <div class="plan-badge">
+        MÁS POPULAR
+      </div>
+
+      <h3>
+        ⭐ Pro
+      </h3>
+
+      <p class="plan-description">
+        Más capacidad para estudiar todos los días.
+      </p>
+
+      <div class="price">
+        5,99€
+        <span>/mes</span>
+      </div>
+
+      <ul>
+
+        <li>Todo lo del plan Gratis</li>
+
+        <li>20 fotos cada 24 horas</li>
+
+        <li>Tests más completos</li>
+
+        <li>Más preguntas por examen</li>
+
+        <li>Planes de estudio avanzados</li>
+
+        <li>Estadísticas más detalladas</li>
+
+        <li>Menos límites de uso</li>
+
+        <li>Prioridad para nuevas funciones</li>
+
+      </ul>
+
+      <button
+        class="primary plan-button"
+        onclick="selectPlan('Pro')"
+      >
+        Elegir Pro
+      </button>
+
+    </div>
+
+
+    <!-- AVANZADO -->
+
+    <div class="plan">
+
+      <h3>
+        🚀 Avanzado
+      </h3>
+
+      <p class="plan-description">
+        La experiencia completa de StudyAI.
+      </p>
+
+      <div class="price">
+        9,99€
+        <span>/mes</span>
+      </div>
+
+      <ul>
+
+        <li>Todo lo del plan Pro</li>
+
+        <li>Fotos ilimitadas</li>
+
+        <li>Tests y exámenes avanzados</li>
+
+        <li>Planes de estudio personalizados</li>
+
+        <li>Seguimiento de progreso avanzado</li>
+
+        <li>Más herramientas de IA</li>
+
+        <li>Mayor límite de uso</li>
+
+        <li>Funciones nuevas antes</li>
+
+      </ul>
+
+      <button
+        class="primary plan-button"
+        onclick="selectPlan('Avanzado')"
+      >
+        Elegir Avanzado
+      </button>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     APP
+========================= -->
+
+<section
+  id="app"
+>
 
   <h2 class="app-title">
     Mi zona de estudio
   </h2>
 
   <p class="app-subtitle">
-    Todo lo que necesitas para prepararte.
+    Tu centro de estudio personal.
   </p>
 
 
@@ -721,7 +1146,9 @@ textarea{
   </div>
 
 
-  <!-- DASHBOARD -->
+  <!-- =========================
+       INICIO APP
+  ========================= -->
 
   <div
     class="page active"
@@ -730,10 +1157,13 @@ textarea{
 
     <div class="box">
 
-      <h3>🎓 ¿En qué curso estás?</h3>
+      <h3>
+        🎓 Configura tu curso
+      </h3>
 
       <p class="description">
-        Esto ayudará a adaptar la dificultad de los ejercicios.
+        StudyAI utilizará tu curso para adaptar
+        la dificultad.
       </p>
 
       <select id="course">
@@ -759,7 +1189,7 @@ textarea{
 
       </select>
 
-      <br><br>
+      <br>
 
       <button
         class="primary"
@@ -773,23 +1203,48 @@ textarea{
 
     <div class="box">
 
-      <h3>📊 Tu progreso</h3>
+      <h3>
+        📊 Tu progreso
+      </h3>
 
       <div class="stats">
 
         <div class="stat">
-          <strong id="statTests">0</strong>
-          <span>Tests realizados</span>
+
+          <strong id="statTests">
+            0
+          </strong>
+
+          <span>
+            Tests realizados
+          </span>
+
         </div>
 
-        <div class="stat">
-          <strong id="statCorrect">0%</strong>
-          <span>Aciertos</span>
-        </div>
 
         <div class="stat">
-          <strong id="statDays">0</strong>
-          <span>Días estudiados</span>
+
+          <strong id="statCorrect">
+            0%
+          </strong>
+
+          <span>
+            Aciertos
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <strong id="statDays">
+            0
+          </strong>
+
+          <span>
+            Días estudiados
+          </span>
+
         </div>
 
       </div>
@@ -799,14 +1254,16 @@ textarea{
 
     <div class="box">
 
-      <h3>🎯 Tu próximo objetivo</h3>
+      <h3>
+        🎯 Próximo examen
+      </h3>
 
       <p
         class="description"
         id="nextExamText"
       >
-        Añade un examen en el calendario para crear
-        automáticamente tu plan de estudio.
+        Añade un examen al calendario
+        para preparar tu estudio.
       </p>
 
       <button
@@ -818,10 +1275,35 @@ textarea{
 
     </div>
 
+
+    <div
+      class="box"
+      id="accountDashboard"
+    >
+
+      <h3>
+        👤 Mi cuenta
+      </h3>
+
+      <p class="description">
+        No has iniciado sesión.
+      </p>
+
+      <button
+        class="primary"
+        onclick="openRegister()"
+      >
+        Registrarse
+      </button>
+
+    </div>
+
   </div>
 
 
-  <!-- APUNTES -->
+  <!-- =========================
+       APUNTES
+  ========================= -->
 
   <div
     class="page"
@@ -830,10 +1312,12 @@ textarea{
 
     <div class="box">
 
-      <h3>📝 Escribe tus apuntes</h3>
+      <h3>
+        📝 Tus apuntes
+      </h3>
 
       <p class="description">
-        Escribe aquí el contenido que quieres estudiar.
+        Escribe aquí lo que quieres estudiar.
       </p>
 
       <textarea
@@ -846,11 +1330,12 @@ textarea{
 
     <div class="box">
 
-      <h3>📸 Fotos de tus apuntes</h3>
+      <h3>
+        📸 Fotos de tus apuntes
+      </h3>
 
       <p class="description">
-        Puedes hacer fotos o seleccionarlas desde tu dispositivo.
-        Máximo 8 fotos cada 24 horas.
+        Haz una foto o selecciona imágenes de tu galería.
       </p>
 
       <p
@@ -882,11 +1367,12 @@ textarea{
 
     <div class="box">
 
-      <h3>🤖 Explicar mis apuntes</h3>
+      <h3>
+        🤖 Explicar mis apuntes
+      </h3>
 
       <p class="description">
-        La IA analizará tus apuntes y te los explicará
-        de forma sencilla.
+        La IA analizará tus apuntes.
       </p>
 
       <button
@@ -899,12 +1385,12 @@ textarea{
       <div
         id="result"
         style="
-          margin-top:18px;
-          background:#f7f9fc;
-          border-radius:12px;
-          padding:18px;
-          display:none;
-          line-height:1.6;
+        margin-top:18px;
+        background:#f7f9fc;
+        border-radius:12px;
+        padding:18px;
+        display:none;
+        line-height:1.6;
         "
       ></div>
 
@@ -916,32 +1402,35 @@ textarea{
       class="box hidden"
     >
 
-      <div class="video-box">
+      <h3>
+        🎥 Vídeo recomendado
+      </h3>
 
-        <h3>🎥 Vídeo recomendado</h3>
+      <p class="description">
+        Vídeos relacionados con tus apuntes.
+      </p>
 
-        <p class="description">
-          Hemos preparado una búsqueda de YouTube
-          relacionada con el tema.
-        </p>
-
-        <a
-          id="youtubeButton"
-          class="youtube"
-          href="#"
-          target="_blank"
-        >
-          ▶ Ver vídeo
-        </a>
-
-      </div>
+      <a
+        id="youtubeButton"
+        class="primary"
+        href="#"
+        target="_blank"
+        style="
+        display:inline-block;
+        text-decoration:none;
+        "
+      >
+        ▶ Buscar vídeo
+      </a>
 
     </div>
 
   </div>
 
 
-  <!-- TESTS -->
+  <!-- =========================
+       TESTS
+  ========================= -->
 
   <div
     class="page"
@@ -953,11 +1442,53 @@ textarea{
       id="testSetup"
     >
 
-      <h3>📝 Crear un test</h3>
+      <h3>
+        📝 Crear test o examen
+      </h3>
 
       <p class="description">
-        Elige cómo quieres practicar.
+        Elige asignatura, tema, número de preguntas
+        y dificultad.
       </p>
+
+
+      <label>
+        Asignatura
+      </label>
+
+      <select id="subject">
+
+        <option value="">
+          Selecciona una asignatura
+        </option>
+
+        <option>Matemáticas</option>
+        <option>Lengua</option>
+        <option>Inglés</option>
+        <option>Historia</option>
+        <option>Geografía</option>
+        <option>Biología</option>
+        <option>Física</option>
+        <option>Química</option>
+        <option>Filosofía</option>
+        <option>Economía</option>
+        <option>Otra</option>
+
+      </select>
+
+      <br><br>
+
+
+      <label>
+        Tema
+      </label>
+
+      <input
+        id="testTopic"
+        placeholder="Ej: Revolución Francesa"
+      >
+
+      <br><br>
 
 
       <label>
@@ -966,10 +1497,21 @@ textarea{
 
       <select id="questionCount">
 
-        <option value="5">5 preguntas</option>
-        <option value="10">10 preguntas</option>
-        <option value="15">15 preguntas</option>
-        <option value="20">20 preguntas</option>
+        <option value="5">
+          5 preguntas
+        </option>
+
+        <option value="10">
+          10 preguntas
+        </option>
+
+        <option value="15">
+          15 preguntas
+        </option>
+
+        <option value="20">
+          20 preguntas
+        </option>
 
       </select>
 
@@ -977,14 +1519,13 @@ textarea{
 
 
       <label>
-        Dificultad
+        Dificultad inicial
       </label>
 
       <div class="difficulty">
 
         <button
           class="diff selected"
-          data-level="easy"
           onclick="selectDifficulty('easy',this)"
         >
           Fácil
@@ -992,7 +1533,6 @@ textarea{
 
         <button
           class="diff"
-          data-level="medium"
           onclick="selectDifficulty('medium',this)"
         >
           Medio
@@ -1000,7 +1540,6 @@ textarea{
 
         <button
           class="diff"
-          data-level="hard"
           onclick="selectDifficulty('hard',this)"
         >
           Difícil
@@ -1014,7 +1553,7 @@ textarea{
         class="primary"
         onclick="startTest(false)"
       >
-        📝 Empezar test
+        📝 Hacer tipo test
       </button>
 
       <button
@@ -1022,7 +1561,7 @@ textarea{
         style="margin-left:8px"
         onclick="startTest(true)"
       >
-        🎯 Modo examen
+        🎯 Hacer examen
       </button>
 
     </div>
@@ -1045,12 +1584,10 @@ textarea{
 
       </div>
 
-
       <div
         class="question"
         id="question"
       ></div>
-
 
       <div
         class="answers"
@@ -1075,7 +1612,9 @@ textarea{
       id="examResult"
     >
 
-      <h3>🎉 Has terminado</h3>
+      <h3>
+        🎉 Resultado
+      </h3>
 
       <div
         class="result-score"
@@ -1093,7 +1632,7 @@ textarea{
         class="primary"
         onclick="resetTest()"
       >
-        Volver a hacer un test
+        Volver a hacer otro
       </button>
 
     </div>
@@ -1101,7 +1640,9 @@ textarea{
   </div>
 
 
-  <!-- CALENDARIO -->
+  <!-- =========================
+       CALENDARIO
+  ========================= -->
 
   <div
     class="page"
@@ -1110,29 +1651,47 @@ textarea{
 
     <div class="box">
 
-      <h3>📅 Calendario de estudio</h3>
+      <h3>
+        📅 Añadir tarea o examen
+      </h3>
 
       <p class="description">
-        Añade tus exámenes y tareas.
+        Tus exámenes servirán para crear un plan
+        de estudio.
       </p>
-
 
       <div class="course-grid">
 
         <div>
-          <label>Fecha</label>
+
+          <label>
+            Fecha
+          </label>
+
           <input
             type="date"
             id="eventDate"
           >
+
         </div>
 
+
         <div>
-          <label>Tipo</label>
+
+          <label>
+            Tipo
+          </label>
 
           <select id="eventType">
-            <option>Examen</option>
-            <option>Tarea</option>
+
+            <option>
+              Examen
+            </option>
+
+            <option>
+              Tarea
+            </option>
+
           </select>
 
         </div>
@@ -1152,7 +1711,7 @@ textarea{
         class="primary"
         onclick="addEvent()"
       >
-        + Añadir al calendario
+        + Añadir
       </button>
 
     </div>
@@ -1180,7 +1739,6 @@ textarea{
 
       </div>
 
-
       <div
         class="calendar-grid"
         id="calendar"
@@ -1191,15 +1749,16 @@ textarea{
 
     <div class="box">
 
-      <h3>📚 Plan de estudio</h3>
+      <h3>
+        📚 Plan de estudio
+      </h3>
 
       <p class="description">
-        Cuando añadas un examen, StudyAI preparará
-        una propuesta de estudio para los días anteriores.
+        Se generará al añadir un examen.
       </p>
 
       <div id="studyPlan">
-        Añade un examen para generar el plan.
+        Todavía no tienes ningún plan.
       </div>
 
     </div>
@@ -1207,7 +1766,9 @@ textarea{
   </div>
 
 
-  <!-- RACHA -->
+  <!-- =========================
+       RACHA
+  ========================= -->
 
   <div
     class="page"
@@ -1232,7 +1793,7 @@ textarea{
       </h3>
 
       <p class="description">
-        Estudia cada día para mantener tu racha.
+        Estudia cada día para mantenerla.
       </p>
 
       <button
@@ -1247,23 +1808,48 @@ textarea{
 
     <div class="box">
 
-      <h3>🏆 Estadísticas</h3>
+      <h3>
+        🏆 Estadísticas
+      </h3>
 
       <div class="stats">
 
         <div class="stat">
-          <strong id="totalStudyDays">0</strong>
-          <span>Días estudiados</span>
+
+          <strong id="totalStudyDays">
+            0
+          </strong>
+
+          <span>
+            Días estudiados
+          </span>
+
         </div>
 
-        <div class="stat">
-          <strong id="totalTests">0</strong>
-          <span>Tests</span>
-        </div>
 
         <div class="stat">
-          <strong id="totalQuestions">0</strong>
-          <span>Preguntas</span>
+
+          <strong id="totalTests">
+            0
+          </strong>
+
+          <span>
+            Tests
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <strong id="totalQuestions">
+            0
+          </strong>
+
+          <span>
+            Preguntas
+          </span>
+
         </div>
 
       </div>
@@ -1274,7 +1860,7 @@ textarea{
 
 
   <button
-    class="back"
+    class="tab"
     onclick="closeApp()"
   >
     ← Volver al inicio
@@ -1283,28 +1869,254 @@ textarea{
 </section>
 
 
+<!-- =========================
+     REGISTRO
+========================= -->
+
+<div
+  class="modal"
+  id="registerModal"
+>
+
+  <div class="modal-content">
+
+    <button
+      class="close"
+      onclick="closeModal('registerModal')"
+    >
+      ×
+    </button>
+
+    <h2>
+      Crear cuenta
+    </h2>
+
+    <p class="description">
+      Crea tu cuenta para guardar tu progreso.
+    </p>
+
+
+    <div class="form-group">
+
+      <label>
+        Nombre
+      </label>
+
+      <input
+        id="registerName"
+        placeholder="Tu nombre"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Correo electrónico
+      </label>
+
+      <input
+        id="registerEmail"
+        type="email"
+        placeholder="tu@email.com"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Contraseña
+      </label>
+
+      <input
+        id="registerPassword"
+        type="password"
+        placeholder="Contraseña"
+      >
+
+    </div>
+
+
+    <button
+      class="primary"
+      onclick="registerUser()"
+    >
+      Registrarse
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<div
+  class="modal"
+  id="loginModal"
+>
+
+  <div class="modal-content">
+
+    <button
+      class="close"
+      onclick="closeModal('loginModal')"
+    >
+      ×
+    </button>
+
+    <h2>
+      Iniciar sesión
+    </h2>
+
+    <p class="description">
+      Accede a tu cuenta.
+    </p>
+
+
+    <div class="form-group">
+
+      <label>
+        Correo
+      </label>
+
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="tu@email.com"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Contraseña
+      </label>
+
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Contraseña"
+      >
+
+    </div>
+
+
+    <button
+      class="primary"
+      onclick="loginUser()"
+    >
+      Iniciar sesión
+    </button>
+
+
+    <button
+      class="tab"
+      style="width:100%;margin-top:10px"
+      onclick="
+        closeModal('loginModal');
+        openRegister();
+      "
+    >
+      Crear cuenta
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     PLAN MODAL
+========================= -->
+
+<div
+  class="modal"
+  id="planModal"
+>
+
+  <div class="modal-content">
+
+    <button
+      class="close"
+      onclick="closeModal('planModal')"
+    >
+      ×
+    </button>
+
+    <h2 id="planModalTitle">
+      Plan Pro
+    </h2>
+
+    <p
+      class="description"
+      id="planModalDescription"
+    ></p>
+
+    <div class="account-card">
+
+      <strong>
+        Importante
+      </strong>
+
+      <p
+        style="
+        margin-top:7px;
+        color:#667085;
+        font-size:14px;
+        line-height:1.5;
+        "
+      >
+        Esta versión todavía no procesa pagos.
+        Primero construiremos el sistema de cuentas
+        y después conectaremos los pagos de forma segura.
+      </p>
+
+    </div>
+
+    <button
+      class="primary"
+      onclick="closeModal('planModal')"
+    >
+      Entendido
+    </button>
+
+  </div>
+
+</div>
+
+
 <script>
 
 /* =========================
-   DATOS
+   VARIABLES
 ========================= */
 
-let selectedDifficulty = "easy";
+let selectedDifficulty="easy";
 
-let testQuestions = [];
+let testQuestions=[];
 
-let currentQuestion = 0;
+let currentQuestion=0;
 
-let testScore = 0;
+let testScore=0;
 
-let isExam = false;
+let isExam=false;
 
-let events =
+let photos=[];
+
+let events=
   JSON.parse(
-    localStorage.getItem("studyAIEvents") || "[]"
+    localStorage.getItem("studyAIEvents")||"[]"
   );
 
-let calendarDate = new Date();
+let calendarDate=new Date();
 
 
 /* =========================
@@ -1317,15 +2129,23 @@ function openApp(){
 
   document.getElementById("features").style.display="none";
 
+  document.getElementById("pricing").style.display="none";
+
   document.getElementById("app").style.display="block";
 
   registerStudy();
 
   updateStats();
 
-  updateStreak();
-
   renderCalendar();
+
+  updateCounter();
+
+  loadCourse();
+
+  updateAccount();
+
+  window.scrollTo(0,0);
 
 }
 
@@ -1338,29 +2158,31 @@ function closeApp(){
 
   document.getElementById("features").style.display="flex";
 
+  document.getElementById("pricing").style.display="block";
+
   window.scrollTo(0,0);
 
 }
 
 
 /* =========================
-   PÁGINAS
+   NAVEGACIÓN
 ========================= */
 
 function showPage(id,button){
 
   document.querySelectorAll(".page")
-    .forEach(page =>
-      page.classList.remove("active")
-    );
+    .forEach(page=>{
+      page.classList.remove("active");
+    });
 
   document.getElementById(id)
     .classList.add("active");
 
   document.querySelectorAll(".tab")
-    .forEach(tab =>
-      tab.classList.remove("active")
-    );
+    .forEach(tab=>{
+      tab.classList.remove("active");
+    });
 
   if(button)
     button.classList.add("active");
@@ -1379,25 +2201,12 @@ function showPage(id,button){
 function showPageById(id){
 
   document.querySelectorAll(".page")
-    .forEach(page =>
-      page.classList.remove("active")
-    );
+    .forEach(page=>{
+      page.classList.remove("active");
+    });
 
   document.getElementById(id)
     .classList.add("active");
-
-  document.querySelectorAll(".tab")
-    .forEach(tab =>
-      tab.classList.remove("active")
-    );
-
-  const tabs =
-    document.querySelectorAll(".tab");
-
-  tabs.forEach(tab=>{
-    if(tab.textContent.includes("Calendario"))
-      tab.classList.add("active");
-  });
 
   renderCalendar();
 
@@ -1410,7 +2219,7 @@ function showPageById(id){
 
 function saveCourse(){
 
-  const course =
+  const course=
     document.getElementById("course").value;
 
   if(!course){
@@ -1427,46 +2236,85 @@ function saveCourse(){
   );
 
   alert(
-    "Curso guardado: " + course
+    "Curso guardado: "+course
   );
 
 }
 
 
+function loadCourse(){
+
+  const saved=
+    localStorage.getItem(
+      "studyAICourse"
+    );
+
+  if(saved){
+
+    document.getElementById(
+      "course"
+    ).value=saved;
+
+  }
+
+}
+
+
 /* =========================
-   FOTOS
+   FOTOS Y PLAN
 ========================= */
 
-const MAX_PHOTOS = 8;
+const MAX_FREE_PHOTOS=8;
 
-const LIMIT_TIME =
-  24*60*60*1000;
+const MAX_PRO_PHOTOS=20;
 
-let photos=[];
+const LIMIT_TIME=24*60*60*1000;
+
+
+function getPlan(){
+
+  return localStorage.getItem(
+    "studyAIPlan"
+  )||"Gratis";
+
+}
+
+
+function getMaxPhotos(){
+
+  const plan=getPlan();
+
+  if(plan==="Avanzado")
+    return Infinity;
+
+  if(plan==="Pro")
+    return MAX_PRO_PHOTOS;
+
+  return MAX_FREE_PHOTOS;
+
+}
 
 
 function getPhotoUsage(){
 
-  const saved =
+  const saved=
     localStorage.getItem(
       "studyAIPhotoUsage"
     );
 
   if(!saved){
 
-    return {
+    return{
       count:0,
       startTime:Date.now()
     };
 
   }
 
-  const usage =
-    JSON.parse(saved);
+  const usage=JSON.parse(saved);
 
   if(
-    Date.now()-usage.startTime
-    >= LIMIT_TIME
+    Date.now()-usage.startTime>=LIMIT_TIME
   ){
 
     const reset={
@@ -1490,48 +2338,36 @@ function getPhotoUsage(){
 
 function updateCounter(){
 
-  const usage =
-    getPhotoUsage();
-
-  const remaining =
-    MAX_PHOTOS-usage.count;
-
-  const counter =
+  const counter=
     document.getElementById("counter");
 
-  if(!counter) return;
+  if(!counter)
+    return;
 
-  if(remaining>0){
+  const usage=getPhotoUsage();
 
-    counter.textContent =
-      remaining +
-      (
-        remaining===1
-        ?" foto disponible"
-        :" fotos disponibles"
-      );
+  const max=getMaxPhotos();
 
-  }else{
+  if(max===Infinity){
 
-    const left =
-      LIMIT_TIME-
-      (
-        Date.now()-
-        usage.startTime
-      );
+    counter.textContent=
+      "Fotos ilimitadas con Avanzado.";
 
-    const hours =
-      Math.ceil(
-        left/(60*60*1000)
-      );
-
-    counter.textContent =
-      "Límite alcanzado. " +
-      "Vuelve en aproximadamente " +
-      hours +
-      (hours===1?" hora.":" horas.");
+    return;
 
   }
+
+  const remaining=
+    Math.max(0,max-usage.count);
+
+  counter.textContent=
+    remaining+
+    (
+      remaining===1
+      ?" foto disponible"
+      :" fotos disponibles"
+    )+
+    " · Plan "+getPlan();
 
 }
 
@@ -1539,91 +2375,105 @@ function updateCounter(){
 document
 .getElementById("photoInput")
 .addEventListener(
-  "change",
-  function(e){
+"change",
+function(e){
 
-    const files =
-      Array.from(e.target.files);
+  const files=
+    Array.from(e.target.files);
 
-    const usage =
-      getPhotoUsage();
+  const usage=getPhotoUsage();
 
-    const remaining =
-      MAX_PHOTOS-usage.count;
+  const max=getMaxPhotos();
 
-    if(remaining<=0){
+  const remaining=
+    max===Infinity
+    ?files.length
+    :max-usage.count;
 
-      alert(
-        "Has alcanzado el límite de 8 fotos."
-      );
 
-      e.target.value="";
+  if(max!==Infinity && remaining<=0){
 
-      return;
+    alert(
+      "Has alcanzado el límite de fotos de tu plan."
+    );
 
-    }
+    e.target.value="";
 
-    if(files.length>remaining){
+    return;
 
-      alert(
-        "Solo puedes añadir "+
-        remaining+
-        " foto"+
-        (remaining===1?"":"s")+
-        " más."
-      );
+  }
 
-      e.target.value="";
 
-      return;
+  const allowed=
+    max===Infinity
+    ?files
+    :files.slice(0,remaining);
 
-    }
 
-    files.forEach(file=>{
+  allowed.forEach(file=>{
 
-      photos.push(file);
+    photos.push(file);
 
-      const reader =
-        new FileReader();
+    const reader=
+      new FileReader();
 
-      reader.onload=function(event){
+    reader.onload=function(event){
 
-        const container =
-          document.createElement("div");
+      const container=
+        document.createElement("div");
 
-        container.className="photo";
+      container.className="photo";
 
-        container.innerHTML=`
-          <img src="${event.target.result}">
-          <button class="delete-photo"
-          onclick="this.parentElement.remove()">
+      container.innerHTML=`
+        <img src="${event.target.result}">
+        <button
+          class="delete-photo"
+          onclick="this.parentElement.remove()"
+        >
           ×
-          </button>
-        `;
+        </button>
+      `;
 
-        document
-        .getElementById("photos")
-        .appendChild(container);
+      document
+      .getElementById("photos")
+      .appendChild(container);
 
-      };
+    };
 
-      reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
 
-    });
+  });
 
-    usage.count+=files.length;
+
+  if(max!==Infinity){
+
+    usage.count+=allowed.length;
 
     localStorage.setItem(
       "studyAIPhotoUsage",
       JSON.stringify(usage)
     );
 
-    updateCounter();
+  }
 
-    e.target.value="";
+
+  if(
+    max!==Infinity &&
+    files.length>allowed.length
+  ){
+
+    alert(
+      "Has alcanzado el límite de fotos de tu plan."
+    );
 
   }
-);
+
+
+  updateCounter();
+
+  e.target.value="";
+
+});
 
 
 /* =========================
@@ -1632,9 +2482,10 @@ document
 
 function explainNotes(){
 
-  const notes =
+  const notes=
     document.getElementById("notes")
-    .value.trim();
+    .value
+    .trim();
 
   if(!notes && photos.length===0){
 
@@ -1646,7 +2497,7 @@ function explainNotes(){
 
   }
 
-  const result =
+  const result=
     document.getElementById("result");
 
   result.style.display="block";
@@ -1656,29 +2507,35 @@ function explainNotes(){
     <br><br>
     Tus apuntes están preparados.
     <br><br>
-    Cuando conectemos la inteligencia artificial,
-    analizará tus apuntes y te dará:
+    La versión con IA podrá:
     <br><br>
-    • Una explicación sencilla<br>
-    • Un resumen<br>
-    • Conceptos importantes<br>
-    • Preguntas para practicar
+    ✓ Explicar el tema de forma sencilla<br>
+    ✓ Crear un resumen<br>
+    ✓ Detectar conceptos importantes<br>
+    ✓ Crear preguntas automáticamente<br>
+    ✓ Recomendar vídeos relacionados
   `;
 
-  const videoSection =
-    document.getElementById("videoSection");
+
+  const videoSection=
+    document.getElementById(
+      "videoSection"
+    );
 
   videoSection.classList.remove("hidden");
 
-  const topic =
-    notes.substring(0,100);
+
+  const search=
+    notes ||
+    "tema de estudio";
+
 
   document.getElementById(
     "youtubeButton"
-  ).href =
+  ).href=
     "https://www.youtube.com/results?search_query="+
     encodeURIComponent(
-      topic+" explicado"
+      search.substring(0,100)+" explicado"
     );
 
 }
@@ -1693,10 +2550,10 @@ function selectDifficulty(level,button){
   selectedDifficulty=level;
 
   document
-  .querySelectorAll(".diff")
-  .forEach(x=>
-    x.classList.remove("selected")
-  );
+    .querySelectorAll(".diff")
+    .forEach(x=>{
+      x.classList.remove("selected");
+    });
 
   button.classList.add("selected");
 
@@ -1704,229 +2561,341 @@ function selectDifficulty(level,button){
 
 
 /* =========================
-   TEST
+   PREGUNTAS
 ========================= */
 
-function generateDemoQuestions(){
+function shuffleAnswers(question){
 
-  const difficulty =
-    selectedDifficulty;
-
-  const course =
-    localStorage.getItem(
-      "studyAICourse"
-    ) || "tu curso";
-
-  let questions=[];
+  const answers=
+    question.a.map(
+      (text,index)=>({
+        text:text,
+        correct:index===question.c
+      })
+    );
 
 
-  if(difficulty==="easy"){
+  for(
+    let i=answers.length-1;
+    i>0;
+    i--
+  ){
 
-    questions=[
-      {
-        q:"¿Qué debes hacer primero cuando estudias un tema nuevo?",
-        a:["Leer y comprender","Memorizar sin leer","No hacer nada","Solo mirar vídeos"],
-        c:0
-      },
-      {
-        q:"¿Qué sirve para comprobar si has aprendido?",
-        a:["Hacer un test","Cerrar el libro","No repasar","Dormir"],
-        c:0
-      },
-      {
-        q:"¿Qué es un resumen?",
-        a:["Las ideas principales","Todo el libro","Una pregunta","Un examen"],
-        c:0
-      },
-      {
-        q:"¿Qué ayuda a recordar información?",
-        a:["Repasar","No estudiar","Evitar preguntas","Dejarlo todo para el último día"],
-        c:0
-      },
-      {
-        q:"¿Qué puedes usar para organizar un examen?",
-        a:["Un calendario","Nada","Solo videojuegos","Una calculadora"],
-        c:0
-      }
-    ];
+    const j=
+      Math.floor(
+        Math.random()*(i+1)
+      );
 
-  }else if(difficulty==="medium"){
-
-    questions=[
-      {
-        q:"¿Cuál es una buena estrategia para preparar un examen?",
-        a:["Repasar durante varios días","Estudiar todo cinco minutos antes","No practicar","No revisar errores"],
-        c:0
-      },
-      {
-        q:"¿Por qué es útil hacer preguntas después de estudiar?",
-        a:["Porque compruebas lo que recuerdas","Porque elimina el estudio","Porque no necesitas apuntes","Porque sustituye todas las clases"],
-        c:0
-      },
-      {
-        q:"¿Qué técnica consiste en recuperar información sin mirar los apuntes?",
-        a:["Recuperación activa","Copiar","Leer pasivamente","Subrayar todo"],
-        c:0
-      },
-      {
-        q:"¿Qué puede indicar que necesitas repasar un tema?",
-        a:["Cometes muchos errores","Lo recuerdas perfectamente","Nunca lo estudiaste","No tienes examen"],
-        c:0
-      },
-      {
-        q:"¿Cuál es una ventaja de distribuir el estudio?",
-        a:["Mejora la retención","Hace innecesario estudiar","Elimina los exámenes","Reduce todas las asignaturas"],
-        c:0
-      }
-    ];
-
-  }else{
-
-    questions=[
-      {
-        q:"¿Qué estrategia suele favorecer una mejor retención a largo plazo?",
-        a:["Práctica espaciada","Memorización de última hora","Leer sin recuperar información","Estudiar una sola vez"],
-        c:0
-      },
-      {
-        q:"¿Qué significa recuperación activa?",
-        a:["Intentar recordar sin consultar la respuesta","Leer varias veces","Copiar el texto","Subrayar cada palabra"],
-        c:0
-      },
-      {
-        q:"¿Por qué conviene analizar los errores de un test?",
-        a:["Para detectar conceptos que necesitan refuerzo","Para evitar estudiar","Para eliminar preguntas","Para cambiar de asignatura"],
-        c:0
-      },
-      {
-        q:"¿Qué combinación puede ser más eficaz?",
-        a:["Explicación + práctica + repaso","Solo lectura","Solo subrayado","No practicar"],
-        c:0
-      },
-      {
-        q:"¿Qué permite un plan de estudio antes de un examen?",
-        a:["Distribuir el trabajo en el tiempo","Eliminar la necesidad de estudiar","Garantizar un 10","Evitar todas las tareas"],
-        c:0
-      }
+    [
+      answers[i],
+      answers[j]
+    ]=
+    [
+      answers[j],
+      answers[i]
     ];
 
   }
+
+
+  question.a=
+    answers.map(x=>x.text);
+
+  question.c=
+    answers.findIndex(
+      x=>x.correct
+    );
+
+}
+
+
+function generateDemoQuestions(){
+
+  const subject=
+    document.getElementById(
+      "subject"
+    ).value ||
+    "la asignatura";
+
+  const topic=
+    document.getElementById(
+      "testTopic"
+    ).value.trim() ||
+    "el tema";
+
+
+  let questions=[
+
+    {
+      q:
+      `¿Cuál de estas afirmaciones sobre ${topic} es correcta?`,
+      a:[
+        `Es un concepto relacionado con ${subject}`,
+        "No tiene ninguna relación",
+        "Es imposible estudiarlo",
+        "No puede aparecer en un examen"
+      ],
+      c:0
+    },
+
+    {
+      q:
+      `¿Qué deberías identificar primero al estudiar ${topic}?`,
+      a:[
+        "Las ideas principales",
+        "Solo las fechas",
+        "Solo los nombres",
+        "Ninguna información"
+      ],
+      c:0
+    },
+
+    {
+      q:
+      `¿Qué ayuda a comprobar si has aprendido ${topic}?`,
+      a:[
+        "Hacer preguntas y tests",
+        "No repasar",
+        "Leer sin pensar",
+        "Estudiarlo solo una vez"
+      ],
+      c:0
+    },
+
+    {
+      q:
+      `¿Qué estrategia es útil para dominar ${topic}?`,
+      a:[
+        "Repasar y practicar",
+        "Memorizar todo sin comprender",
+        "No hacer ejercicios",
+        "Estudiarlo únicamente el día anterior"
+      ],
+      c:0
+    },
+
+    {
+      q:
+      `¿Qué puede ayudarte a preparar un examen de ${topic}?`,
+      a:[
+        "Un plan de estudio",
+        "No organizarte",
+        "Evitar los tests",
+        "No revisar errores"
+      ],
+      c:0
+    },
+
+    {
+      q:
+      `Si fallas una pregunta sobre ${topic}, ¿qué es recomendable hacer?`,
+      a:[
+        "Revisar el concepto y volver a practicar",
+        "Ignorar el error",
+        "Dejar de estudiar",
+        "Borrar los apuntes"
+      ],
+      c:0
+    }
+
+  ];
+
+
+  questions.forEach(
+    shuffleAnswers
+  );
 
   return questions;
 
 }
 
 
+/* =========================
+   START TEST
+========================= */
+
 function startTest(exam){
+
+  const subject=
+    document.getElementById(
+      "subject"
+    ).value;
+
+  const topic=
+    document.getElementById(
+      "testTopic"
+    ).value.trim();
+
+
+  if(!subject){
+
+    alert(
+      "Selecciona una asignatura."
+    );
+
+    return;
+
+  }
+
+
+  if(!topic){
+
+    alert(
+      "Escribe el tema del test."
+    );
+
+    return;
+
+  }
+
 
   isExam=exam;
 
-  const count =
+
+  const count=
     Number(
       document.getElementById(
         "questionCount"
       ).value
     );
 
-  testQuestions =
+
+  testQuestions=
     generateDemoQuestions();
 
-  while(testQuestions.length<count){
 
-    testQuestions =
+  while(
+    testQuestions.length<count
+  ){
+
+    testQuestions=
       testQuestions.concat(
         generateDemoQuestions()
       );
 
   }
 
-  testQuestions =
+
+  testQuestions=
     testQuestions.slice(0,count);
+
+
+  testQuestions.forEach(
+    shuffleAnswers
+  );
+
 
   currentQuestion=0;
 
   testScore=0;
 
+
   document.getElementById(
     "testSetup"
   ).style.display="none";
+
 
   document.getElementById(
     "examResult"
   ).style.display="none";
 
+
   document.getElementById(
     "testArea"
   ).style.display="block";
+
 
   showQuestion();
 
 }
 
 
+/* =========================
+   SHOW QUESTION
+========================= */
+
 function showQuestion(){
 
-  const q =
+  const q=
     testQuestions[currentQuestion];
+
 
   document.getElementById(
     "questionProgress"
-  ).textContent =
+  ).textContent=
     "Pregunta "+
     (currentQuestion+1)+
     " de "+
     testQuestions.length;
 
+
   document.getElementById(
     "currentDifficulty"
-  ).textContent =
+  ).textContent=
     difficultyName();
+
 
   document.getElementById(
     "question"
-  ).textContent=q.q;
+  ).textContent=
+    q.q;
 
-  const answers =
+
+  const answers=
     document.getElementById(
       "answers"
     );
 
   answers.innerHTML="";
 
-  q.a.forEach((answer,index)=>{
 
-    const button =
-      document.createElement("button");
+  q.a.forEach(
+    (answer,index)=>{
 
-    button.className="answer";
+      const button=
+        document.createElement(
+          "button"
+        );
 
-    button.textContent=
-      answer;
+      button.className="answer";
 
-    button.onclick=()=>{
-      answerQuestion(
-        index,
+      button.textContent=
+        answer;
+
+      button.onclick=()=>{
+        answerQuestion(
+          index,
+          button
+        );
+      };
+
+      answers.appendChild(
         button
       );
-    };
 
-    answers.appendChild(button);
+    }
+  );
 
-  });
 
-  document.getElementById(
-    "nextQuestion"
-  ).classList.add("hidden");
+  document
+    .getElementById(
+      "nextQuestion"
+    )
+    .classList.add("hidden");
 
 }
 
 
 function difficultyName(){
 
-  if(selectedDifficulty==="easy")
+  if(
+    selectedDifficulty==="easy"
+  )
     return "Fácil";
 
-  if(selectedDifficulty==="medium")
+  if(
+    selectedDifficulty==="medium"
+  )
     return "Medio";
 
   return "Difícil";
@@ -1934,22 +2903,35 @@ function difficultyName(){
 }
 
 
-function answerQuestion(index,button){
+/* =========================
+   ANSWER
+========================= */
 
-  const q =
+function answerQuestion(
+  index,
+  button
+){
+
+  const q=
     testQuestions[currentQuestion];
 
-  const buttons =
-    document
-    .querySelectorAll(".answer");
 
-  buttons.forEach(b=>
-    b.disabled=true
+  const buttons=
+    document.querySelectorAll(
+      ".answer"
+    );
+
+
+  buttons.forEach(
+    b=>b.disabled=true
   );
+
 
   if(index===q.c){
 
-    button.classList.add("correct");
+    button.classList.add(
+      "correct"
+    );
 
     testScore++;
 
@@ -1957,45 +2939,81 @@ function answerQuestion(index,button){
 
   }else{
 
-    button.classList.add("wrong");
+    button.classList.add(
+      "wrong"
+    );
 
     buttons[q.c]
-      .classList.add("correct");
+      .classList.add(
+        "correct"
+      );
 
     decreaseDifficulty();
 
   }
 
-  document.getElementById(
-    "nextQuestion"
-  ).classList.remove("hidden");
+
+  document
+    .getElementById(
+      "nextQuestion"
+    )
+    .classList.remove(
+      "hidden"
+    );
 
 }
 
 
+/* =========================
+   ADAPTIVE DIFFICULTY
+========================= */
+
 function increaseDifficulty(){
 
-  if(selectedDifficulty==="easy")
+  if(
+    selectedDifficulty==="easy"
+  ){
+
     selectedDifficulty="medium";
-  else if(selectedDifficulty==="medium")
+
+  }else if(
+    selectedDifficulty==="medium"
+  ){
+
     selectedDifficulty="hard";
+
+  }
 
 }
 
 
 function decreaseDifficulty(){
 
-  if(selectedDifficulty==="hard")
+  if(
+    selectedDifficulty==="hard"
+  ){
+
     selectedDifficulty="medium";
-  else if(selectedDifficulty==="medium")
+
+  }else if(
+    selectedDifficulty==="medium"
+  ){
+
     selectedDifficulty="easy";
+
+  }
 
 }
 
 
+/* =========================
+   NEXT
+========================= */
+
 function nextQuestion(){
 
   currentQuestion++;
+
 
   if(
     currentQuestion>=
@@ -2008,10 +3026,15 @@ function nextQuestion(){
 
   }
 
+
   showQuestion();
 
 }
 
+
+/* =========================
+   FINISH
+========================= */
 
 function finishTest(){
 
@@ -2019,60 +3042,86 @@ function finishTest(){
     "testArea"
   ).style.display="none";
 
+
   document.getElementById(
     "examResult"
   ).style.display="block";
 
-  const total =
+
+  const total=
     testQuestions.length;
 
-  const percentage =
+
+  const percentage=
     Math.round(
-      testScore/total*100
+      testScore/
+      total*
+      100
     );
+
 
   document.getElementById(
     "finalScore"
-  ).textContent =
-    testScore+"/"+total+
-    " ("+percentage+"%)";
+  ).textContent=
+    testScore+
+    "/"+
+    total+
+    " ("+
+    percentage+
+    "%)";
+
 
   let message;
 
+
   if(percentage>=90)
-    message="¡Excelente! Estás muy preparado.";
+    message=
+      "¡Excelente! Estás muy preparado.";
 
   else if(percentage>=70)
-    message="Muy bien. Un poco más de repaso y lo tendrás.";
+    message=
+      "Muy bien. Un poco más de repaso y lo tendrás.";
 
   else if(percentage>=50)
-    message="Vas por buen camino. Te conviene repasar los errores.";
+    message=
+      "Vas por buen camino. Repasa tus errores.";
 
   else
-    message="Necesitas repasar el tema antes de volver a intentarlo.";
+    message=
+      "Te recomendamos volver a estudiar el tema.";
+
 
   document.getElementById(
     "finalMessage"
-  ).textContent=message;
+  ).textContent=
+    message;
 
 
-  let stats =
+  let stats=
     JSON.parse(
       localStorage.getItem(
         "studyAIStats"
-      ) || '{"tests":0,"correct":0,"questions":0}'
+      ) ||
+      '{"tests":0,"correct":0,"questions":0}'
     );
+
 
   stats.tests++;
 
-  stats.correct+=testScore;
+  stats.correct+=
+    testScore;
 
-  stats.questions+=total;
+  stats.questions+=
+    total;
+
 
   localStorage.setItem(
     "studyAIStats",
     JSON.stringify(stats)
   );
+
+
+  registerStudy();
 
   updateStats();
 
@@ -2084,6 +3133,7 @@ function resetTest(){
   document.getElementById(
     "examResult"
   ).style.display="none";
+
 
   document.getElementById(
     "testSetup"
@@ -2098,30 +3148,34 @@ function resetTest(){
 
 function addEvent(){
 
-  const date =
+  const date=
     document.getElementById(
       "eventDate"
     ).value;
 
-  const type =
+
+  const type=
     document.getElementById(
       "eventType"
     ).value;
 
-  const title =
+
+  const title=
     document.getElementById(
       "eventTitle"
     ).value.trim();
 
+
   if(!date || !title){
 
     alert(
-      "Pon una fecha y un nombre."
+      "Introduce fecha y nombre."
     );
 
     return;
 
   }
+
 
   events.push({
     date:date,
@@ -2129,22 +3183,33 @@ function addEvent(){
     title:title
   });
 
+
   localStorage.setItem(
     "studyAIEvents",
     JSON.stringify(events)
   );
 
+
   document.getElementById(
     "eventTitle"
   ).value="";
 
+
   renderCalendar();
 
-  if(type==="Examen")
-    createStudyPlan(date,title);
+
+  if(type==="Examen"){
+
+    createStudyPlan(
+      date,
+      title
+    );
+
+  }
+
 
   alert(
-    type+" añadido al calendario."
+    type+" añadido correctamente."
   );
 
 }
@@ -2152,43 +3217,49 @@ function addEvent(){
 
 function renderCalendar(){
 
-  const calendar =
+  const calendar=
     document.getElementById(
       "calendar"
     );
 
-  if(!calendar) return;
+
+  if(!calendar)
+    return;
+
 
   calendar.innerHTML="";
 
-  const year =
+
+  const year=
     calendarDate.getFullYear();
 
-  const month =
+  const month=
     calendarDate.getMonth();
 
-  const monthNames=[
+
+  const names=[
     "Enero","Febrero","Marzo",
     "Abril","Mayo","Junio",
     "Julio","Agosto","Septiembre",
     "Octubre","Noviembre","Diciembre"
   ];
 
+
   document.getElementById(
     "monthTitle"
-  ).textContent =
-    monthNames[month]+" "+year;
+  ).textContent=
+    names[month]+" "+year;
 
 
-  const names=[
+  [
     "Lun","Mar","Mié",
     "Jue","Vie","Sáb","Dom"
-  ];
-
-  names.forEach(name=>{
+  ].forEach(name=>{
 
     const d=
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
     d.className="day-name";
 
@@ -2199,25 +3270,34 @@ function renderCalendar(){
   });
 
 
-  let first =
-    new Date(year,month,1)
-    .getDay();
+  let first=
+    new Date(
+      year,
+      month,
+      1
+    ).getDay();
 
-  first =
-    first===0 ? 6 : first-1;
+
+  first=
+    first===0
+    ?6
+    :first-1;
 
 
-  for(let i=0;i<first;i++){
+  for(
+    let i=0;
+    i<first;
+    i++
+  ){
 
-    const empty=
-      document.createElement("div");
-
-    calendar.appendChild(empty);
+    calendar.appendChild(
+      document.createElement("div")
+    );
 
   }
 
 
-  const days =
+  const days=
     new Date(
       year,
       month+1,
@@ -2225,49 +3305,78 @@ function renderCalendar(){
     ).getDate();
 
 
-  for(let day=1;day<=days;day++){
+  for(
+    let day=1;
+    day<=days;
+    day++
+  ){
 
-    const cell =
-      document.createElement("div");
+    const cell=
+      document.createElement(
+        "div"
+      );
 
     cell.className="day";
 
-    const number =
-      document.createElement("div");
 
-    number.className="day-number";
+    const number=
+      document.createElement(
+        "div"
+      );
 
-    number.textContent=day;
+    number.className=
+      "day-number";
 
-    cell.appendChild(number);
+    number.textContent=
+      day;
 
 
-    const dateString =
-      year+"-"+
-      String(month+1).padStart(2,"0")+
+    cell.appendChild(
+      number
+    );
+
+
+    const dateString=
+      year+
       "-"+
-      String(day).padStart(2,"0");
+      String(month+1)
+        .padStart(2,"0")+
+      "-"+
+      String(day)
+        .padStart(2,"0");
 
 
     events
-    .filter(e=>e.date===dateString)
-    .forEach(e=>{
+      .filter(
+        e=>e.date===dateString
+      )
+      .forEach(e=>{
 
-      const event =
-        document.createElement("div");
+        const event=
+          document.createElement(
+            "div"
+          );
 
-      event.className="event";
+        event.className="event";
 
-      event.textContent =
-        (e.type==="Examen"?"📝 ":"📌 ")+
-        e.title;
+        event.textContent=
+          (
+            e.type==="Examen"
+            ?"📝 "
+            :"📌 "
+          )+
+          e.title;
 
-      cell.appendChild(event);
+        cell.appendChild(
+          event
+        );
 
-    });
+      });
 
 
-    calendar.appendChild(cell);
+    calendar.appendChild(
+      cell
+    );
 
   }
 
@@ -2277,7 +3386,8 @@ function renderCalendar(){
 function changeMonth(amount){
 
   calendarDate.setMonth(
-    calendarDate.getMonth()+amount
+    calendarDate.getMonth()+
+    amount
   );
 
   renderCalendar();
@@ -2289,24 +3399,33 @@ function changeMonth(amount){
    PLAN DE ESTUDIO
 ========================= */
 
-function createStudyPlan(date,title){
+function createStudyPlan(
+  date,
+  title
+){
 
-  const container =
+  const container=
     document.getElementById(
       "studyPlan"
     );
 
-  if(!container) return;
 
-  const examDate =
-    new Date(date+"T12:00:00");
+  const examDate=
+    new Date(
+      date+"T12:00:00"
+    );
 
-  const today =
+
+  const today=
     new Date();
 
-  const daysLeft =
+
+  const daysLeft=
     Math.ceil(
-      (examDate-today)/
+      (
+        examDate-
+        today
+      )/
       (1000*60*60*24)
     );
 
@@ -2321,45 +3440,71 @@ function createStudyPlan(date,title){
   }
 
 
-  const days =
-    Math.min(daysLeft,7);
+  const days=
+    Math.min(
+      daysLeft,
+      7
+    );
+
 
   let html="";
 
 
-  for(let i=days;i>=1;i--){
+  for(
+    let i=days;
+    i>=1;
+    i--
+  ){
 
-    let d =
-      new Date(examDate);
+    const d=
+      new Date(
+        examDate
+      );
+
 
     d.setDate(
       examDate.getDate()-i
     );
 
+
     let task;
 
-    if(i===days)
-      task="Lee y comprende el tema.";
 
-    else if(i>2)
-      task="Repasa conceptos y haz un pequeño test.";
+    if(i===days){
 
-    else if(i===2)
-      task="Haz un examen de práctica y revisa tus errores.";
+      task=
+        "Lee y comprende el tema y organiza tus apuntes.";
 
-    else
-      task="Repaso final y descanso. No estudies todo a última hora.";
+    }else if(i>2){
+
+      task=
+        "Repasa los conceptos importantes y practica con preguntas.";
+
+    }else if(i===2){
+
+      task=
+        "Haz un test de práctica y revisa todos tus errores.";
+
+    }else{
+
+      task=
+        "Haz un repaso final y descansa. Evita estudiar todo a última hora.";
+
+    }
 
 
     html+=`
       <div class="plan-day">
+
         <strong>
           ${formatDate(d)}
         </strong>
+
         <p>
           <b>${title}</b><br>
           ${task}
         </p>
+
       </div>
     `;
 
@@ -2368,16 +3513,30 @@ function createStudyPlan(date,title){
 
   html+=`
     <div class="plan-day">
-      <strong>📝 Día del examen</strong>
+
+      <strong>
+        📝 Día del examen
+      </strong>
+
       <p>
-        Repaso muy ligero y después realiza el examen
+        Repaso ligero y después realiza el examen
         con tranquilidad.
       </p>
+
     </div>
   `;
 
 
-  container.innerHTML=html;
+  container.innerHTML=
+    html;
+
+
+  document.getElementById(
+    "nextExamText"
+  ).textContent=
+    title+
+    " · "+
+    formatDate(examDate);
 
 }
 
@@ -2402,16 +3561,25 @@ function formatDate(date){
 
 function todayString(){
 
-  return new Date()
-    .toISOString()
-    .split("T")[0];
+  const d=
+    new Date();
+
+  return d.getFullYear()+
+    "-"+
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0")+
+    "-"+
+    String(
+      d.getDate()
+    ).padStart(2,"0");
 
 }
 
 
 function registerStudy(){
 
-  let data =
+  let data=
     JSON.parse(
       localStorage.getItem(
         "studyAIRacha"
@@ -2420,7 +3588,7 @@ function registerStudy(){
     );
 
 
-  const today =
+  const today=
     todayString();
 
 
@@ -2447,20 +3615,28 @@ function registerStudy(){
   }
 
 
-  const yesterday =
+  const yesterday=
     new Date();
+
 
   yesterday.setDate(
     yesterday.getDate()-1
   );
 
-  const yString =
-    yesterday
-    .toISOString()
-    .split("T")[0];
+
+  const y=
+    yesterday.getFullYear()+
+    "-"+
+    String(
+      yesterday.getMonth()+1
+    ).padStart(2,"0")+
+    "-"+
+    String(
+      yesterday.getDate()
+    ).padStart(2,"0");
 
 
-  if(data.last===yString){
+  if(data.last===y){
 
     data.streak++;
 
@@ -2487,7 +3663,7 @@ function registerStudy(){
 
 function updateStreak(){
 
-  const data =
+  const data=
     JSON.parse(
       localStorage.getItem(
         "studyAIRacha"
@@ -2496,19 +3672,22 @@ function updateStreak(){
     );
 
 
-  const streak =
-    data.streak || 0;
+  const streak=
+    data.streak||0;
 
 
   document.getElementById(
     "bigStreak"
-  ).textContent=streak;
+  ).textContent=
+    streak;
 
 
   document.getElementById(
     "miniStreak"
   ).textContent=
-    "🔥 "+streak+" días";
+    "🔥 "+
+    streak+
+    " días";
 
 
   document.getElementById(
@@ -2525,9 +3704,13 @@ function updateStreak(){
 }
 
 
+/* =========================
+   ESTADÍSTICAS
+========================= */
+
 function updateStats(){
 
-  const stats =
+  const stats=
     JSON.parse(
       localStorage.getItem(
         "studyAIStats"
@@ -2536,59 +3719,317 @@ function updateStats(){
     );
 
 
-  const percentage =
+  const percentage=
     stats.questions>0
-    ? Math.round(
-        stats.correct/
-        stats.questions*
-        100
-      )
-    : 0;
+    ?Math.round(
+      stats.correct/
+      stats.questions*
+      100
+    )
+    :0;
 
 
-  const testElement =
+  const a=
     document.getElementById(
       "statTests"
     );
 
-  const correctElement =
+  const b=
     document.getElementById(
       "statCorrect"
     );
 
-
-  if(testElement)
-    testElement.textContent=
-      stats.tests;
-
-
-  if(correctElement)
-    correctElement.textContent=
-      percentage+"%";
-
-
-  const totalTests =
+  const c=
     document.getElementById(
       "totalTests"
     );
 
-  const totalQuestions =
+  const d=
     document.getElementById(
       "totalQuestions"
     );
 
 
-  if(totalTests)
-    totalTests.textContent=
+  if(a)
+    a.textContent=
       stats.tests;
 
+  if(b)
+    b.textContent=
+      percentage+"%";
 
-  if(totalQuestions)
-    totalQuestions.textContent=
+  if(c)
+    c.textContent=
+      stats.tests;
+
+  if(d)
+    d.textContent=
       stats.questions;
 
 
   updateStreak();
+
+}
+
+
+/* =========================
+   REGISTRO / CUENTA
+========================= */
+
+function openRegister(){
+
+  document.getElementById(
+    "registerModal"
+  ).style.display="flex";
+
+}
+
+
+function registerUser(){
+
+  const name=
+    document.getElementById(
+      "registerName"
+    ).value.trim();
+
+  const email=
+    document.getElementById(
+      "registerEmail"
+    ).value.trim();
+
+  const password=
+    document.getElementById(
+      "registerPassword"
+    ).value;
+
+
+  if(!name || !email || !password){
+
+    alert(
+      "Completa todos los campos."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    DEMO LOCAL.
+
+    No se guardan contraseñas reales
+    en una aplicación definitiva.
+  */
+
+  localStorage.setItem(
+    "studyAIUser",
+    JSON.stringify({
+      name:name,
+      email:email
+    })
+  );
+
+
+  closeModal(
+    "registerModal"
+  );
+
+
+  updateAccount();
+
+
+  alert(
+    "Cuenta creada correctamente."
+  );
+
+}
+
+
+function openLogin(){
+
+  document.getElementById(
+    "loginModal"
+  ).style.display="flex";
+
+}
+
+
+function loginUser(){
+
+  const email=
+    document.getElementById(
+      "loginEmail"
+    ).value.trim();
+
+
+  if(!email){
+
+    alert(
+      "Introduce tu correo."
+    );
+
+    return;
+
+  }
+
+
+  const user=
+    JSON.parse(
+      localStorage.getItem(
+        "studyAIUser"
+      )||"null"
+    );
+
+
+  if(!user){
+
+    alert(
+      "No existe una cuenta en esta versión. Regístrate primero."
+    );
+
+    return;
+
+  }
+
+
+  if(user.email!==email){
+
+    alert(
+      "El correo no coincide con la cuenta guardada."
+    );
+
+    return;
+
+  }
+
+
+  closeModal(
+    "loginModal"
+  );
+
+
+  updateAccount();
+
+
+  alert(
+    "Sesión iniciada."
+  );
+
+}
+
+
+function updateAccount(){
+
+  const user=
+    JSON.parse(
+      localStorage.getItem(
+        "studyAIUser"
+      )||"null"
+    );
+
+
+  const box=
+    document.getElementById(
+      "accountDashboard"
+    );
+
+
+  if(!box)
+    return;
+
+
+  if(user){
+
+    box.innerHTML=`
+
+      <h3>
+        👤 Mi cuenta
+      </h3>
+
+      <p class="description">
+        Has iniciado sesión como
+        <b>${escapeHtml(user.name)}</b>.
+      </p>
+
+      <div class="account-card">
+
+        <strong>
+          Plan actual: ${escapeHtml(getPlan())}
+        </strong>
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+function escapeHtml(text){
+
+  const div=
+    document.createElement(
+      "div"
+    );
+
+  div.textContent=text;
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================
+   PLANES
+========================= */
+
+function selectPlan(plan){
+
+  document.getElementById(
+    "planModalTitle"
+  ).textContent=
+    "Plan "+plan;
+
+
+  let description="";
+
+
+  if(plan==="Pro"){
+
+    description=
+      "5,99 € al mes · 20 fotos cada 24 horas y más herramientas para estudiar.";
+
+  }else{
+
+    description=
+      "9,99 € al mes · Fotos ilimitadas y la experiencia más completa.";
+
+  }
+
+
+  document.getElementById(
+    "planModalDescription"
+  ).textContent=
+    description;
+
+
+  document.getElementById(
+    "planModal"
+  ).style.display="flex";
+
+}
+
+
+/* =========================
+   MODALES
+========================= */
+
+function closeModal(id){
+
+  document.getElementById(
+    id
+  ).style.display="none";
 
 }
 
