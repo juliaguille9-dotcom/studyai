@@ -3,152 +3,252 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StudyAI</title>
+
+  <title>StudyAI - Estudia mejor con IA</title>
 
   <style>
+    :root {
+      --navy: #0b1f3a;
+      --navy-light: #16345c;
+      --blue: #dcecff;
+      --blue-hover: #c9e0ff;
+      --text: #101828;
+      --gray: #667085;
+      --border: #e4e7ec;
+      --background: #ffffff;
+      --soft: #f7faff;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     body {
-      background: #f5f7fb;
-      color: #172033;
+      background: var(--background);
+      color: var(--text);
     }
 
     header {
-      height: 70px;
-      background: white;
+      height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 7%;
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 1px solid var(--border);
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     .logo {
-      font-size: 24px;
-      font-weight: bold;
+      color: var(--navy);
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
     .login {
-      border: none;
-      background: #172033;
+      background: var(--navy);
       color: white;
-      padding: 10px 18px;
-      border-radius: 10px;
+      border: none;
+      padding: 11px 19px;
+      border-radius: 9px;
+      font-size: 14px;
       cursor: pointer;
     }
 
+    .login:hover {
+      background: var(--navy-light);
+    }
+
+    /* INICIO */
+
     .hero {
+      max-width: 950px;
+      margin: auto;
       text-align: center;
-      padding: 90px 20px;
+      padding: 105px 20px 75px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--blue);
+      color: var(--navy);
+      padding: 8px 14px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 22px;
     }
 
     .hero h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
+      color: var(--navy);
+      font-size: 54px;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: var(--navy-light);
     }
 
     .hero p {
-      font-size: 19px;
-      color: #667085;
       max-width: 650px;
       margin: auto;
-      line-height: 1.6;
+      color: var(--gray);
+      font-size: 18px;
+      line-height: 1.7;
     }
 
     .start {
-      margin-top: 30px;
+      margin-top: 32px;
       padding: 15px 28px;
       border: none;
-      border-radius: 12px;
-      background: #4f46e5;
+      border-radius: 10px;
+      background: var(--navy);
       color: white;
-      font-size: 17px;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .start:hover {
+      background: var(--navy-light);
+      transform: translateY(-1px);
     }
 
     .features {
+      max-width: 1000px;
+      margin: auto;
       display: flex;
-      gap: 20px;
+      gap: 18px;
       justify-content: center;
-      padding: 30px 7% 80px;
+      padding: 20px 20px 90px;
       flex-wrap: wrap;
     }
 
     .card {
       background: white;
-      padding: 25px;
-      border-radius: 16px;
-      width: 280px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 26px;
+      width: 290px;
+      box-shadow: 0 8px 25px rgba(11, 31, 58, 0.05);
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--blue);
+      color: var(--navy);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 18px;
     }
 
     .card h3 {
-      margin-bottom: 10px;
+      color: var(--navy);
+      margin-bottom: 9px;
+      font-size: 18px;
     }
 
     .card p {
-      color: #667085;
-      line-height: 1.5;
+      color: var(--gray);
+      line-height: 1.55;
+      font-size: 14px;
     }
+
+    /* ESTUDIAR */
 
     #study {
       display: none;
       max-width: 900px;
       margin: auto;
-      padding: 50px 20px;
+      padding: 55px 20px 80px;
     }
 
-    #study h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
+    .study-header {
+      margin-bottom: 28px;
     }
 
-    .subtitle {
-      color: #667085;
-      margin-bottom: 25px;
+    .study-header h2 {
+      color: var(--navy);
+      font-size: 34px;
+      margin-bottom: 9px;
+    }
+
+    .study-header p {
+      color: var(--gray);
+    }
+
+    .section {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 20px rgba(11, 31, 58, 0.04);
+    }
+
+    .section-title {
+      color: var(--navy);
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .section-description {
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 16px;
     }
 
     textarea {
       width: 100%;
-      min-height: 180px;
-      border: 1px solid #d0d5dd;
-      border-radius: 14px;
-      padding: 16px;
-      font-size: 16px;
+      min-height: 190px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 15px;
+      font-size: 15px;
       resize: vertical;
       outline: none;
-      background: white;
+      color: var(--text);
+      background: #fcfdff;
     }
 
-    .photo-section {
-      margin-top: 20px;
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
-      border: 1px solid #e5e7eb;
+    textarea:focus {
+      border-color: var(--navy-light);
+      box-shadow: 0 0 0 3px var(--blue);
     }
 
-    .photo-section h3 {
-      margin-bottom: 8px;
-    }
-
-    .counter {
-      color: #667085;
+    .photo-counter {
+      color: var(--gray);
+      font-size: 14px;
       margin-bottom: 15px;
     }
 
     .photo-button {
       display: inline-block;
-      background: #172033;
+      background: var(--navy);
       color: white;
-      padding: 12px 18px;
-      border-radius: 10px;
+      padding: 12px 17px;
+      border-radius: 9px;
       cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .photo-button:hover {
+      background: var(--navy-light);
     }
 
     #photoInput {
@@ -159,15 +259,16 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
       gap: 12px;
-      margin-top: 20px;
+      margin-top: 18px;
     }
 
     .photo {
       position: relative;
-      height: 140px;
-      border-radius: 12px;
+      height: 145px;
+      border-radius: 11px;
       overflow: hidden;
-      background: #eee;
+      background: var(--soft);
+      border: 1px solid var(--border);
     }
 
     .photo img {
@@ -178,53 +279,122 @@
 
     .delete-photo {
       position: absolute;
-      top: 6px;
-      right: 6px;
-      border: none;
-      background: rgba(0,0,0,0.7);
-      color: white;
+      top: 7px;
+      right: 7px;
       width: 28px;
       height: 28px;
+      border: none;
       border-radius: 50%;
+      background: rgba(11, 31, 58, 0.85);
+      color: white;
       cursor: pointer;
+      font-size: 18px;
     }
 
     .explain {
-      margin-top: 20px;
-      padding: 14px 22px;
-      background: #4f46e5;
-      color: white;
+      width: 100%;
+      padding: 15px;
       border: none;
-      border-radius: 11px;
-      cursor: pointer;
+      border-radius: 10px;
+      background: var(--navy);
+      color: white;
       font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .explain:hover {
+      background: var(--navy-light);
     }
 
     #result {
-      margin-top: 20px;
-      background: white;
-      padding: 20px;
-      border-radius: 14px;
-      border: 1px solid #e5e7eb;
-      line-height: 1.6;
       display: none;
+      margin-top: 18px;
+      background: var(--soft);
+      border: 1px solid var(--blue-hover);
+      border-radius: 14px;
+      padding: 22px;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    /* VIDEO */
+
+    .video-section {
+      display: none;
+      margin-top: 25px;
+    }
+
+    .video-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 6px 20px rgba(11, 31, 58, 0.04);
+    }
+
+    .video-box h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .video-box p {
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .youtube-button {
+      display: inline-block;
+      background: var(--navy);
+      color: white;
+      text-decoration: none;
+      padding: 11px 16px;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: bold;
     }
 
     .back {
-      margin-top: 25px;
+      margin-top: 22px;
       border: none;
       background: transparent;
-      color: #4f46e5;
+      color: var(--navy-light);
       cursor: pointer;
+      font-weight: bold;
     }
 
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 36px;
-      }
+    /* RESPONSIVE */
+
+    @media (max-width: 650px) {
 
       header {
         padding: 0 20px;
+      }
+
+      .hero {
+        padding: 75px 20px 60px;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+        letter-spacing: -1.2px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .features {
+        padding-bottom: 60px;
+      }
+
+      .card {
+        width: 100%;
+      }
+
+      #study {
+        padding-top: 35px;
       }
     }
   </style>
@@ -232,337 +402,595 @@
 
 <body>
 
-<header>
-  <div class="logo">StudyAI</div>
-  <button class="login">Iniciar sesión</button>
-</header>
+  <header>
+    <div class="logo">StudyAI</div>
+    <button class="login">Iniciar sesión</button>
+  </header>
 
-<section class="hero" id="home">
-  <h1>Estudia mejor con IA</h1>
 
-  <p>
-    Sube tus apuntes, haz fotos y utiliza StudyAI para aprender de una forma
-    más rápida y sencilla.
-  </p>
+  <!-- INICIO -->
 
-  <button class="start" onclick="startStudying()">
-    Empezar a estudiar
-  </button>
-</section>
+  <section class="hero" id="home">
 
-<section class="features" id="features">
+    <div class="badge">
+      TU ASISTENTE DE ESTUDIO
+    </div>
 
-  <div class="card">
-    <h3>🤖 Explicar</h3>
+    <h1>
+      Estudia mejor<br>
+      <span>con inteligencia artificial.</span>
+    </h1>
+
     <p>
-      La inteligencia artificial podrá explicarte tus apuntes de forma sencilla.
-    </p>
-  </div>
-
-  <div class="card">
-    <h3>📝 Tests</h3>
-    <p>
-      Podrás crear preguntas y tests para comprobar cuánto sabes.
-    </p>
-  </div>
-
-  <div class="card">
-    <h3>📸 Fotos</h3>
-    <p>
-      Haz fotos de tus apuntes y guárdalas para estudiarlas.
-    </p>
-  </div>
-
-</section>
-
-
-<section id="study">
-
-  <h2>📚 Vamos a estudiar</h2>
-
-  <p class="subtitle">
-    Escribe tus apuntes o haz fotos de ellos.
-  </p>
-
-  <textarea
-    id="notes"
-    placeholder="Escribe aquí tus apuntes..."
-  ></textarea>
-
-
-  <div class="photo-section">
-
-    <h3>📸 Fotos de tus apuntes</h3>
-
-    <p class="counter" id="counter">
-      8 fotos disponibles
+      Sube tus apuntes, haz fotos y utiliza StudyAI
+      para comprender tus temas, practicar y prepararte
+      para tus exámenes.
     </p>
 
-    <label class="photo-button" for="photoInput">
-      📷 Hacer / seleccionar fotos
-    </label>
+    <button class="start" onclick="startStudying()">
+      Empezar a estudiar
+    </button>
 
-    <input
-      id="photoInput"
-      type="file"
-      accept="image/*"
-      capture="environment"
-      multiple
+  </section>
+
+
+  <section class="features" id="features">
+
+    <div class="card">
+
+      <div class="card-icon">🤖</div>
+
+      <h3>Explicaciones inteligentes</h3>
+
+      <p>
+        StudyAI podrá explicarte tus apuntes
+        de una manera sencilla y fácil de entender.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-icon">📝</div>
+
+      <h3>Tests personalizados</h3>
+
+      <p>
+        Genera preguntas sobre lo que estás estudiando
+        y descubre cuánto sabes.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-icon">📸</div>
+
+      <h3>Apuntes en fotos</h3>
+
+      <p>
+        Haz fotos de tus apuntes y prepáralos
+        para estudiarlos con StudyAI.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ESTUDIAR -->
+
+  <section id="study">
+
+    <div class="study-header">
+
+      <h2>Vamos a estudiar</h2>
+
+      <p>
+        Escribe tus apuntes o haz fotos de ellos.
+      </p>
+
+    </div>
+
+
+    <div class="section">
+
+      <div class="section-title">
+        📝 Tus apuntes
+      </div>
+
+      <div class="section-description">
+        Puedes escribir directamente aquí.
+      </div>
+
+      <textarea
+        id="notes"
+        placeholder="Escribe aquí tus apuntes..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="section">
+
+      <div class="section-title">
+        📸 Fotos de tus apuntes
+      </div>
+
+      <div class="section-description">
+        Puedes hacer fotos de tus apuntes o seleccionarlas
+        desde tu dispositivo.
+      </div>
+
+      <div
+        class="photo-counter"
+        id="counter"
+      >
+        8 fotos disponibles
+      </div>
+
+      <label
+        class="photo-button"
+        for="photoInput"
+      >
+        📷 Hacer / seleccionar fotos
+      </label>
+
+      <input
+        id="photoInput"
+        type="file"
+        accept="image/*"
+        capture="environment"
+        multiple
+      >
+
+      <div id="photos"></div>
+
+    </div>
+
+
+    <button
+      class="explain"
+      onclick="explainNotes()"
+    >
+      🤖 Explicar mis apuntes
+    </button>
+
+
+    <div id="result"></div>
+
+
+    <!-- VIDEO -->
+
+    <div
+      class="video-section"
+      id="videoSection"
     >
 
-    <div id="photos"></div>
+      <div class="video-box">
 
-  </div>
+        <h3>
+          🎥 Vídeo recomendado
+        </h3>
 
+        <p>
+          Cuando conectemos la inteligencia artificial,
+          StudyAI buscará un vídeo relacionado con el
+          tema que estés estudiando.
+        </p>
 
-  <button class="explain" onclick="explainNotes()">
-    🤖 Explicar mis apuntes
-  </button>
+        <a
+          class="youtube-button"
+          id="youtubeButton"
+          href="#"
+          target="_blank"
+        >
+          ▶ Ver vídeo en YouTube
+        </a>
 
-  <div id="result"></div>
+      </div>
 
-  <button class="back" onclick="goBack()">
-    ← Volver
-  </button>
-
-</section>
-
-
-<script>
-
-  const MAX_PHOTOS = 8;
-  const LIMIT_TIME = 24 * 60 * 60 * 1000;
-
-  let photos = [];
-
-  function startStudying() {
-    document.getElementById("home").style.display = "none";
-    document.getElementById("features").style.display = "none";
-    document.getElementById("study").style.display = "block";
-
-    updateCounter();
-  }
+    </div>
 
 
-  function goBack() {
-    document.getElementById("study").style.display = "none";
-    document.getElementById("home").style.display = "block";
-    document.getElementById("features").style.display = "flex";
-  }
+    <button
+      class="back"
+      onclick="goBack()"
+    >
+      ← Volver al inicio
+    </button>
+
+  </section>
 
 
-  function getUsage() {
+  <script>
 
-    const data = localStorage.getItem("studyAIPhotoUsage");
+    const MAX_PHOTOS = 8;
 
-    if (!data) {
-      return {
-        count: 0,
-        startTime: Date.now()
-      };
-    }
+    const LIMIT_TIME =
+      24 * 60 * 60 * 1000;
 
-    const usage = JSON.parse(data);
-
-    if (Date.now() - usage.startTime >= LIMIT_TIME) {
-
-      const newUsage = {
-        count: 0,
-        startTime: Date.now()
-      };
-
-      localStorage.setItem(
-        "studyAIPhotoUsage",
-        JSON.stringify(newUsage)
-      );
-
-      return newUsage;
-    }
-
-    return usage;
-  }
+    let photos = [];
 
 
-  function updateCounter() {
+    function startStudying() {
 
-    const usage = getUsage();
+      document.getElementById("home")
+        .style.display = "none";
 
-    const remaining = MAX_PHOTOS - usage.count;
+      document.getElementById("features")
+        .style.display = "none";
 
-    const counter = document.getElementById("counter");
-
-    if (remaining > 0) {
-
-      counter.textContent =
-        remaining +
-        (remaining === 1
-          ? " foto disponible"
-          : " fotos disponibles");
-
-    } else {
-
-      const timeLeft =
-        LIMIT_TIME - (Date.now() - usage.startTime);
-
-      const hours =
-        Math.ceil(timeLeft / (60 * 60 * 1000));
-
-      counter.textContent =
-        "Has alcanzado el límite. Podrás volver a subir fotos en aproximadamente "
-        + hours +
-        (hours === 1 ? " hora." : " horas.");
-    }
-  }
-
-
-  document
-    .getElementById("photoInput")
-    .addEventListener("change", function(event) {
-
-      const selectedFiles = Array.from(event.target.files);
-
-      const usage = getUsage();
-
-      const remaining = MAX_PHOTOS - usage.count;
-
-      if (remaining <= 0) {
-
-        alert(
-          "Has alcanzado el límite de 8 fotos. " +
-          "Podrás volver a subir fotos cuando pasen 24 horas."
-        );
-
-        event.target.value = "";
-        return;
-      }
-
-
-      if (selectedFiles.length > remaining) {
-
-        alert(
-          "Solo puedes añadir " +
-          remaining +
-          " foto" +
-          (remaining === 1 ? "" : "s") +
-          " más."
-        );
-
-        event.target.value = "";
-        return;
-      }
-
-
-      selectedFiles.forEach(file => {
-
-        photos.push(file);
-
-        showPhoto(file);
-
-      });
-
-
-      usage.count += selectedFiles.length;
-
-      localStorage.setItem(
-        "studyAIPhotoUsage",
-        JSON.stringify(usage)
-      );
-
+      document.getElementById("study")
+        .style.display = "block";
 
       updateCounter();
 
-      event.target.value = "";
-
-    });
-
-
-  function showPhoto(file) {
-
-    const reader = new FileReader();
-
-    reader.onload = function(event) {
-
-      const container =
-        document.createElement("div");
-
-      container.className = "photo";
-
-
-      const img =
-        document.createElement("img");
-
-      img.src = event.target.result;
-
-
-      const button =
-        document.createElement("button");
-
-      button.className = "delete-photo";
-
-      button.textContent = "×";
-
-
-      button.onclick = function() {
-
-        container.remove();
-
-      };
-
-
-      container.appendChild(img);
-
-      container.appendChild(button);
-
-      document
-        .getElementById("photos")
-        .appendChild(container);
-
-    };
-
-
-    reader.readAsDataURL(file);
-
-  }
-
-
-  function explainNotes() {
-
-    const notes =
-      document.getElementById("notes").value.trim();
-
-    const result =
-      document.getElementById("result");
-
-
-    if (!notes && photos.length === 0) {
-
-      alert(
-        "Escribe unos apuntes o añade alguna foto."
-      );
-
-      return;
+      window.scrollTo(0, 0);
     }
 
 
-    result.style.display = "block";
+    function goBack() {
 
-    result.innerHTML = `
-      <strong>🤖 StudyAI</strong>
-      <br><br>
-      He recibido tus apuntes y tus fotos.
-      <br><br>
-      <strong>Siguiente paso:</strong>
-      vamos a conectar la inteligencia artificial
-      para que pueda analizar este contenido y
-      explicártelo automáticamente.
-    `;
+      document.getElementById("study")
+        .style.display = "none";
 
-  }
+      document.getElementById("home")
+        .style.display = "block";
+
+      document.getElementById("features")
+        .style.display = "flex";
+
+      window.scrollTo(0, 0);
+    }
 
 
-  updateCounter();
+    function getUsage() {
 
-</script>
+      const data =
+        localStorage.getItem(
+          "studyAIPhotoUsage"
+        );
+
+
+      if (!data) {
+
+        return {
+          count: 0,
+          startTime: Date.now()
+        };
+
+      }
+
+
+      const usage =
+        JSON.parse(data);
+
+
+      if (
+        Date.now() - usage.startTime
+        >= LIMIT_TIME
+      ) {
+
+        const newUsage = {
+          count: 0,
+          startTime: Date.now()
+        };
+
+
+        localStorage.setItem(
+          "studyAIPhotoUsage",
+          JSON.stringify(newUsage)
+        );
+
+
+        return newUsage;
+
+      }
+
+
+      return usage;
+    }
+
+
+    function updateCounter() {
+
+      const usage =
+        getUsage();
+
+
+      const remaining =
+        MAX_PHOTOS - usage.count;
+
+
+      const counter =
+        document.getElementById("counter");
+
+
+      if (remaining > 0) {
+
+        counter.textContent =
+          remaining +
+          (
+            remaining === 1
+              ? " foto disponible"
+              : " fotos disponibles"
+          );
+
+      } else {
+
+        const timeLeft =
+          LIMIT_TIME -
+          (
+            Date.now() -
+            usage.startTime
+          );
+
+
+        const hours =
+          Math.ceil(
+            timeLeft /
+            (60 * 60 * 1000)
+          );
+
+
+        counter.textContent =
+          "Límite alcanzado. " +
+          "Podrás subir fotos de nuevo " +
+          "en aproximadamente " +
+          hours +
+          (
+            hours === 1
+              ? " hora."
+              : " horas."
+          );
+
+      }
+    }
+
+
+    document
+      .getElementById("photoInput")
+      .addEventListener(
+        "change",
+        function(event) {
+
+          const selectedFiles =
+            Array.from(
+              event.target.files
+            );
+
+
+          const usage =
+            getUsage();
+
+
+          const remaining =
+            MAX_PHOTOS -
+            usage.count;
+
+
+          if (remaining <= 0) {
+
+            alert(
+              "Has alcanzado el límite de 8 fotos. " +
+              "Podrás volver a subir fotos cuando pasen 24 horas."
+            );
+
+
+            event.target.value = "";
+
+            return;
+          }
+
+
+          if (
+            selectedFiles.length >
+            remaining
+          ) {
+
+            alert(
+              "Solo puedes añadir " +
+              remaining +
+              " foto" +
+              (
+                remaining === 1
+                  ? ""
+                  : "s"
+              ) +
+              " más."
+            );
+
+
+            event.target.value = "";
+
+            return;
+          }
+
+
+          selectedFiles.forEach(
+            file => {
+
+              photos.push(file);
+
+              showPhoto(file);
+
+            }
+          );
+
+
+          usage.count +=
+            selectedFiles.length;
+
+
+          localStorage.setItem(
+            "studyAIPhotoUsage",
+            JSON.stringify(usage)
+          );
+
+
+          updateCounter();
+
+
+          event.target.value = "";
+
+        }
+      );
+
+
+    function showPhoto(file) {
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function(event) {
+
+          const container =
+            document.createElement(
+              "div"
+            );
+
+
+          container.className =
+            "photo";
+
+
+          const img =
+            document.createElement(
+              "img"
+            );
+
+
+          img.src =
+            event.target.result;
+
+
+          const button =
+            document.createElement(
+              "button"
+            );
+
+
+          button.className =
+            "delete-photo";
+
+
+          button.textContent =
+            "×";
+
+
+          button.onclick =
+            function() {
+
+              container.remove();
+
+            };
+
+
+          container.appendChild(img);
+
+          container.appendChild(button);
+
+
+          document
+            .getElementById("photos")
+            .appendChild(container);
+
+        };
+
+
+      reader.readAsDataURL(file);
+
+    }
+
+
+    function explainNotes() {
+
+      const notes =
+        document
+          .getElementById("notes")
+          .value
+          .trim();
+
+
+      const result =
+        document.getElementById(
+          "result"
+        );
+
+
+      const videoSection =
+        document.getElementById(
+          "videoSection"
+        );
+
+
+      if (
+        !notes &&
+        photos.length === 0
+      ) {
+
+        alert(
+          "Escribe unos apuntes o añade alguna foto."
+        );
+
+        return;
+      }
+
+
+      result.style.display =
+        "block";
+
+
+      result.innerHTML = `
+        <strong>StudyAI</strong>
+        <br><br>
+        Hemos recibido tus apuntes.
+        <br><br>
+        La inteligencia artificial se conectará
+        próximamente para analizar el contenido
+        y explicártelo automáticamente.
+      `;
+
+
+      /*
+        Esta sección se activará cuando
+        conectemos la IA y detectemos el tema.
+      */
+
+      videoSection.style.display =
+        "block";
+
+
+      const topic =
+        notes
+          ? notes.substring(0, 80)
+          : "tema de estudio";
+
+
+      const youtubeUrl =
+        "https://www.youtube.com/results?search_query=" +
+        encodeURIComponent(
+          topic + " explicado"
+        );
+
+
+      document
+        .getElementById(
+          "youtubeButton"
+        )
+        .href = youtubeUrl;
+
+    }
+
+
+    updateCounter();
+
+  </script>
 
 </body>
 </html>
