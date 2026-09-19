@@ -3,2028 +3,1581 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>StudyAI - Tu asistente de estudio</title>
+<title>StudyLearning</title>
 
 <style>
-
 :root{
-  --navy:#0b1f3a;
-  --navy2:#173b68;
-  --blue:#dcecff;
-  --blue2:#eef5ff;
-  --bg:#f6f8fc;
-  --white:#ffffff;
-  --text:#101828;
-  --gray:#667085;
-  --border:#e4e7ec;
-  --green:#16804b;
-  --red:#d93636;
-  --gold:#d99b00;
+  --navy:#102a43;
+  --navy2:#173f5f;
+  --blue:#2f80ed;
+  --light:#eef6ff;
+  --bg:#f7f9fc;
+  --text:#172033;
+  --muted:#687386;
+  --white:#fff;
+  --border:#e4e9f0;
+  --green:#20a36a;
+  --orange:#f59e0b;
+  --red:#e05252;
+  --shadow:0 10px 35px rgba(16,42,67,.08);
 }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,Helvetica,sans-serif;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
+  font-family:Inter,Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
 }
 
-button,
-input,
-select,
-textarea{
-  font-family:inherit;
-}
+button,input,textarea,select{font:inherit}
 
-/* =========================
-   HEADER
-========================= */
+button{cursor:pointer;border:0}
 
-header{
-  height:70px;
+.header{
+  height:72px;
   background:white;
   border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 5%;
+  padding:0 6%;
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:20;
 }
 
 .logo{
-  color:var(--navy);
-  font-size:25px;
+  font-size:24px;
   font-weight:800;
+  color:var(--navy);
 }
 
-.header-right{
+.logo span{color:var(--blue)}
+
+.nav{
   display:flex;
   align-items:center;
-  gap:9px;
+  gap:12px;
 }
 
-.streak-mini{
-  background:var(--blue);
-  color:var(--navy);
-  padding:9px 13px;
+.nav button{
+  background:transparent;
+  padding:10px 14px;
+  color:var(--muted);
   border-radius:9px;
-  font-weight:bold;
-  font-size:14px;
 }
 
-.header-btn{
-  border:0;
-  background:var(--navy);
-  color:white;
-  padding:10px 15px;
-  border-radius:9px;
-  cursor:pointer;
-  font-weight:bold;
+.nav button:hover{background:var(--light);color:var(--navy)}
+
+.primary{
+  background:var(--navy)!important;
+  color:white!important;
+  padding:12px 20px!important;
+  border-radius:10px!important;
+  font-weight:700;
 }
 
-.register-header{
-  background:white;
+.secondary{
+  background:var(--light);
   color:var(--navy);
-  border:1px solid var(--border);
+  padding:12px 20px;
+  border-radius:10px;
+  font-weight:700;
 }
-
-/* =========================
-   HERO
-========================= */
 
 .hero{
-  max-width:1000px;
+  max-width:1200px;
   margin:auto;
-  text-align:center;
-  padding:90px 20px 65px;
+  padding:75px 25px 50px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:50px;
+  align-items:center;
 }
 
 .badge{
   display:inline-block;
-  background:var(--blue);
-  color:var(--navy);
-  padding:8px 14px;
-  border-radius:50px;
+  background:var(--light);
+  color:var(--blue);
+  font-weight:800;
+  padding:8px 13px;
+  border-radius:30px;
   font-size:13px;
-  font-weight:bold;
   margin-bottom:20px;
 }
 
 .hero h1{
-  color:var(--navy);
   font-size:55px;
-  line-height:1.06;
+  line-height:1.05;
   letter-spacing:-2px;
-  margin-bottom:20px;
+  color:var(--navy);
 }
 
-.hero h1 span{
-  color:var(--navy2);
-}
+.hero h1 span{color:var(--blue)}
 
 .hero p{
-  max-width:700px;
-  margin:auto;
-  color:var(--gray);
-  line-height:1.7;
   font-size:18px;
+  line-height:1.7;
+  color:var(--muted);
+  max-width:620px;
+  margin:22px 0 28px;
 }
 
-.primary{
-  background:var(--navy);
-  color:white;
-  border:0;
-  border-radius:10px;
-  padding:14px 21px;
-  font-weight:bold;
-  cursor:pointer;
+.hero-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
 }
 
-.primary:hover{
-  background:var(--navy2);
+.hero-card{
+  background:white;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  border-radius:22px;
+  padding:25px;
 }
 
-.start{
-  margin-top:28px;
-  font-size:16px;
+.mini-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
 }
 
-/* =========================
-   FEATURES
-========================= */
+.mini-title{font-weight:800;color:var(--navy)}
+
+.streak{
+  background:#fff7e6;
+  color:#c47b00;
+  padding:8px 12px;
+  border-radius:20px;
+  font-weight:800;
+}
+
+.progress-box{
+  padding:18px;
+  background:var(--bg);
+  border-radius:15px;
+  margin-bottom:15px;
+}
+
+.progress-line{
+  height:9px;
+  background:#e5eaf0;
+  border-radius:20px;
+  margin-top:12px;
+  overflow:hidden;
+}
+
+.progress-line div{
+  height:100%;
+  width:74%;
+  background:var(--blue);
+  border-radius:20px;
+}
 
 .features{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:18px;
-  max-width:1050px;
+  max-width:1200px;
   margin:auto;
-  padding:10px 20px 70px;
+  padding:25px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
 }
 
-.card{
-  width:300px;
+.feature{
   background:white;
   border:1px solid var(--border);
   border-radius:16px;
   padding:25px;
-  box-shadow:0 5px 20px rgba(11,31,58,.04);
 }
 
-.card-icon{
-  width:43px;
-  height:43px;
-  background:var(--blue);
-  border-radius:10px;
+.feature-icon{
+  width:44px;
+  height:44px;
   display:flex;
   align-items:center;
   justify-content:center;
+  background:var(--light);
+  border-radius:12px;
   margin-bottom:15px;
+  font-size:21px;
 }
 
-.card h3{
-  color:var(--navy);
-  margin-bottom:8px;
-}
+.feature h3{margin-bottom:9px;color:var(--navy)}
+.feature p{color:var(--muted);line-height:1.6}
 
-.card p{
-  color:var(--gray);
-  line-height:1.5;
-  font-size:14px;
-}
-
-/* =========================
-   PRICING
-========================= */
-
-.pricing-section{
-  max-width:1100px;
+.pricing{
+  max-width:1200px;
   margin:auto;
-  padding:30px 20px 90px;
-  text-align:center;
+  padding:80px 25px;
 }
 
 .section-title{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.section-title h2{
+  font-size:38px;
   color:var(--navy);
-  font-size:34px;
-  margin-bottom:10px;
 }
 
-.section-subtitle{
-  color:var(--gray);
-  margin-bottom:30px;
+.section-title p{
+  color:var(--muted);
+  margin-top:10px;
 }
 
-.plans{
+.prices{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:18px;
-  text-align:left;
+  gap:20px;
 }
 
-.plan{
+.price-card{
   background:white;
   border:1px solid var(--border);
-  border-radius:17px;
-  padding:27px;
-  position:relative;
+  border-radius:18px;
+  padding:28px;
 }
 
-.plan.featured{
+.price-card.featured{
   border:2px solid var(--navy);
   transform:translateY(-5px);
 }
 
-.plan-badge{
-  position:absolute;
-  top:-13px;
-  right:20px;
-  background:var(--navy);
-  color:white;
-  padding:6px 11px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:bold;
-}
-
-.plan h3{
-  color:var(--navy);
-  font-size:23px;
-  margin-bottom:8px;
-}
-
-.plan-description{
-  color:var(--gray);
-  font-size:14px;
-  min-height:42px;
-}
-
+.price-card h3{font-size:21px;color:var(--navy)}
 .price{
+  font-size:37px;
+  font-weight:900;
+  margin:18px 0;
   color:var(--navy);
-  font-size:35px;
-  font-weight:800;
+}
+
+.price small{font-size:14px;color:var(--muted)}
+
+.price-card ul{
+  list-style:none;
   margin:20px 0;
 }
 
-.price span{
-  font-size:14px;
-  color:var(--gray);
-  font-weight:normal;
-}
-
-.plan ul{
-  list-style:none;
-  margin-bottom:22px;
-}
-
-.plan li{
+.price-card li{
   padding:8px 0;
-  color:#344054;
-  font-size:14px;
+  color:var(--muted);
 }
 
-.plan li::before{
+.price-card li::before{
   content:"✓";
   color:var(--green);
   font-weight:bold;
   margin-right:8px;
 }
 
-.plan-button{
-  width:100%;
-}
+/* APP */
 
-/* =========================
-   APP
-========================= */
-
-#app{
+.app{
   display:none;
-  max-width:1100px;
+  max-width:1400px;
   margin:auto;
-  padding:35px 20px 80px;
+  padding:25px;
 }
 
-.app-title{
-  color:var(--navy);
-  font-size:32px;
-  margin-bottom:7px;
+.app.active{display:block}
+
+.app-grid{
+  display:grid;
+  grid-template-columns:230px 1fr;
+  gap:22px;
 }
 
-.app-subtitle{
-  color:var(--gray);
-  margin-bottom:25px;
-}
-
-.nav-tabs{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:22px;
-}
-
-.tab{
-  border:1px solid var(--border);
+.sidebar{
   background:white;
-  color:var(--navy);
-  padding:10px 14px;
-  border-radius:9px;
-  cursor:pointer;
-  font-weight:bold;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:15px;
+  height:fit-content;
+  position:sticky;
+  top:95px;
 }
 
-.tab.active{
-  background:var(--navy);
-  color:white;
+.sidebar-user{
+  background:var(--light);
+  padding:16px;
+  border-radius:13px;
+  margin-bottom:15px;
 }
 
-.page{
-  display:none;
-}
-
-.page.active{
+.sidebar-user strong{
   display:block;
+  color:var(--navy);
+  margin-bottom:4px;
 }
 
-.box{
+.sidebar-user span{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.side-btn{
+  width:100%;
+  text-align:left;
+  padding:12px;
+  background:white;
+  color:var(--muted);
+  border-radius:9px;
+  margin-bottom:4px;
+}
+
+.side-btn:hover,.side-btn.active{
+  background:var(--light);
+  color:var(--navy);
+  font-weight:700;
+}
+
+.main{
+  min-width:0;
+}
+
+.dashboard-head{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  margin-bottom:20px;
+}
+
+.dashboard-head h2{
+  color:var(--navy);
+  font-size:28px;
+}
+
+.dashboard-head p{
+  color:var(--muted);
+  margin-top:5px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.stat{
   background:white;
   border:1px solid var(--border);
   border-radius:16px;
-  padding:22px;
-  margin-bottom:18px;
-  box-shadow:0 5px 20px rgba(11,31,58,.04);
+  padding:20px;
 }
 
-.box h3{
+.stat-label{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.stat-value{
+  font-size:28px;
+  font-weight:900;
   color:var(--navy);
-  margin-bottom:8px;
+  margin-top:8px;
 }
 
-.description{
-  color:var(--gray);
+.content-grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:20px;
+}
+
+.panel{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:23px;
+  margin-bottom:20px;
+}
+
+.panel h3{
+  color:var(--navy);
+  margin-bottom:16px;
+}
+
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:16px;
+}
+
+.subjects{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.subject{
+  border:1px solid var(--border);
+  padding:16px;
+  border-radius:13px;
+  cursor:pointer;
+}
+
+.subject:hover{
+  border-color:var(--blue);
+  background:var(--light);
+}
+
+.subject strong{
+  display:block;
+  color:var(--navy);
+  margin-bottom:7px;
+}
+
+.subject small{color:var(--muted)}
+
+.subject-progress{
+  height:6px;
+  background:#e9edf2;
+  border-radius:20px;
+  margin-top:12px;
+  overflow:hidden;
+}
+
+.subject-progress div{
+  height:100%;
+  background:var(--blue);
+}
+
+.task{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:13px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.task:last-child{border-bottom:0}
+
+.task-dot{
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  background:var(--blue);
+}
+
+.task strong{
+  display:block;
   font-size:14px;
-  margin-bottom:17px;
 }
 
-.course-grid{
+.task small{color:var(--muted)}
+
+.action-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.action{
+  padding:18px;
+  border:1px solid var(--border);
+  background:white;
+  border-radius:13px;
+  text-align:left;
+}
+
+.action:hover{
+  background:var(--light);
+  border-color:#c8ddf7;
+}
+
+.action b{
+  display:block;
+  color:var(--navy);
+  margin-bottom:5px;
+}
+
+.action span{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.streak-big{
+  font-size:38px;
+  font-weight:900;
+  color:var(--navy);
+}
+
+.form-group{margin-bottom:15px}
+
+.form-group label{
+  display:block;
+  font-weight:700;
+  margin-bottom:7px;
+  color:var(--navy);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px;
+  outline:none;
+  background:white;
+}
+
+.form-group textarea{
+  min-height:170px;
+  resize:vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  border-color:var(--blue);
+}
+
+.two{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:15px;
 }
 
-select,
-input,
-textarea{
-  width:100%;
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:12px;
-  background:white;
-  outline:none;
-  font-size:15px;
+.photo-box{
+  border:2px dashed #cbd5e1;
+  padding:25px;
+  text-align:center;
+  border-radius:15px;
+  margin-top:15px;
 }
 
-textarea{
-  min-height:170px;
-  resize:vertical;
+.photo-box p{
+  color:var(--muted);
+  margin-bottom:12px;
 }
 
-select:focus,
-input:focus,
-textarea:focus{
-  border-color:var(--navy2);
-}
-
-/* =========================
-   PHOTOS
-========================= */
-
-.photo-button{
-  display:inline-block;
-  background:var(--navy);
-  color:white;
-  padding:12px 16px;
-  border-radius:9px;
-  cursor:pointer;
-  margin-top:10px;
-}
-
-#photoInput{
-  display:none;
-}
-
-#photos{
+.photo-list{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  grid-template-columns:repeat(4,1fr);
   gap:10px;
   margin-top:15px;
 }
 
-.photo{
-  height:130px;
-  border-radius:10px;
-  overflow:hidden;
-  position:relative;
-  border:1px solid var(--border);
-}
-
-.photo img{
+.photo-list img{
   width:100%;
-  height:100%;
+  aspect-ratio:1;
   object-fit:cover;
-}
-
-.delete-photo{
-  position:absolute;
-  right:6px;
-  top:6px;
-  width:27px;
-  height:27px;
-  border:0;
-  border-radius:50%;
-  background:rgba(11,31,58,.85);
-  color:white;
-  cursor:pointer;
-}
-
-/* =========================
-   TEST
-========================= */
-
-.difficulty{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.diff{
-  flex:1;
-  min-width:100px;
-  padding:13px;
-  border:1px solid var(--border);
-  background:white;
   border-radius:10px;
-  cursor:pointer;
-  font-weight:bold;
-  color:var(--navy);
-}
-
-.diff.selected{
-  background:var(--navy);
-  color:white;
-}
-
-.question-number{
-  color:var(--gray);
-  font-size:14px;
-  margin-bottom:8px;
 }
 
 .question{
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:15px;
+}
+
+.question-number{
+  color:var(--blue);
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.question h4{
   color:var(--navy);
-  font-size:22px;
-  line-height:1.4;
-  margin-bottom:20px;
+  margin-bottom:15px;
 }
 
 .answers{
   display:grid;
-  gap:10px;
+  gap:8px;
 }
 
 .answer{
-  background:white;
+  padding:13px;
   border:1px solid var(--border);
   border-radius:10px;
-  padding:14px;
+  background:white;
   text-align:left;
-  cursor:pointer;
-  font-size:15px;
 }
 
 .answer:hover{
-  background:var(--blue2);
+  border-color:var(--blue);
+  background:var(--light);
 }
 
 .answer.correct{
-  background:#e6f7ee;
+  background:#e9f8f1;
   border-color:var(--green);
 }
 
 .answer.wrong{
-  background:#fdeaea;
+  background:#fff0f0;
   border-color:var(--red);
 }
 
-.test-info{
+.flashcard{
+  min-height:250px;
   display:flex;
-  justify-content:space-between;
-  margin-bottom:18px;
-  color:var(--gray);
-}
-
-#testArea,
-#examResult{
-  display:none;
-}
-
-.result-score{
-  font-size:42px;
-  color:var(--navy);
-  font-weight:bold;
-  margin:15px 0;
-}
-
-/* =========================
-   CALENDAR
-========================= */
-
-.calendar-top{
-  display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-bottom:15px;
+  justify-content:center;
+  text-align:center;
+  background:var(--light);
+  border-radius:18px;
+  padding:35px;
+  cursor:pointer;
 }
 
-.calendar-grid{
+.flashcard h2{
+  color:var(--navy);
+}
+
+.flash-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+.flash-buttons button{flex:1}
+
+.calendar{
   display:grid;
   grid-template-columns:repeat(7,1fr);
-  gap:5px;
-}
-
-.day-name{
-  text-align:center;
-  font-weight:bold;
-  color:var(--gray);
-  padding:7px;
-  font-size:13px;
+  gap:7px;
 }
 
 .day{
-  min-height:65px;
-  background:#fbfcfe;
+  min-height:80px;
   border:1px solid var(--border);
-  border-radius:8px;
-  padding:7px;
+  border-radius:9px;
+  padding:8px;
+  background:white;
 }
 
-.day-number{
-  font-weight:bold;
-  color:var(--navy);
+.day strong{font-size:12px}
+
+.day.event{
+  background:var(--light);
+  border-color:#c8ddf7;
 }
 
-.event{
-  margin-top:5px;
-  font-size:11px;
-  background:var(--blue);
-  color:var(--navy);
-  padding:3px;
-  border-radius:4px;
-  overflow:hidden;
-}
-
-/* =========================
-   STREAK
-========================= */
-
-.streak-card{
-  text-align:center;
-  padding:35px;
-}
-
-.streak-number{
-  font-size:65px;
-  font-weight:800;
-  color:var(--navy);
-}
-
-.streak-fire{
-  font-size:45px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:20px;
-}
-
-.stat{
-  background:var(--blue);
-  border-radius:12px;
-  padding:18px;
-  text-align:center;
-}
-
-.stat strong{
+.day small{
   display:block;
-  font-size:25px;
-  color:var(--navy);
+  color:var(--blue);
+  margin-top:7px;
+  font-size:10px;
 }
-
-.stat span{
-  color:var(--gray);
-  font-size:13px;
-}
-
-/* =========================
-   PLAN
-========================= */
 
 .plan-day{
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:16px;
+  border-left:4px solid var(--blue);
+  background:var(--bg);
+  padding:14px;
   margin-bottom:10px;
+  border-radius:0 10px 10px 0;
 }
 
 .plan-day strong{
   color:var(--navy);
 }
 
-.plan-day p{
-  color:var(--gray);
-  margin-top:6px;
-  line-height:1.5;
+.result{
+  text-align:center;
+  padding:30px;
+  background:var(--light);
+  border-radius:15px;
 }
 
-/* =========================
-   MODALES
-========================= */
+.result-score{
+  font-size:55px;
+  font-weight:900;
+  color:var(--navy);
+}
 
 .modal{
+  display:none;
   position:fixed;
   inset:0;
-  background:rgba(5,20,40,.55);
-  display:none;
+  background:rgba(10,20,30,.55);
+  z-index:100;
   align-items:center;
   justify-content:center;
   padding:20px;
-  z-index:300;
 }
 
-.modal-content{
+.modal.show{display:flex}
+
+.modal-box{
   background:white;
   width:100%;
   max-width:500px;
+  border-radius:20px;
+  padding:28px;
   max-height:90vh;
   overflow:auto;
-  border-radius:18px;
-  padding:28px;
-  position:relative;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
 }
 
 .close{
-  position:absolute;
-  right:18px;
-  top:15px;
-  border:0;
-  background:none;
-  font-size:25px;
-  cursor:pointer;
-  color:var(--gray);
+  background:#f1f3f6;
+  width:32px;
+  height:32px;
+  border-radius:50%;
 }
 
-.modal h2{
-  color:var(--navy);
-  margin-bottom:8px;
+footer{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+  margin-top:30px;
 }
 
-.form-group{
-  margin-top:15px;
+.hidden{display:none!important}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .features,.prices{grid-template-columns:1fr}
+  .price-card.featured{transform:none}
+  .app-grid{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .content-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
 }
 
-.form-group label{
-  display:block;
-  color:var(--navy);
-  font-size:14px;
-  font-weight:bold;
-  margin-bottom:6px;
+@media(max-width:600px){
+  .header{padding:0 18px}
+  .nav button:not(.primary){display:none}
+  .hero{padding:45px 18px}
+  .hero h1{font-size:40px}
+  .features,.pricing,.app{padding:18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .subjects,.action-grid,.two{grid-template-columns:1fr}
+  .dashboard-head{display:block}
+  .dashboard-head button{margin-top:15px}
+  .photo-list{grid-template-columns:repeat(2,1fr)}
 }
-
-.modal .primary{
-  width:100%;
-  margin-top:18px;
-}
-
-/* =========================
-   ACCOUNT
-========================= */
-
-.account-card{
-  background:var(--blue2);
-  border-radius:12px;
-  padding:18px;
-  margin-top:15px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:800px){
-
-  .plans{
-    grid-template-columns:1fr;
-  }
-
-  .plan.featured{
-    transform:none;
-  }
-
-}
-
-@media(max-width:700px){
-
-  .hero h1{
-    font-size:40px;
-  }
-
-  .course-grid{
-    grid-template-columns:1fr;
-  }
-
-  .stats{
-    grid-template-columns:1fr;
-  }
-
-  .header-right .register-header{
-    display:none;
-  }
-
-  .calendar-grid{
-    gap:2px;
-  }
-
-  .day{
-    min-height:55px;
-    padding:4px;
-  }
-
-  .event{
-    font-size:9px;
-  }
-
-}
-
-.hidden{
-  display:none!important;
-}
-
 </style>
 </head>
 
 <body>
 
+<header class="header">
+  <div class="logo">Study<span>Learning</span></div>
 
-<!-- =========================
-     HEADER
-========================= -->
-
-<header>
-
-  <div class="logo">
-    StudyAI
+  <div class="nav">
+    <button onclick="scrollToSection('features')">Funciones</button>
+    <button onclick="scrollToSection('pricing')">Planes</button>
+    <button onclick="openModal('loginModal')">Iniciar sesión</button>
+    <button class="primary" onclick="openApp()">Empezar</button>
   </div>
-
-  <div class="header-right">
-
-    <div
-      class="streak-mini"
-      id="miniStreak"
-    >
-      🔥 0 días
-    </div>
-
-    <button
-      class="header-btn register-header"
-      onclick="openRegister()"
-    >
-      Registrarse
-    </button>
-
-    <button
-      class="header-btn"
-      onclick="openLogin()"
-    >
-      Iniciar sesión
-    </button>
-
-  </div>
-
 </header>
 
+<section class="hero" id="home">
+  <div>
+    <div class="badge">TU ASISTENTE PERSONAL DE ESTUDIO</div>
 
-<!-- =========================
-     HERO
-========================= -->
-
-<section
-  class="hero"
-  id="home"
->
-
-  <div class="badge">
-    TU ASISTENTE DE ESTUDIO
-  </div>
-
-  <h1>
-    Estudia mejor<br>
-    <span>con StudyAI.</span>
-  </h1>
-
-  <p>
-    Organiza tus apuntes, practica con tests,
-    prepara exámenes y crea tu propio plan de estudio.
-  </p>
-
-  <button
-    class="primary start"
-    onclick="openApp()"
-  >
-    Empezar a estudiar
-  </button>
-
-</section>
-
-
-<!-- =========================
-     FEATURES
-========================= -->
-
-<section
-  class="features"
-  id="features"
->
-
-  <div class="card">
-
-    <div class="card-icon">
-      🤖
-    </div>
-
-    <h3>
-      Inteligencia artificial
-    </h3>
+    <h1>
+      Estudia mejor.<br>
+      <span>Aprende más.</span>
+    </h1>
 
     <p>
-      Explicaciones sencillas, resúmenes,
-      preguntas y ayuda personalizada.
+      StudyLearning organiza tus apuntes, crea tests,
+      prepara tus exámenes y te ayuda a estudiar cada día.
     </p>
 
+    <div class="hero-buttons">
+      <button class="primary" onclick="openApp()">Empezar a estudiar</button>
+      <button class="secondary" onclick="scrollToSection('pricing')">Ver planes</button>
+    </div>
   </div>
 
-
-  <div class="card">
-
-    <div class="card-icon">
-      📝
+  <div class="hero-card">
+    <div class="mini-top">
+      <div class="mini-title">Tu progreso de hoy</div>
+      <div class="streak">🔥 <span id="heroStreak">0</span></div>
     </div>
 
-    <h3>
-      Tests y exámenes
-    </h3>
-
-    <p>
-      Elige asignatura, tema y dificultad
-      para practicar.
-    </p>
-
-  </div>
-
-
-  <div class="card">
-
-    <div class="card-icon">
-      📅
+    <div class="progress-box">
+      <strong>Sesión de estudio</strong>
+      <div class="progress-line"><div></div></div>
+      <small>74% completado</small>
     </div>
 
-    <h3>
-      Organización
-    </h3>
-
-    <p>
-      Calendario, tareas, exámenes,
-      rachas y planes de estudio.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PLANES
-========================= -->
-
-<section
-  class="pricing-section"
-  id="pricing"
->
-
-  <h2 class="section-title">
-    Elige tu plan
-  </h2>
-
-  <p class="section-subtitle">
-    Empieza gratis y mejora tu experiencia cuando quieras.
-  </p>
-
-
-  <div class="plans">
-
-
-    <!-- GRATIS -->
-
-    <div class="plan">
-
-      <h3>
-        Gratis
-      </h3>
-
-      <p class="plan-description">
-        Para empezar a estudiar con StudyAI.
+    <div class="progress-box">
+      <strong>Próximo examen</strong>
+      <p style="color:#687386;margin-top:7px">
+        Organiza tu preparación con un plan personalizado.
       </p>
+    </div>
 
-      <div class="price">
-        0€
-        <span>/mes</span>
-      </div>
+    <button class="primary" style="width:100%" onclick="openApp()">
+      ⚡ Estudiar ahora
+    </button>
+  </div>
+</section>
+
+<section class="features" id="features">
+
+  <div class="feature">
+    <div class="feature-icon">📸</div>
+    <h3>Apuntes inteligentes</h3>
+    <p>
+      Sube tus apuntes o fotografías y conviértelos
+      en material de estudio.
+    </p>
+  </div>
+
+  <div class="feature">
+    <div class="feature-icon">🧠</div>
+    <h3>Aprendizaje adaptativo</h3>
+    <p>
+      Practica más aquello que todavía no dominas
+      y aumenta la dificultad progresivamente.
+    </p>
+  </div>
+
+  <div class="feature">
+    <div class="feature-icon">📅</div>
+    <h3>Planificador</h3>
+    <p>
+      Añade tus exámenes y crea un plan de estudio
+      para llegar preparado.
+    </p>
+  </div>
+
+</section>
+
+<section class="pricing" id="pricing">
+
+  <div class="section-title">
+    <h2>Elige tu plan</h2>
+    <p>Empieza gratis y mejora cuando quieras.</p>
+  </div>
+
+  <div class="prices">
+
+    <div class="price-card">
+      <h3>Gratis</h3>
+      <div class="price">0€ <small>/mes</small></div>
 
       <ul>
-
-        <li>Tests y exámenes básicos</li>
-
         <li>8 fotos cada 24 horas</li>
-
+        <li>Tests básicos</li>
+        <li>Flashcards</li>
         <li>Calendario</li>
-
-        <li>Racha de estudio</li>
-
-        <li>Plan de estudio básico</li>
-
-        <li>Estadísticas</li>
-
+        <li>Seguimiento de progreso</li>
       </ul>
 
-      <button
-        class="primary plan-button"
-        onclick="openApp()"
-      >
+      <button class="secondary" style="width:100%" onclick="choosePlan('Gratis')">
         Empezar gratis
       </button>
-
     </div>
 
-
-    <!-- PRO -->
-
-    <div class="plan featured">
-
-      <div class="plan-badge">
-        MÁS POPULAR
-      </div>
-
-      <h3>
-        ⭐ Pro
-      </h3>
-
-      <p class="plan-description">
-        Más capacidad para estudiar todos los días.
-      </p>
-
-      <div class="price">
-        5,99€
-        <span>/mes</span>
-      </div>
+    <div class="price-card featured">
+      <h3>Pro</h3>
+      <div class="price">5,99€ <small>/mes</small></div>
 
       <ul>
-
-        <li>Todo lo del plan Gratis</li>
-
         <li>20 fotos cada 24 horas</li>
-
-        <li>Tests más completos</li>
-
-        <li>Más preguntas por examen</li>
-
-        <li>Planes de estudio avanzados</li>
-
-        <li>Estadísticas más detalladas</li>
-
-        <li>Menos límites de uso</li>
-
-        <li>Prioridad para nuevas funciones</li>
-
+        <li>Tests avanzados</li>
+        <li>Planes de estudio</li>
+        <li>Aprendizaje adaptativo</li>
+        <li>Más estadísticas</li>
       </ul>
 
-      <button
-        class="primary plan-button"
-        onclick="selectPlan('Pro')"
-      >
+      <button class="primary" style="width:100%" onclick="choosePlan('Pro')">
         Elegir Pro
       </button>
-
     </div>
 
-
-    <!-- AVANZADO -->
-
-    <div class="plan">
-
-      <h3>
-        🚀 Avanzado
-      </h3>
-
-      <p class="plan-description">
-        La experiencia completa de StudyAI.
-      </p>
-
-      <div class="price">
-        9,99€
-        <span>/mes</span>
-      </div>
+    <div class="price-card">
+      <h3>Avanzado</h3>
+      <div class="price">9,99€ <small>/mes</small></div>
 
       <ul>
-
-        <li>Todo lo del plan Pro</li>
-
         <li>Fotos ilimitadas</li>
-
-        <li>Tests y exámenes avanzados</li>
-
-        <li>Planes de estudio personalizados</li>
-
-        <li>Seguimiento de progreso avanzado</li>
-
-        <li>Más herramientas de IA</li>
-
-        <li>Mayor límite de uso</li>
-
-        <li>Funciones nuevas antes</li>
-
+        <li>Todas las funciones Pro</li>
+        <li>Modo examen</li>
+        <li>Repaso inteligente</li>
+        <li>Estadísticas avanzadas</li>
       </ul>
 
-      <button
-        class="primary plan-button"
-        onclick="selectPlan('Avanzado')"
-      >
+      <button class="primary" style="width:100%" onclick="choosePlan('Avanzado')">
         Elegir Avanzado
       </button>
-
     </div>
 
-
   </div>
-
 </section>
 
 
-<!-- =========================
-     APP
-========================= -->
+<!-- APP -->
 
-<section
-  id="app"
->
+<section class="app" id="app">
 
-  <h2 class="app-title">
-    Mi zona de estudio
-  </h2>
+  <div class="app-grid">
 
-  <p class="app-subtitle">
-    Tu centro de estudio personal.
-  </p>
+    <aside class="sidebar">
+
+      <div class="sidebar-user">
+        <strong id="userName">Estudiante</strong>
+        <span id="userCourse">2º ESO</span>
+      </div>
+
+      <button class="side-btn active" onclick="showPage('dashboard',this)">
+        🏠 Inicio
+      </button>
+
+      <button class="side-btn" onclick="showPage('study',this)">
+        ⚡ Estudiar ahora
+      </button>
+
+      <button class="side-btn" onclick="showPage('notes',this)">
+        📚 Mis apuntes
+      </button>
+
+      <button class="side-btn" onclick="showPage('tests',this)">
+        📝 Tests
+      </button>
+
+      <button class="side-btn" onclick="showPage('flashcards',this)">
+        🃏 Flashcards
+      </button>
+
+      <button class="side-btn" onclick="showPage('calendar',this)">
+        📅 Calendario
+      </button>
+
+      <button class="side-btn" onclick="showPage('progress',this)">
+        📊 Progreso
+      </button>
+
+      <button class="side-btn" onclick="showPage('plans',this)">
+        💎 Planes
+      </button>
+
+    </aside>
 
 
-  <div class="nav-tabs">
+    <main class="main">
 
-    <button
-      class="tab active"
-      onclick="showPage('dashboard',this)"
-    >
-      🏠 Inicio
-    </button>
+      <!-- DASHBOARD -->
 
-    <button
-      class="tab"
-      onclick="showPage('notesPage',this)"
-    >
-      📚 Apuntes
-    </button>
+      <div id="page-dashboard">
 
-    <button
-      class="tab"
-      onclick="showPage('testPage',this)"
-    >
-      📝 Tests
-    </button>
+        <div class="dashboard-head">
+          <div>
+            <h2>Hola, <span id="helloName">estudiante</span> 👋</h2>
+            <p>Esto es lo que tienes preparado para hoy.</p>
+          </div>
 
-    <button
-      class="tab"
-      onclick="showPage('calendarPage',this)"
-    >
-      📅 Calendario
-    </button>
+          <button class="primary" onclick="showPage('study')">
+            ⚡ Estudiar ahora
+          </button>
+        </div>
 
-    <button
-      class="tab"
-      onclick="showPage('streakPage',this)"
-    >
-      🔥 Racha
-    </button>
+        <div class="stats">
 
+          <div class="stat">
+            <div class="stat-label">🔥 Racha</div>
+            <div class="stat-value" id="statStreak">0 días</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">⭐ XP</div>
+            <div class="stat-value" id="statXP">0</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">📝 Tests</div>
+            <div class="stat-value" id="statTests">0</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">🎯 Aciertos</div>
+            <div class="stat-value" id="statCorrect">0%</div>
+          </div>
+
+        </div>
+
+        <div class="content-grid">
+
+          <div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Mis asignaturas</h3>
+                <button class="secondary" onclick="showPage('tests')">Practicar</button>
+              </div>
+
+              <div class="subjects">
+
+                <div class="subject" onclick="startSubject('Matemáticas')">
+                  <strong>📐 Matemáticas</strong>
+                  <small>Progreso: 68%</small>
+                  <div class="subject-progress"><div style="width:68%"></div></div>
+                </div>
+
+                <div class="subject" onclick="startSubject('Lengua')">
+                  <strong>📖 Lengua</strong>
+                  <small>Progreso: 82%</small>
+                  <div class="subject-progress"><div style="width:82%"></div></div>
+                </div>
+
+                <div class="subject" onclick="startSubject('Inglés')">
+                  <strong>🇬🇧 Inglés</strong>
+                  <small>Progreso: 55%</small>
+                  <div class="subject-progress"><div style="width:55%"></div></div>
+                </div>
+
+                <div class="subject" onclick="startSubject('Historia')">
+                  <strong>🏛️ Historia</strong>
+                  <small>Progreso: 43%</small>
+                  <div class="subject-progress"><div style="width:43%"></div></div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>⚡ Acciones rápidas</h3>
+
+              <div class="action-grid">
+
+                <button class="action" onclick="showPage('notes')">
+                  <b>📸 Subir apuntes</b>
+                  <span>Convierte tus apuntes en material de estudio.</span>
+                </button>
+
+                <button class="action" onclick="showPage('tests')">
+                  <b>📝 Crear test</b>
+                  <span>Practica un tema con preguntas.</span>
+                </button>
+
+                <button class="action" onclick="showPage('flashcards')">
+                  <b>🃏 Repasar tarjetas</b>
+                  <span>Memoriza conceptos importantes.</span>
+                </button>
+
+                <button class="action" onclick="showPage('calendar')">
+                  <b>📅 Planificar</b>
+                  <span>Organiza tus próximos exámenes.</span>
+                </button>
+
+              </div>
+            </div>
+
+          </div>
+
+
+          <div>
+
+            <div class="panel">
+              <h3>📋 Para hoy</h3>
+
+              <div class="task">
+                <div class="task-dot"></div>
+                <div>
+                  <strong>Repasar Matemáticas</strong>
+                  <small>20 minutos</small>
+                </div>
+              </div>
+
+              <div class="task">
+                <div class="task-dot"></div>
+                <div>
+                  <strong>Test de Historia</strong>
+                  <small>10 preguntas</small>
+                </div>
+              </div>
+
+              <div class="task">
+                <div class="task-dot"></div>
+                <div>
+                  <strong>Repasar flashcards</strong>
+                  <small>15 minutos</small>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="panel">
+              <h3>🔥 Tu racha</h3>
+              <div class="streak-big">
+                🔥 <span id="bigStreak">0</span>
+              </div>
+              <p style="color:#687386;margin-top:5px">
+                días consecutivos estudiando.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- STUDY -->
+
+      <div id="page-study" class="hidden">
+
+        <div class="panel">
+          <h2 style="color:var(--navy);margin-bottom:8px">
+            ⚡ Estudiar ahora
+          </h2>
+
+          <p style="color:var(--muted);margin-bottom:22px">
+            Crea una sesión personalizada.
+          </p>
+
+          <div class="two">
+
+            <div class="form-group">
+              <label>Asignatura</label>
+              <select id="studySubject">
+                <option>Matemáticas</option>
+                <option>Lengua</option>
+                <option>Inglés</option>
+                <option>Historia</option>
+                <option>Biología</option>
+                <option>Física y Química</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Tema</label>
+              <input id="studyTopic" placeholder="Ej: La Edad Media">
+            </div>
+
+          </div>
+
+          <div class="two">
+
+            <div class="form-group">
+              <label>Dificultad</label>
+              <select id="studyDifficulty">
+                <option>Fácil</option>
+                <option selected>Medio</option>
+                <option>Difícil</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Tiempo</label>
+              <select>
+                <option>15 minutos</option>
+                <option selected>30 minutos</option>
+                <option>45 minutos</option>
+                <option>60 minutos</option>
+              </select>
+            </div>
+
+          </div>
+
+          <button class="primary" onclick="startStudySession()">
+            🚀 Empezar sesión
+          </button>
+
+          <div id="studySession" style="margin-top:25px"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- NOTES -->
+
+      <div id="page-notes" class="hidden">
+
+        <div class="panel">
+
+          <h2 style="color:var(--navy);margin-bottom:8px">
+            📚 Mis apuntes
+          </h2>
+
+          <p style="color:var(--muted);margin-bottom:20px">
+            Escribe tus apuntes o sube fotografías.
+          </p>
+
+          <div class="form-group">
+            <label>Curso</label>
+
+            <select id="course">
+              <option>1º Primaria</option>
+              <option>2º Primaria</option>
+              <option>3º Primaria</option>
+              <option>4º Primaria</option>
+              <option>5º Primaria</option>
+              <option>6º Primaria</option>
+              <option>1º ESO</option>
+              <option selected>2º ESO</option>
+              <option>3º ESO</option>
+              <option>4º ESO</option>
+              <option>1º Bachillerato</option>
+              <option>2º Bachillerato</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Tus apuntes</label>
+            <textarea id="notes" placeholder="Pega o escribe aquí tus apuntes..."></textarea>
+          </div>
+
+          <div class="photo-box">
+
+            <p>
+              📸 Sube fotografías de tus apuntes
+            </p>
+
+            <input
+              type="file"
+              id="photoInput"
+              accept="image/*"
+              capture="environment"
+              multiple
+              onchange="handlePhotos(event)"
+            >
+
+            <div id="photoCounter" style="margin-top:10px;color:var(--muted)">
+              0 / 8 fotos utilizadas
+            </div>
+
+          </div>
+
+          <div class="photo-list" id="photoList"></div>
+
+          <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
+
+            <button class="primary" onclick="explainNotes()">
+              🧠 Explicar apuntes
+            </button>
+
+            <button class="secondary" onclick="generateStudyMaterial()">
+              ✨ Crear material
+            </button>
+
+          </div>
+
+          <div id="notesResult" style="margin-top:20px"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- TESTS -->
+
+      <div id="page-tests" class="hidden">
+
+        <div class="panel">
+
+          <h2 style="color:var(--navy);margin-bottom:8px">
+            📝 Crear test
+          </h2>
+
+          <p style="color:var(--muted);margin-bottom:20px">
+            Elige qué quieres practicar.
+          </p>
+
+          <div class="two">
+
+            <div class="form-group">
+              <label>Asignatura</label>
+              <select id="testSubject">
+                <option>Matemáticas</option>
+                <option>Lengua</option>
+                <option>Inglés</option>
+                <option>Historia</option>
+                <option>Biología</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Tema</label>
+              <input id="testTopic" placeholder="Ej: Proporcionalidad">
+            </div>
+
+          </div>
+
+          <div class="two">
+
+            <div class="form-group">
+              <label>Preguntas</label>
+              <select id="questionCount">
+                <option>5</option>
+                <option selected>10</option>
+                <option>15</option>
+                <option>20</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Dificultad</label>
+              <select id="difficulty">
+                <option>Fácil</option>
+                <option selected>Medio</option>
+                <option>Difícil</option>
+              </select>
+            </div>
+
+          </div>
+
+          <button class="primary" onclick="createTest()">
+            🚀 Crear test
+          </button>
+
+          <div id="testContainer" style="margin-top:25px"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- FLASHCARDS -->
+
+      <div id="page-flashcards" class="hidden">
+
+        <div class="panel">
+
+          <h2 style="color:var(--navy);margin-bottom:8px">
+            🃏 Flashcards
+          </h2>
+
+          <p style="color:var(--muted);margin-bottom:20px">
+            Repasa conceptos y comprueba cuánto recuerdas.
+          </p>
+
+          <div class="flashcard" onclick="flipCard()">
+            <div id="flashText">
+              <h2>Fotosíntesis</h2>
+              <p style="margin-top:12px;color:var(--muted)">
+                Haz clic para ver la respuesta.
+              </p>
+            </div>
+          </div>
+
+          <div class="flash-buttons">
+            <button class="secondary" onclick="nextFlashcard('hard')">
+              🔴 Difícil
+            </button>
+
+            <button class="secondary" onclick="nextFlashcard('easy')">
+              🟢 Fácil
+            </button>
+
+            <button class="primary" onclick="nextFlashcard('normal')">
+              Siguiente →
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CALENDAR -->
+
+      <div id="page-calendar" class="hidden">
+
+        <div class="panel">
+
+          <div class="panel-head">
+            <div>
+              <h2 style="color:var(--navy)">📅 Calendario</h2>
+              <p style="color:var(--muted);margin-top:5px">
+                Organiza tus exámenes y tareas.
+              </p>
+            </div>
+
+            <button class="primary" onclick="openModal('eventModal')">
+              + Añadir
+            </button>
+          </div>
+
+          <div class="calendar" id="calendar"></div>
+
+        </div>
+
+        <div class="panel">
+
+          <h3>🎯 Crear plan de estudio</h3>
+
+          <div class="two">
+
+            <div class="form-group">
+              <label>Examen</label>
+              <input id="examName" placeholder="Ej: Examen de Historia">
+            </div>
+
+            <div class="form-group">
+              <label>Fecha</label>
+              <input type="date" id="examDate">
+            </div>
+
+          </div>
+
+          <button class="primary" onclick="generatePlan()">
+            🧠 Crear plan
+          </button>
+
+          <div id="studyPlan" style="margin-top:20px"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PROGRESS -->
+
+      <div id="page-progress" class="hidden">
+
+        <div class="panel">
+
+          <h2 style="color:var(--navy)">📊 Mi progreso</h2>
+
+          <div class="stats" style="margin-top:20px">
+
+            <div class="stat">
+              <div class="stat-label">Nivel</div>
+              <div class="stat-value" id="level">1</div>
+            </div>
+
+            <div class="stat">
+              <div class="stat-label">XP</div>
+              <div class="stat-value" id="progressXP">0</div>
+            </div>
+
+            <div class="stat">
+              <div class="stat-label">Tests realizados</div>
+              <div class="stat-value" id="progressTests">0</div>
+            </div>
+
+            <div class="stat">
+              <div class="stat-label">Racha</div>
+              <div class="stat-value" id="progressStreak">0</div>
+            </div>
+
+          </div>
+
+          <h3>Dominio por asignatura</h3>
+
+          <div style="margin-top:15px">
+
+            <p>Matemáticas — 68%</p>
+            <div class="progress-line"><div style="width:68%"></div></div>
+
+            <p style="margin-top:18px">Lengua — 82%</p>
+            <div class="progress-line"><div style="width:82%"></div></div>
+
+            <p style="margin-top:18px">Inglés — 55%</p>
+            <div class="progress-line"><div style="width:55%"></div></div>
+
+            <p style="margin-top:18px">Historia — 43%</p>
+            <div class="progress-line"><div style="width:43%"></div></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PLANS -->
+
+      <div id="page-plans" class="hidden">
+
+        <div class="panel">
+
+          <h2 style="color:var(--navy);margin-bottom:8px">
+            💎 Planes de StudyLearning
+          </h2>
+
+          <p style="color:var(--muted);margin-bottom:25px">
+            Tu plan actual: <strong id="currentPlan">Gratis</strong>
+          </p>
+
+          <div class="prices">
+
+            <div class="price-card">
+              <h3>Gratis</h3>
+              <div class="price">0€</div>
+              <button class="secondary" style="width:100%" onclick="choosePlan('Gratis')">
+                Seleccionar
+              </button>
+            </div>
+
+            <div class="price-card featured">
+              <h3>Pro</h3>
+              <div class="price">5,99€</div>
+              <button class="primary" style="width:100%" onclick="choosePlan('Pro')">
+                Seleccionar
+              </button>
+            </div>
+
+            <div class="price-card">
+              <h3>Avanzado</h3>
+              <div class="price">9,99€</div>
+              <button class="primary" style="width:100%" onclick="choosePlan('Avanzado')">
+                Seleccionar
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
   </div>
-
-
-  <!-- =========================
-       INICIO APP
-  ========================= -->
-
-  <div
-    class="page active"
-    id="dashboard"
-  >
-
-    <div class="box">
-
-      <h3>
-        🎓 Configura tu curso
-      </h3>
-
-      <p class="description">
-        StudyAI utilizará tu curso para adaptar
-        la dificultad.
-      </p>
-
-      <select id="course">
-
-        <option value="">
-          Selecciona tu curso
-        </option>
-
-        <option>1.º de Primaria</option>
-        <option>2.º de Primaria</option>
-        <option>3.º de Primaria</option>
-        <option>4.º de Primaria</option>
-        <option>5.º de Primaria</option>
-        <option>6.º de Primaria</option>
-
-        <option>1.º de ESO</option>
-        <option>2.º de ESO</option>
-        <option>3.º de ESO</option>
-        <option>4.º de ESO</option>
-
-        <option>1.º de Bachillerato</option>
-        <option>2.º de Bachillerato</option>
-
-      </select>
-
-      <br>
-
-      <button
-        class="primary"
-        onclick="saveCourse()"
-      >
-        Guardar curso
-      </button>
-
-    </div>
-
-
-    <div class="box">
-
-      <h3>
-        📊 Tu progreso
-      </h3>
-
-      <div class="stats">
-
-        <div class="stat">
-
-          <strong id="statTests">
-            0
-          </strong>
-
-          <span>
-            Tests realizados
-          </span>
-
-        </div>
-
-
-        <div class="stat">
-
-          <strong id="statCorrect">
-            0%
-          </strong>
-
-          <span>
-            Aciertos
-          </span>
-
-        </div>
-
-
-        <div class="stat">
-
-          <strong id="statDays">
-            0
-          </strong>
-
-          <span>
-            Días estudiados
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="box">
-
-      <h3>
-        🎯 Próximo examen
-      </h3>
-
-      <p
-        class="description"
-        id="nextExamText"
-      >
-        Añade un examen al calendario
-        para preparar tu estudio.
-      </p>
-
-      <button
-        class="primary"
-        onclick="showPageById('calendarPage')"
-      >
-        📅 Añadir examen
-      </button>
-
-    </div>
-
-
-    <div
-      class="box"
-      id="accountDashboard"
-    >
-
-      <h3>
-        👤 Mi cuenta
-      </h3>
-
-      <p class="description">
-        No has iniciado sesión.
-      </p>
-
-      <button
-        class="primary"
-        onclick="openRegister()"
-      >
-        Registrarse
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       APUNTES
-  ========================= -->
-
-  <div
-    class="page"
-    id="notesPage"
-  >
-
-    <div class="box">
-
-      <h3>
-        📝 Tus apuntes
-      </h3>
-
-      <p class="description">
-        Escribe aquí lo que quieres estudiar.
-      </p>
-
-      <textarea
-        id="notes"
-        placeholder="Escribe aquí tus apuntes..."
-      ></textarea>
-
-    </div>
-
-
-    <div class="box">
-
-      <h3>
-        📸 Fotos de tus apuntes
-      </h3>
-
-      <p class="description">
-        Haz una foto o selecciona imágenes de tu galería.
-      </p>
-
-      <p
-        id="counter"
-        class="description"
-      >
-        8 fotos disponibles
-      </p>
-
-      <label
-        class="photo-button"
-        for="photoInput"
-      >
-        📷 Hacer / seleccionar fotos
-      </label>
-
-      <input
-        id="photoInput"
-        type="file"
-        accept="image/*"
-        capture="environment"
-        multiple
-      >
-
-      <div id="photos"></div>
-
-    </div>
-
-
-    <div class="box">
-
-      <h3>
-        🤖 Explicar mis apuntes
-      </h3>
-
-      <p class="description">
-        La IA analizará tus apuntes.
-      </p>
-
-      <button
-        class="primary"
-        onclick="explainNotes()"
-      >
-        Explicar apuntes
-      </button>
-
-      <div
-        id="result"
-        style="
-        margin-top:18px;
-        background:#f7f9fc;
-        border-radius:12px;
-        padding:18px;
-        display:none;
-        line-height:1.6;
-        "
-      ></div>
-
-    </div>
-
-
-    <div
-      id="videoSection"
-      class="box hidden"
-    >
-
-      <h3>
-        🎥 Vídeo recomendado
-      </h3>
-
-      <p class="description">
-        Vídeos relacionados con tus apuntes.
-      </p>
-
-      <a
-        id="youtubeButton"
-        class="primary"
-        href="#"
-        target="_blank"
-        style="
-        display:inline-block;
-        text-decoration:none;
-        "
-      >
-        ▶ Buscar vídeo
-      </a>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       TESTS
-  ========================= -->
-
-  <div
-    class="page"
-    id="testPage"
-  >
-
-    <div
-      class="box"
-      id="testSetup"
-    >
-
-      <h3>
-        📝 Crear test o examen
-      </h3>
-
-      <p class="description">
-        Elige asignatura, tema, número de preguntas
-        y dificultad.
-      </p>
-
-
-      <label>
-        Asignatura
-      </label>
-
-      <select id="subject">
-
-        <option value="">
-          Selecciona una asignatura
-        </option>
-
-        <option>Matemáticas</option>
-        <option>Lengua</option>
-        <option>Inglés</option>
-        <option>Historia</option>
-        <option>Geografía</option>
-        <option>Biología</option>
-        <option>Física</option>
-        <option>Química</option>
-        <option>Filosofía</option>
-        <option>Economía</option>
-        <option>Otra</option>
-
-      </select>
-
-      <br><br>
-
-
-      <label>
-        Tema
-      </label>
-
-      <input
-        id="testTopic"
-        placeholder="Ej: Revolución Francesa"
-      >
-
-      <br><br>
-
-
-      <label>
-        Número de preguntas
-      </label>
-
-      <select id="questionCount">
-
-        <option value="5">
-          5 preguntas
-        </option>
-
-        <option value="10">
-          10 preguntas
-        </option>
-
-        <option value="15">
-          15 preguntas
-        </option>
-
-        <option value="20">
-          20 preguntas
-        </option>
-
-      </select>
-
-      <br><br>
-
-
-      <label>
-        Dificultad inicial
-      </label>
-
-      <div class="difficulty">
-
-        <button
-          class="diff selected"
-          onclick="selectDifficulty('easy',this)"
-        >
-          Fácil
-        </button>
-
-        <button
-          class="diff"
-          onclick="selectDifficulty('medium',this)"
-        >
-          Medio
-        </button>
-
-        <button
-          class="diff"
-          onclick="selectDifficulty('hard',this)"
-        >
-          Difícil
-        </button>
-
-      </div>
-
-      <br>
-
-      <button
-        class="primary"
-        onclick="startTest(false)"
-      >
-        📝 Hacer tipo test
-      </button>
-
-      <button
-        class="primary"
-        style="margin-left:8px"
-        onclick="startTest(true)"
-      >
-        🎯 Hacer examen
-      </button>
-
-    </div>
-
-
-    <div
-      class="box"
-      id="testArea"
-    >
-
-      <div class="test-info">
-
-        <span id="questionProgress">
-          Pregunta 1
-        </span>
-
-        <span id="currentDifficulty">
-          Fácil
-        </span>
-
-      </div>
-
-      <div
-        class="question"
-        id="question"
-      ></div>
-
-      <div
-        class="answers"
-        id="answers"
-      ></div>
-
-      <br>
-
-      <button
-        id="nextQuestion"
-        class="primary hidden"
-        onclick="nextQuestion()"
-      >
-        Siguiente
-      </button>
-
-    </div>
-
-
-    <div
-      class="box"
-      id="examResult"
-    >
-
-      <h3>
-        🎉 Resultado
-      </h3>
-
-      <div
-        class="result-score"
-        id="finalScore"
-      >
-        0/5
-      </div>
-
-      <p
-        id="finalMessage"
-        class="description"
-      ></p>
-
-      <button
-        class="primary"
-        onclick="resetTest()"
-      >
-        Volver a hacer otro
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       CALENDARIO
-  ========================= -->
-
-  <div
-    class="page"
-    id="calendarPage"
-  >
-
-    <div class="box">
-
-      <h3>
-        📅 Añadir tarea o examen
-      </h3>
-
-      <p class="description">
-        Tus exámenes servirán para crear un plan
-        de estudio.
-      </p>
-
-      <div class="course-grid">
-
-        <div>
-
-          <label>
-            Fecha
-          </label>
-
-          <input
-            type="date"
-            id="eventDate"
-          >
-
-        </div>
-
-
-        <div>
-
-          <label>
-            Tipo
-          </label>
-
-          <select id="eventType">
-
-            <option>
-              Examen
-            </option>
-
-            <option>
-              Tarea
-            </option>
-
-          </select>
-
-        </div>
-
-      </div>
-
-      <br>
-
-      <input
-        id="eventTitle"
-        placeholder="Ej: Examen de Matemáticas"
-      >
-
-      <br><br>
-
-      <button
-        class="primary"
-        onclick="addEvent()"
-      >
-        + Añadir
-      </button>
-
-    </div>
-
-
-    <div class="box">
-
-      <div class="calendar-top">
-
-        <button
-          class="tab"
-          onclick="changeMonth(-1)"
-        >
-          ←
-        </button>
-
-        <h3 id="monthTitle"></h3>
-
-        <button
-          class="tab"
-          onclick="changeMonth(1)"
-        >
-          →
-        </button>
-
-      </div>
-
-      <div
-        class="calendar-grid"
-        id="calendar"
-      ></div>
-
-    </div>
-
-
-    <div class="box">
-
-      <h3>
-        📚 Plan de estudio
-      </h3>
-
-      <p class="description">
-        Se generará al añadir un examen.
-      </p>
-
-      <div id="studyPlan">
-        Todavía no tienes ningún plan.
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       RACHA
-  ========================= -->
-
-  <div
-    class="page"
-    id="streakPage"
-  >
-
-    <div class="box streak-card">
-
-      <div class="streak-fire">
-        🔥
-      </div>
-
-      <div
-        class="streak-number"
-        id="bigStreak"
-      >
-        0
-      </div>
-
-      <h3>
-        días de racha
-      </h3>
-
-      <p class="description">
-        Estudia cada día para mantenerla.
-      </p>
-
-      <button
-        class="primary"
-        onclick="registerStudy()"
-      >
-        📚 Estudiar hoy
-      </button>
-
-    </div>
-
-
-    <div class="box">
-
-      <h3>
-        🏆 Estadísticas
-      </h3>
-
-      <div class="stats">
-
-        <div class="stat">
-
-          <strong id="totalStudyDays">
-            0
-          </strong>
-
-          <span>
-            Días estudiados
-          </span>
-
-        </div>
-
-
-        <div class="stat">
-
-          <strong id="totalTests">
-            0
-          </strong>
-
-          <span>
-            Tests
-          </span>
-
-        </div>
-
-
-        <div class="stat">
-
-          <strong id="totalQuestions">
-            0
-          </strong>
-
-          <span>
-            Preguntas
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <button
-    class="tab"
-    onclick="closeApp()"
-  >
-    ← Volver al inicio
-  </button>
-
 </section>
 
 
-<!-- =========================
-     REGISTRO
-========================= -->
-
-<div
-  class="modal"
-  id="registerModal"
->
-
-  <div class="modal-content">
-
-    <button
-      class="close"
-      onclick="closeModal('registerModal')"
-    >
-      ×
-    </button>
-
-    <h2>
-      Crear cuenta
-    </h2>
-
-    <p class="description">
-      Crea tu cuenta para guardar tu progreso.
-    </p>
+<footer>
+  <strong>StudyLearning</strong><br>
+  Tu espacio inteligente para estudiar.
+</footer>
 
 
-    <div class="form-group">
+<!-- LOGIN -->
 
-      <label>
-        Nombre
-      </label>
+<div class="modal" id="loginModal">
 
-      <input
-        id="registerName"
-        placeholder="Tu nombre"
-      >
+  <div class="modal-box">
 
+    <div class="modal-head">
+      <h2 style="color:var(--navy)">Iniciar sesión</h2>
+      <button class="close" onclick="closeModal('loginModal')">×</button>
     </div>
 
-
     <div class="form-group">
-
-      <label>
-        Correo electrónico
-      </label>
-
-      <input
-        id="registerEmail"
-        type="email"
-        placeholder="tu@email.com"
-      >
-
+      <label>Email</label>
+      <input type="email" id="loginEmail" placeholder="tu@email.com">
     </div>
 
-
     <div class="form-group">
-
-      <label>
-        Contraseña
-      </label>
-
-      <input
-        id="registerPassword"
-        type="password"
-        placeholder="Contraseña"
-      >
-
+      <label>Contraseña</label>
+      <input type="password" id="loginPassword" placeholder="••••••••">
     </div>
 
-
-    <button
-      class="primary"
-      onclick="registerUser()"
-    >
-      Registrarse
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     LOGIN
-========================= -->
-
-<div
-  class="modal"
-  id="loginModal"
->
-
-  <div class="modal-content">
-
-    <button
-      class="close"
-      onclick="closeModal('loginModal')"
-    >
-      ×
-    </button>
-
-    <h2>
-      Iniciar sesión
-    </h2>
-
-    <p class="description">
-      Accede a tu cuenta.
-    </p>
-
-
-    <div class="form-group">
-
-      <label>
-        Correo
-      </label>
-
-      <input
-        id="loginEmail"
-        type="email"
-        placeholder="tu@email.com"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Contraseña
-      </label>
-
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="Contraseña"
-      >
-
-    </div>
-
-
-    <button
-      class="primary"
-      onclick="loginUser()"
-    >
+    <button class="primary" style="width:100%" onclick="login()">
       Iniciar sesión
     </button>
 
-
-    <button
-      class="tab"
-      style="width:100%;margin-top:10px"
-      onclick="
-        closeModal('loginModal');
-        openRegister();
-      "
-    >
+    <button class="secondary" style="width:100%;margin-top:10px" onclick="openRegister()">
       Crear cuenta
     </button>
 
@@ -2033,59 +1586,82 @@ textarea:focus{
 </div>
 
 
-<!-- =========================
-     PLAN MODAL
-========================= -->
+<!-- REGISTER -->
 
-<div
-  class="modal"
-  id="planModal"
->
+<div class="modal" id="registerModal">
 
-  <div class="modal-content">
+  <div class="modal-box">
 
-    <button
-      class="close"
-      onclick="closeModal('planModal')"
-    >
-      ×
-    </button>
-
-    <h2 id="planModalTitle">
-      Plan Pro
-    </h2>
-
-    <p
-      class="description"
-      id="planModalDescription"
-    ></p>
-
-    <div class="account-card">
-
-      <strong>
-        Importante
-      </strong>
-
-      <p
-        style="
-        margin-top:7px;
-        color:#667085;
-        font-size:14px;
-        line-height:1.5;
-        "
-      >
-        Esta versión todavía no procesa pagos.
-        Primero construiremos el sistema de cuentas
-        y después conectaremos los pagos de forma segura.
-      </p>
-
+    <div class="modal-head">
+      <h2 style="color:var(--navy)">Crear cuenta</h2>
+      <button class="close" onclick="closeModal('registerModal')">×</button>
     </div>
 
-    <button
-      class="primary"
-      onclick="closeModal('planModal')"
-    >
-      Entendido
+    <div class="form-group">
+      <label>Nombre</label>
+      <input id="registerName" placeholder="Tu nombre">
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input id="registerEmail" type="email" placeholder="tu@email.com">
+    </div>
+
+    <div class="form-group">
+      <label>Curso</label>
+      <select id="registerCourse">
+        <option>1º Primaria</option>
+        <option>2º Primaria</option>
+        <option>3º Primaria</option>
+        <option>4º Primaria</option>
+        <option>5º Primaria</option>
+        <option>6º Primaria</option>
+        <option>1º ESO</option>
+        <option selected>2º ESO</option>
+        <option>3º ESO</option>
+        <option>4º ESO</option>
+        <option>1º Bachillerato</option>
+        <option>2º Bachillerato</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input id="registerPassword" type="password" placeholder="••••••••">
+    </div>
+
+    <button class="primary" style="width:100%" onclick="register()">
+      Crear cuenta
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- EVENT -->
+
+<div class="modal" id="eventModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2 style="color:var(--navy)">Añadir evento</h2>
+      <button class="close" onclick="closeModal('eventModal')">×</button>
+    </div>
+
+    <div class="form-group">
+      <label>Nombre</label>
+      <input id="eventName" placeholder="Examen de Matemáticas">
+    </div>
+
+    <div class="form-group">
+      <label>Fecha</label>
+      <input type="date" id="eventDate">
+    </div>
+
+    <button class="primary" style="width:100%" onclick="addEvent()">
+      Guardar evento
     </button>
 
   </div>
@@ -2095,348 +1671,319 @@ textarea:focus{
 
 <script>
 
-/* =========================
-   VARIABLES
-========================= */
+const $ = id => document.getElementById(id);
 
-let selectedDifficulty="easy";
+let flashIndex = 0;
+let flashShowingAnswer = false;
 
-let testQuestions=[];
+const flashcards = [
+  {
+    q:"Fotosíntesis",
+    a:"Proceso mediante el cual las plantas producen materia orgánica utilizando luz, agua y dióxido de carbono."
+  },
+  {
+    q:"¿Qué es la célula?",
+    a:"Es la unidad básica estructural y funcional de los seres vivos."
+  },
+  {
+    q:"¿Qué es la proporcionalidad?",
+    a:"Relación entre dos magnitudes que cambian manteniendo una determinada razón."
+  },
+  {
+    q:"¿Qué fue el Humanismo?",
+    a:"Movimiento cultural del Renacimiento que situó al ser humano y el estudio de la Antigüedad clásica en el centro de interés."
+  }
+];
 
-let currentQuestion=0;
 
-let testScore=0;
+function scrollToSection(id){
+  $(id).scrollIntoView({behavior:"smooth"});
+}
 
-let isExam=false;
-
-let photos=[];
-
-let events=
-  JSON.parse(
-    localStorage.getItem("studyAIEvents")||"[]"
-  );
-
-let calendarDate=new Date();
-
-
-/* =========================
-   APP
-========================= */
 
 function openApp(){
 
-  document.getElementById("home").style.display="none";
+  $("app").classList.add("active");
 
-  document.getElementById("features").style.display="none";
+  $("app").scrollIntoView({
+    behavior:"smooth"
+  });
 
-  document.getElementById("pricing").style.display="none";
-
-  document.getElementById("app").style.display="block";
-
-  registerStudy();
+  updateUser();
 
   updateStats();
 
   renderCalendar();
 
-  updateCounter();
-
-  loadCourse();
-
-  updateAccount();
-
-  window.scrollTo(0,0);
+  updatePlan();
 
 }
 
 
-function closeApp(){
+function showPage(page,button){
 
-  document.getElementById("app").style.display="none";
+  const pages=[
+    "dashboard",
+    "study",
+    "notes",
+    "tests",
+    "flashcards",
+    "calendar",
+    "progress",
+    "plans"
+  ];
 
-  document.getElementById("home").style.display="block";
+  pages.forEach(p=>{
+    const element=$("page-"+p);
 
-  document.getElementById("features").style.display="flex";
+    if(element){
+      element.classList.toggle(
+        "hidden",
+        p!==page
+      );
+    }
+  });
 
-  document.getElementById("pricing").style.display="block";
+  document.querySelectorAll(".side-btn")
+    .forEach(b=>b.classList.remove("active"));
 
-  window.scrollTo(0,0);
-
-}
-
-
-/* =========================
-   NAVEGACIÓN
-========================= */
-
-function showPage(id,button){
-
-  document.querySelectorAll(".page")
-    .forEach(page=>{
-      page.classList.remove("active");
-    });
-
-  document.getElementById(id)
-    .classList.add("active");
-
-  document.querySelectorAll(".tab")
-    .forEach(tab=>{
-      tab.classList.remove("active");
-    });
-
-  if(button)
+  if(button){
     button.classList.add("active");
+  }
 
-  if(id==="calendarPage")
+  if(page==="calendar"){
     renderCalendar();
+  }
 
-  if(id==="streakPage")
-    updateStreak();
+  if(page==="progress"){
+    updateStats();
+  }
 
-  updateStats();
-
-}
-
-
-function showPageById(id){
-
-  document.querySelectorAll(".page")
-    .forEach(page=>{
-      page.classList.remove("active");
-    });
-
-  document.getElementById(id)
-    .classList.add("active");
-
-  renderCalendar();
+  if(page==="plans"){
+    updatePlan();
+  }
 
 }
 
 
-/* =========================
-   CURSO
-========================= */
+function openModal(id){
+  $(id).classList.add("show");
+}
 
-function saveCourse(){
 
-  const course=
-    document.getElementById("course").value;
+function closeModal(id){
+  $(id).classList.remove("show");
+}
 
-  if(!course){
 
-    alert("Selecciona tu curso.");
+function openRegister(){
 
+  closeModal("loginModal");
+
+  openModal("registerModal");
+
+}
+
+
+function register(){
+
+  const name=$("registerName").value.trim();
+  const email=$("registerEmail").value.trim();
+  const course=$("registerCourse").value;
+
+  if(!name || !email){
+    alert("Completa tu nombre y email.");
     return;
-
   }
 
   localStorage.setItem(
-    "studyAICourse",
-    course
+    "studyLearningUser",
+    JSON.stringify({
+      name,
+      email,
+      course
+    })
   );
 
-  alert(
-    "Curso guardado: "+course
-  );
+  closeModal("registerModal");
+
+  openApp();
+
+  alert("Cuenta creada correctamente.");
 
 }
 
 
-function loadCourse(){
+function login(){
 
-  const saved=
-    localStorage.getItem(
-      "studyAICourse"
+  const email=$("loginEmail").value.trim();
+
+  const saved=JSON.parse(
+    localStorage.getItem("studyLearningUser") || "null"
+  );
+
+  if(saved && saved.email===email){
+
+    closeModal("loginModal");
+
+    openApp();
+
+  }else{
+
+    alert(
+      "No encontramos esa cuenta en este dispositivo. Puedes crear una cuenta."
     );
-
-  if(saved){
-
-    document.getElementById(
-      "course"
-    ).value=saved;
 
   }
 
 }
 
 
-/* =========================
-   FOTOS Y PLAN
-========================= */
+function updateUser(){
 
-const MAX_FREE_PHOTOS=8;
+  const saved=JSON.parse(
+    localStorage.getItem("studyLearningUser") || "null"
+  );
 
-const MAX_PRO_PHOTOS=20;
+  if(saved){
 
-const LIMIT_TIME=24*60*60*1000;
+    $("userName").textContent=saved.name;
 
+    $("helloName").textContent=saved.name;
 
-function getPlan(){
+    $("userCourse").textContent=saved.course;
 
-  return localStorage.getItem(
-    "studyAIPlan"
-  )||"Gratis";
+    $("course").value=saved.course;
+
+  }
 
 }
 
 
-function getMaxPhotos(){
+function choosePlan(plan){
 
-  const plan=getPlan();
+  localStorage.setItem(
+    "studyLearningPlan",
+    plan
+  );
 
-  if(plan==="Avanzado")
-    return Infinity;
+  updatePlan();
 
-  if(plan==="Pro")
-    return MAX_PRO_PHOTOS;
+  alert(
+    plan==="Gratis"
+    ? "Has seleccionado el plan Gratis."
+    : "El plan "+plan+" está preparado. El pago real se conectará posteriormente."
+  );
 
-  return MAX_FREE_PHOTOS;
+}
+
+
+function updatePlan(){
+
+  const plan=
+    localStorage.getItem("studyLearningPlan")
+    || "Gratis";
+
+  if($("currentPlan")){
+    $("currentPlan").textContent=plan;
+  }
+
+}
+
+
+function getPhotoData(){
+
+  return JSON.parse(
+    localStorage.getItem("studyLearningPhotos") || "null"
+  );
 
 }
 
 
 function getPhotoUsage(){
 
-  const saved=
-    localStorage.getItem(
-      "studyAIPhotoUsage"
-    );
+  const data=getPhotoData();
 
-  if(!saved){
+  if(!data){
+    return {
+      count:0,
+      startTime:Date.now()
+    };
+  }
 
-    return{
+  const twentyFourHours=24*60*60*1000;
+
+  if(Date.now()-data.startTime>=twentyFourHours){
+
+    localStorage.removeItem("studyLearningPhotos");
+
+    return {
       count:0,
       startTime:Date.now()
     };
 
   }
 
-  const usage=JSON.parse(saved);
-
-  if(
-    Date.now()-usage.startTime>=LIMIT_TIME
-  ){
-
-    const reset={
-      count:0,
-      startTime:Date.now()
-    };
-
-    localStorage.setItem(
-      "studyAIPhotoUsage",
-      JSON.stringify(reset)
-    );
-
-    return reset;
-
-  }
-
-  return usage;
+  return data;
 
 }
 
 
-function updateCounter(){
+function handlePhotos(event){
 
-  const counter=
-    document.getElementById("counter");
+  const files=[
+    ...event.target.files
+  ];
 
-  if(!counter)
-    return;
+  if(!files.length) return;
 
-  const usage=getPhotoUsage();
+  const plan=
+    localStorage.getItem("studyLearningPlan")
+    || "Gratis";
 
-  const max=getMaxPhotos();
+  let limit=8;
 
-  if(max===Infinity){
+  if(plan==="Pro") limit=20;
 
-    counter.textContent=
-      "Fotos ilimitadas con Avanzado.";
-
-    return;
-
-  }
-
-  const remaining=
-    Math.max(0,max-usage.count);
-
-  counter.textContent=
-    remaining+
-    (
-      remaining===1
-      ?" foto disponible"
-      :" fotos disponibles"
-    )+
-    " · Plan "+getPlan();
-
-}
-
-
-document
-.getElementById("photoInput")
-.addEventListener(
-"change",
-function(e){
-
-  const files=
-    Array.from(e.target.files);
+  if(plan==="Avanzado") limit=999999;
 
   const usage=getPhotoUsage();
 
-  const max=getMaxPhotos();
-
-  const remaining=
-    max===Infinity
-    ?files.length
-    :max-usage.count;
-
-
-  if(max!==Infinity && remaining<=0){
+  if(usage.count + files.length > limit){
 
     alert(
       "Has alcanzado el límite de fotos de tu plan."
     );
 
-    e.target.value="";
-
     return;
 
   }
 
+  usage.count+=files.length;
 
-  const allowed=
-    max===Infinity
-    ?files
-    :files.slice(0,remaining);
+  localStorage.setItem(
+    "studyLearningPhotos",
+    JSON.stringify(usage)
+  );
 
+  $("photoCounter").textContent=
+    usage.count+" / "+
+    (limit>1000?"∞":limit)+
+    " fotos utilizadas";
 
-  allowed.forEach(file=>{
+  const list=$("photoList");
 
-    photos.push(file);
+  files.forEach(file=>{
 
-    const reader=
-      new FileReader();
+    const reader=new FileReader();
 
-    reader.onload=function(event){
+    reader.onload=e=>{
 
-      const container=
-        document.createElement("div");
+      const img=document.createElement("img");
 
-      container.className="photo";
+      img.src=e.target.result;
 
-      container.innerHTML=`
-        <img src="${event.target.result}">
-        <button
-          class="delete-photo"
-          onclick="this.parentElement.remove()"
-        >
-          ×
-        </button>
-      `;
-
-      document
-      .getElementById("photos")
-      .appendChild(container);
+      list.appendChild(img);
 
     };
 
@@ -2444,1605 +1991,791 @@ function(e){
 
   });
 
+}
 
-  if(max!==Infinity){
-
-    usage.count+=allowed.length;
-
-    localStorage.setItem(
-      "studyAIPhotoUsage",
-      JSON.stringify(usage)
-    );
-
-  }
-
-
-  if(
-    max!==Infinity &&
-    files.length>allowed.length
-  ){
-
-    alert(
-      "Has alcanzado el límite de fotos de tu plan."
-    );
-
-  }
-
-
-  updateCounter();
-
-  e.target.value="";
-
-});
-
-
-/* =========================
-   APUNTES
-========================= */
 
 function explainNotes(){
 
-  const notes=
-    document.getElementById("notes")
-    .value
-    .trim();
+  const notes=$("notes").value.trim();
 
-  if(!notes && photos.length===0){
+  if(!notes){
 
-    alert(
-      "Escribe apuntes o añade fotos."
-    );
+    alert("Escribe o sube unos apuntes primero.");
 
     return;
 
   }
 
-  const result=
-    document.getElementById("result");
+  $("notesResult").innerHTML=`
 
-  result.style.display="block";
+    <div class="panel" style="background:var(--light);border:0">
 
-  result.innerHTML=`
-    <strong>🤖 StudyAI</strong>
-    <br><br>
-    Tus apuntes están preparados.
-    <br><br>
-    La versión con IA podrá:
-    <br><br>
-    ✓ Explicar el tema de forma sencilla<br>
-    ✓ Crear un resumen<br>
-    ✓ Detectar conceptos importantes<br>
-    ✓ Crear preguntas automáticamente<br>
-    ✓ Recomendar vídeos relacionados
+      <h3>🧠 Explicación</h3>
+
+      <p style="line-height:1.7;color:var(--text)">
+        StudyLearning analizaría tus apuntes y los convertiría
+        en una explicación sencilla y organizada.
+      </p>
+
+      <br>
+
+      <strong>📌 Ideas principales</strong>
+
+      <p style="color:var(--muted);margin-top:7px">
+        • Identificar conceptos importantes<br>
+        • Explicarlos con lenguaje sencillo<br>
+        • Detectar información que debes memorizar<br>
+        • Preparar preguntas para practicar
+      </p>
+
+    </div>
+
   `;
 
-
-  const videoSection=
-    document.getElementById(
-      "videoSection"
-    );
-
-  videoSection.classList.remove("hidden");
-
-
-  const search=
-    notes ||
-    "tema de estudio";
-
-
-  document.getElementById(
-    "youtubeButton"
-  ).href=
-    "https://www.youtube.com/results?search_query="+
-    encodeURIComponent(
-      search.substring(0,100)+" explicado"
-    );
+  addXP(10);
 
 }
 
 
-/* =========================
-   DIFICULTAD
-========================= */
+function generateStudyMaterial(){
 
-function selectDifficulty(level,button){
+  const notes=$("notes").value.trim();
 
-  selectedDifficulty=level;
+  if(!notes){
 
-  document
-    .querySelectorAll(".diff")
-    .forEach(x=>{
-      x.classList.remove("selected");
-    });
-
-  button.classList.add("selected");
-
-}
-
-
-/* =========================
-   PREGUNTAS
-========================= */
-
-function shuffleAnswers(question){
-
-  const answers=
-    question.a.map(
-      (text,index)=>({
-        text:text,
-        correct:index===question.c
-      })
-    );
-
-
-  for(
-    let i=answers.length-1;
-    i>0;
-    i--
-  ){
-
-    const j=
-      Math.floor(
-        Math.random()*(i+1)
-      );
-
-    [
-      answers[i],
-      answers[j]
-    ]=
-    [
-      answers[j],
-      answers[i]
-    ];
-
-  }
-
-
-  question.a=
-    answers.map(x=>x.text);
-
-  question.c=
-    answers.findIndex(
-      x=>x.correct
-    );
-
-}
-
-
-function generateDemoQuestions(){
-
-  const subject=
-    document.getElementById(
-      "subject"
-    ).value ||
-    "la asignatura";
-
-  const topic=
-    document.getElementById(
-      "testTopic"
-    ).value.trim() ||
-    "el tema";
-
-
-  let questions=[
-
-    {
-      q:
-      `¿Cuál de estas afirmaciones sobre ${topic} es correcta?`,
-      a:[
-        `Es un concepto relacionado con ${subject}`,
-        "No tiene ninguna relación",
-        "Es imposible estudiarlo",
-        "No puede aparecer en un examen"
-      ],
-      c:0
-    },
-
-    {
-      q:
-      `¿Qué deberías identificar primero al estudiar ${topic}?`,
-      a:[
-        "Las ideas principales",
-        "Solo las fechas",
-        "Solo los nombres",
-        "Ninguna información"
-      ],
-      c:0
-    },
-
-    {
-      q:
-      `¿Qué ayuda a comprobar si has aprendido ${topic}?`,
-      a:[
-        "Hacer preguntas y tests",
-        "No repasar",
-        "Leer sin pensar",
-        "Estudiarlo solo una vez"
-      ],
-      c:0
-    },
-
-    {
-      q:
-      `¿Qué estrategia es útil para dominar ${topic}?`,
-      a:[
-        "Repasar y practicar",
-        "Memorizar todo sin comprender",
-        "No hacer ejercicios",
-        "Estudiarlo únicamente el día anterior"
-      ],
-      c:0
-    },
-
-    {
-      q:
-      `¿Qué puede ayudarte a preparar un examen de ${topic}?`,
-      a:[
-        "Un plan de estudio",
-        "No organizarte",
-        "Evitar los tests",
-        "No revisar errores"
-      ],
-      c:0
-    },
-
-    {
-      q:
-      `Si fallas una pregunta sobre ${topic}, ¿qué es recomendable hacer?`,
-      a:[
-        "Revisar el concepto y volver a practicar",
-        "Ignorar el error",
-        "Dejar de estudiar",
-        "Borrar los apuntes"
-      ],
-      c:0
-    }
-
-  ];
-
-
-  questions.forEach(
-    shuffleAnswers
-  );
-
-  return questions;
-
-}
-
-
-/* =========================
-   START TEST
-========================= */
-
-function startTest(exam){
-
-  const subject=
-    document.getElementById(
-      "subject"
-    ).value;
-
-  const topic=
-    document.getElementById(
-      "testTopic"
-    ).value.trim();
-
-
-  if(!subject){
-
-    alert(
-      "Selecciona una asignatura."
-    );
+    alert("Añade apuntes primero.");
 
     return;
 
   }
 
+  $("notesResult").innerHTML=`
 
-  if(!topic){
+    <div class="panel" style="background:var(--light);border:0">
 
-    alert(
-      "Escribe el tema del test."
-    );
+      <h3>✨ Material generado</h3>
 
-    return;
+      <div class="action-grid">
 
-  }
+        <button class="action" onclick="showPage('tests')">
+          <b>📝 Crear test</b>
+          <span>Practica el contenido.</span>
+        </button>
 
+        <button class="action" onclick="showPage('flashcards')">
+          <b>🃏 Crear flashcards</b>
+          <span>Memoriza conceptos.</span>
+        </button>
 
-  isExam=exam;
+        <button class="action" onclick="alert('Resumen preparado.')">
+          <b>📄 Resumen</b>
+          <span>Versión corta de tus apuntes.</span>
+        </button>
 
+        <button class="action" onclick="alert('Preguntas preparadas.')">
+          <b>❓ Preguntas</b>
+          <span>Comprueba lo que sabes.</span>
+        </button>
 
-  const count=
-    Number(
-      document.getElementById(
-        "questionCount"
-      ).value
-    );
+      </div>
 
+    </div>
 
-  testQuestions=
-    generateDemoQuestions();
+  `;
 
-
-  while(
-    testQuestions.length<count
-  ){
-
-    testQuestions=
-      testQuestions.concat(
-        generateDemoQuestions()
-      );
-
-  }
-
-
-  testQuestions=
-    testQuestions.slice(0,count);
-
-
-  testQuestions.forEach(
-    shuffleAnswers
-  );
-
-
-  currentQuestion=0;
-
-  testScore=0;
-
-
-  document.getElementById(
-    "testSetup"
-  ).style.display="none";
-
-
-  document.getElementById(
-    "examResult"
-  ).style.display="none";
-
-
-  document.getElementById(
-    "testArea"
-  ).style.display="block";
-
-
-  showQuestion();
+  addXP(15);
 
 }
 
 
-/* =========================
-   SHOW QUESTION
-========================= */
+function startStudySession(){
 
-function showQuestion(){
+  const subject=$("studySubject").value;
 
-  const q=
-    testQuestions[currentQuestion];
+  const topic=
+    $("studyTopic").value.trim()
+    || "este tema";
 
+  const difficulty=$("studyDifficulty").value;
 
-  document.getElementById(
-    "questionProgress"
-  ).textContent=
-    "Pregunta "+
-    (currentQuestion+1)+
-    " de "+
-    testQuestions.length;
+  $("studySession").innerHTML=`
 
+    <div class="result">
 
-  document.getElementById(
-    "currentDifficulty"
-  ).textContent=
-    difficultyName();
+      <div style="font-size:45px">🧠</div>
 
+      <h2 style="color:var(--navy);margin:10px 0">
+        Sesión preparada
+      </h2>
 
-  document.getElementById(
-    "question"
-  ).textContent=
-    q.q;
+      <p style="color:var(--muted)">
+        ${subject} · ${topic} · ${difficulty}
+      </p>
 
+      <div style="margin-top:20px">
 
-  const answers=
-    document.getElementById(
-      "answers"
-    );
+        <button class="primary"
+          onclick="startStudyQuestions('${topic}')">
+          Empezar preguntas
+        </button>
 
-  answers.innerHTML="";
+      </div>
 
+    </div>
 
-  q.a.forEach(
-    (answer,index)=>{
-
-      const button=
-        document.createElement(
-          "button"
-        );
-
-      button.className="answer";
-
-      button.textContent=
-        answer;
-
-      button.onclick=()=>{
-        answerQuestion(
-          index,
-          button
-        );
-      };
-
-      answers.appendChild(
-        button
-      );
-
-    }
-  );
-
-
-  document
-    .getElementById(
-      "nextQuestion"
-    )
-    .classList.add("hidden");
+  `;
 
 }
 
 
-function difficultyName(){
+function startStudyQuestions(topic){
 
-  if(
-    selectedDifficulty==="easy"
-  )
-    return "Fácil";
+  $("studySession").innerHTML=`
 
-  if(
-    selectedDifficulty==="medium"
-  )
-    return "Medio";
+    <div class="question">
 
-  return "Difícil";
+      <div class="question-number">
+        PREGUNTA 1
+      </div>
+
+      <h4>
+        ¿Cuál de estas afirmaciones describe mejor
+        el tema "${topic}"?
+      </h4>
+
+      <div class="answers">
+
+        <button class="answer"
+          onclick="studyAnswer(this,true)">
+          Es una idea que debemos comprender y relacionar con sus conceptos principales.
+        </button>
+
+        <button class="answer"
+          onclick="studyAnswer(this,false)">
+          Es un concepto que no tiene relación con el tema.
+        </button>
+
+        <button class="answer"
+          onclick="studyAnswer(this,false)">
+          No puede estudiarse mediante preguntas.
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
 
 }
 
 
-/* =========================
-   ANSWER
-========================= */
+function studyAnswer(button,correct){
 
-function answerQuestion(
-  index,
-  button
-){
+  if(correct){
 
-  const q=
-    testQuestions[currentQuestion];
+    button.classList.add("correct");
 
+    addXP(10);
 
-  const buttons=
-    document.querySelectorAll(
-      ".answer"
-    );
-
-
-  buttons.forEach(
-    b=>b.disabled=true
-  );
-
-
-  if(index===q.c){
-
-    button.classList.add(
-      "correct"
-    );
-
-    testScore++;
-
-    increaseDifficulty();
+    alert("¡Correcto! 🎉");
 
   }else{
 
-    button.classList.add(
-      "wrong"
+    button.classList.add("wrong");
+
+    alert("Repasa este concepto e inténtalo de nuevo.");
+
+  }
+
+}
+
+
+function createTest(){
+
+  const subject=$("testSubject").value;
+
+  const topic=
+    $("testTopic").value.trim()
+    || "el tema seleccionado";
+
+  const count=
+    Number($("questionCount").value);
+
+  let difficulty=$("difficulty").value;
+
+  const questions=[
+    {
+      q:`¿Cuál es una característica importante de ${topic}?`,
+      a:[
+        "Comprender sus conceptos principales",
+        "No tiene conceptos",
+        "No puede estudiarse",
+        "No tiene relación con ninguna asignatura"
+      ],
+      correct:0
+    },
+    {
+      q:`¿Qué deberías hacer para dominar ${topic}?`,
+      a:[
+        "Memorizar sin comprender",
+        "Practicar y revisar los errores",
+        "No hacer preguntas",
+        "Evitar los ejercicios"
+      ],
+      correct:1
+    },
+    {
+      q:`¿Cuál es una buena estrategia para estudiar ${topic}?`,
+      a:[
+        "Repasar únicamente una vez",
+        "No revisar los errores",
+        "Practicar, comprobar y volver a repasar",
+        "No estudiar"
+      ],
+      correct:2
+    },
+    {
+      q:`¿Qué ocurre cuando detectas un error estudiando ${topic}?`,
+      a:[
+        "Debes ignorarlo",
+        "Es una oportunidad para aprender",
+        "Debes abandonar",
+        "No sirve para nada"
+      ],
+      correct:1
+    }
+  ];
+
+  let html=`
+    <div style="margin-bottom:18px">
+      <strong>${subject}</strong> · ${topic} · ${difficulty}
+    </div>
+  `;
+
+  let correctTotal=0;
+
+  for(let i=0;i<count;i++){
+
+    const q=
+      questions[
+        i%questions.length
+      ];
+
+    let answers=
+      q.a.map((text,index)=>({
+        text,
+        correct:index===q.correct
+      }));
+
+    answers.sort(()=>Math.random()-.5);
+
+    html+=`
+
+      <div class="question">
+
+        <div class="question-number">
+          PREGUNTA ${i+1}
+        </div>
+
+        <h4>${q.q}</h4>
+
+        <div class="answers">
+
+          ${answers.map((answer,index)=>`
+
+            <button class="answer"
+              onclick="answerQuestion(this,${answer.correct})">
+
+              ${String.fromCharCode(65+index)}. ${answer.text}
+
+            </button>
+
+          `).join("")}
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+  html+=`
+
+    <button class="primary"
+      onclick="finishTest(${count})">
+      Terminar test
+    </button>
+
+    <div id="testResult" style="margin-top:20px"></div>
+
+  `;
+
+  $("testContainer").innerHTML=html;
+
+}
+
+
+function answerQuestion(button,correct){
+
+  if(button.dataset.answered==="true") return;
+
+  button.dataset.answered="true";
+
+  if(correct){
+
+    button.classList.add("correct");
+
+    button.dataset.correct="true";
+
+    addXP(10);
+
+  }else{
+
+    button.classList.add("wrong");
+
+    button.dataset.correct="false";
+
+  }
+
+}
+
+
+function finishTest(count){
+
+  const buttons=
+    document.querySelectorAll(
+      "#testContainer .answer[data-answered='true']"
     );
 
-    buttons[q.c]
-      .classList.add(
-        "correct"
-      );
+  let correct=0;
 
-    decreaseDifficulty();
+  buttons.forEach(button=>{
 
-  }
+    if(button.dataset.correct==="true"){
+      correct++;
+    }
 
-
-  document
-    .getElementById(
-      "nextQuestion"
-    )
-    .classList.remove(
-      "hidden"
-    );
-
-}
-
-
-/* =========================
-   ADAPTIVE DIFFICULTY
-========================= */
-
-function increaseDifficulty(){
-
-  if(
-    selectedDifficulty==="easy"
-  ){
-
-    selectedDifficulty="medium";
-
-  }else if(
-    selectedDifficulty==="medium"
-  ){
-
-    selectedDifficulty="hard";
-
-  }
-
-}
-
-
-function decreaseDifficulty(){
-
-  if(
-    selectedDifficulty==="hard"
-  ){
-
-    selectedDifficulty="medium";
-
-  }else if(
-    selectedDifficulty==="medium"
-  ){
-
-    selectedDifficulty="easy";
-
-  }
-
-}
-
-
-/* =========================
-   NEXT
-========================= */
-
-function nextQuestion(){
-
-  currentQuestion++;
-
-
-  if(
-    currentQuestion>=
-    testQuestions.length
-  ){
-
-    finishTest();
-
-    return;
-
-  }
-
-
-  showQuestion();
-
-}
-
-
-/* =========================
-   FINISH
-========================= */
-
-function finishTest(){
-
-  document.getElementById(
-    "testArea"
-  ).style.display="none";
-
-
-  document.getElementById(
-    "examResult"
-  ).style.display="block";
-
-
-  const total=
-    testQuestions.length;
-
+  });
 
   const percentage=
-    Math.round(
-      testScore/
-      total*
-      100
-    );
+    buttons.length
+    ? Math.round(correct/buttons.length*100)
+    : 0;
 
-
-  document.getElementById(
-    "finalScore"
-  ).textContent=
-    testScore+
-    "/"+
-    total+
-    " ("+
-    percentage+
-    "%)";
-
-
-  let message;
-
-
-  if(percentage>=90)
-    message=
-      "¡Excelente! Estás muy preparado.";
-
-  else if(percentage>=70)
-    message=
-      "Muy bien. Un poco más de repaso y lo tendrás.";
-
-  else if(percentage>=50)
-    message=
-      "Vas por buen camino. Repasa tus errores.";
-
-  else
-    message=
-      "Te recomendamos volver a estudiar el tema.";
-
-
-  document.getElementById(
-    "finalMessage"
-  ).textContent=
-    message;
-
-
-  let stats=
-    JSON.parse(
-      localStorage.getItem(
-        "studyAIStats"
-      ) ||
-      '{"tests":0,"correct":0,"questions":0}'
-    );
-
-
-  stats.tests++;
-
-  stats.correct+=
-    testScore;
-
-  stats.questions+=
-    total;
-
+  const oldTests=
+    Number(localStorage.getItem("studyTests")||0);
 
   localStorage.setItem(
-    "studyAIStats",
-    JSON.stringify(stats)
+    "studyTests",
+    oldTests+1
   );
 
+  localStorage.setItem(
+    "studyCorrect",
+    percentage
+  );
 
-  registerStudy();
+  addXP(25);
+
+  $("testResult").innerHTML=`
+
+    <div class="result">
+
+      <div class="result-score">
+        ${percentage}%
+      </div>
+
+      <h3 style="color:var(--navy)">
+        ${correct} de ${buttons.length} correctas
+      </h3>
+
+      <p style="color:var(--muted);margin-top:8px">
+        ${percentage>=80
+          ?"¡Muy bien! Puedes aumentar la dificultad."
+          :percentage>=50
+          ?"Buen trabajo. Repasa los errores."
+          :"Conviene volver a estudiar el tema."
+        }
+      </p>
+
+    </div>
+
+  `;
 
   updateStats();
 
 }
 
 
-function resetTest(){
+function flipCard(){
 
-  document.getElementById(
-    "examResult"
-  ).style.display="none";
+  flashShowingAnswer=!flashShowingAnswer;
 
+  const card=flashcards[flashIndex];
 
-  document.getElementById(
-    "testSetup"
-  ).style.display="block";
+  if(flashShowingAnswer){
+
+    $("flashText").innerHTML=`
+
+      <h2>Respuesta</h2>
+
+      <p style="margin-top:15px;line-height:1.7;color:var(--muted)">
+        ${card.a}
+      </p>
+
+    `;
+
+  }else{
+
+    $("flashText").innerHTML=`
+
+      <h2>${card.q}</h2>
+
+      <p style="margin-top:12px;color:var(--muted)">
+        Haz clic para ver la respuesta.
+      </p>
+
+    `;
+
+  }
 
 }
 
 
-/* =========================
-   CALENDARIO
-========================= */
+function nextFlashcard(type){
 
-function addEvent(){
+  if(type==="easy") addXP(5);
 
-  const date=
-    document.getElementById(
-      "eventDate"
-    ).value;
+  if(type==="hard") addXP(2);
 
+  flashIndex=
+    (flashIndex+1)%flashcards.length;
 
-  const type=
-    document.getElementById(
-      "eventType"
-    ).value;
+  flashShowingAnswer=false;
 
+  flipCard();
 
-  const title=
-    document.getElementById(
-      "eventTitle"
-    ).value.trim();
+  flipCard();
+
+}
 
 
-  if(!date || !title){
+function addXP(amount){
 
-    alert(
-      "Introduce fecha y nombre."
-    );
+  let xp=
+    Number(localStorage.getItem("studyXP")||0);
+
+  xp+=amount;
+
+  localStorage.setItem(
+    "studyXP",
+    xp
+  );
+
+  updateStats();
+
+}
+
+
+function updateStats(){
+
+  const streak=
+    Number(localStorage.getItem("studyStreak")||0);
+
+  const xp=
+    Number(localStorage.getItem("studyXP")||0);
+
+  const tests=
+    Number(localStorage.getItem("studyTests")||0);
+
+  const correct=
+    Number(localStorage.getItem("studyCorrect")||0);
+
+  $("statStreak").textContent=
+    streak+" días";
+
+  $("statXP").textContent=xp;
+
+  $("statTests").textContent=tests;
+
+  $("statCorrect").textContent=
+    correct+"%";
+
+  $("bigStreak").textContent=streak;
+
+  $("heroStreak").textContent=streak;
+
+  $("progressXP").textContent=xp;
+
+  $("progressTests").textContent=tests;
+
+  $("progressStreak").textContent=streak;
+
+  $("level").textContent=
+    Math.floor(xp/100)+1;
+
+}
+
+
+function startSubject(subject){
+
+  $("testSubject").value=subject;
+
+  showPage("tests");
+
+  $("testTopic").focus();
+
+}
+
+
+function generatePlan(){
+
+  const name=
+    $("examName").value.trim()
+    || "Próximo examen";
+
+  const date=$("examDate").value;
+
+  if(!date){
+
+    alert("Selecciona una fecha.");
 
     return;
 
   }
 
+  const exam=new Date(date);
 
-  events.push({
-    date:date,
-    type:type,
-    title:title
-  });
+  const today=new Date();
 
-
-  localStorage.setItem(
-    "studyAIEvents",
-    JSON.stringify(events)
+  const days=Math.max(
+    1,
+    Math.ceil(
+      (exam-today)/(1000*60*60*24)
+    )
   );
 
+  const totalDays=Math.min(days,7);
 
-  document.getElementById(
-    "eventTitle"
-  ).value="";
+  let html="";
 
+  for(let i=totalDays;i>=1;i--){
 
-  renderCalendar();
+    const day=new Date(exam);
 
-
-  if(type==="Examen"){
-
-    createStudyPlan(
-      date,
-      title
+    day.setDate(
+      exam.getDate()-i
     );
+
+    html+=`
+
+      <div class="plan-day">
+
+        <strong>
+          ${day.toLocaleDateString("es-ES",{
+            weekday:"long",
+            day:"numeric",
+            month:"long"
+          })}
+        </strong>
+
+        <p style="color:var(--muted);margin-top:5px">
+
+          ${
+            i===1
+            ?"Simulacro final + repaso de errores"
+            :i===2
+            ?"Test completo del tema"
+            :i===3
+            ?"Repaso de conceptos difíciles"
+            :"Estudio de conceptos + ejercicios"
+          }
+
+        </p>
+
+      </div>
+
+    `;
 
   }
 
+  $("studyPlan").innerHTML=`
 
-  alert(
-    type+" añadido correctamente."
+    <div>
+
+      <h3 style="color:var(--navy);margin-bottom:15px">
+        Plan para ${name}
+      </h3>
+
+      ${html}
+
+    </div>
+
+  `;
+
+}
+
+
+function addEvent(){
+
+  const name=
+    $("eventName").value.trim();
+
+  const date=
+    $("eventDate").value;
+
+  if(!name || !date){
+
+    alert("Completa los datos.");
+
+    return;
+
+  }
+
+  const events=
+    JSON.parse(
+      localStorage.getItem("studyEvents")||"[]"
+    );
+
+  events.push({
+    name,
+    date
+  });
+
+  localStorage.setItem(
+    "studyEvents",
+    JSON.stringify(events)
   );
+
+  closeModal("eventModal");
+
+  renderCalendar();
 
 }
 
 
 function renderCalendar(){
 
-  const calendar=
-    document.getElementById(
-      "calendar"
+  const calendar=$("calendar");
+
+  if(!calendar) return;
+
+  const events=
+    JSON.parse(
+      localStorage.getItem("studyEvents")||"[]"
     );
-
-
-  if(!calendar)
-    return;
-
 
   calendar.innerHTML="";
 
+  const today=new Date();
 
-  const year=
-    calendarDate.getFullYear();
+  for(let i=0;i<28;i++){
 
-  const month=
-    calendarDate.getMonth();
+    const date=new Date(today);
 
-
-  const names=[
-    "Enero","Febrero","Marzo",
-    "Abril","Mayo","Junio",
-    "Julio","Agosto","Septiembre",
-    "Octubre","Noviembre","Diciembre"
-  ];
-
-
-  document.getElementById(
-    "monthTitle"
-  ).textContent=
-    names[month]+" "+year;
-
-
-  [
-    "Lun","Mar","Mié",
-    "Jue","Vie","Sáb","Dom"
-  ].forEach(name=>{
-
-    const d=
-      document.createElement(
-        "div"
-      );
-
-    d.className="day-name";
-
-    d.textContent=name;
-
-    calendar.appendChild(d);
-
-  });
-
-
-  let first=
-    new Date(
-      year,
-      month,
-      1
-    ).getDay();
-
-
-  first=
-    first===0
-    ?6
-    :first-1;
-
-
-  for(
-    let i=0;
-    i<first;
-    i++
-  ){
-
-    calendar.appendChild(
-      document.createElement("div")
+    date.setDate(
+      today.getDate()+i
     );
 
-  }
+    const iso=
+      date.toISOString().split("T")[0];
 
+    const event=
+      events.find(e=>e.date===iso);
 
-  const days=
-    new Date(
-      year,
-      month+1,
-      0
-    ).getDate();
+    const day=document.createElement("div");
 
+    day.className=
+      "day"+(event?" event":"");
 
-  for(
-    let day=1;
-    day<=days;
-    day++
-  ){
-
-    const cell=
-      document.createElement(
-        "div"
-      );
-
-    cell.className="day";
-
-
-    const number=
-      document.createElement(
-        "div"
-      );
-
-    number.className=
-      "day-number";
-
-    number.textContent=
-      day;
-
-
-    cell.appendChild(
-      number
-    );
-
-
-    const dateString=
-      year+
-      "-"+
-      String(month+1)
-        .padStart(2,"0")+
-      "-"+
-      String(day)
-        .padStart(2,"0");
-
-
-    events
-      .filter(
-        e=>e.date===dateString
-      )
-      .forEach(e=>{
-
-        const event=
-          document.createElement(
-            "div"
-          );
-
-        event.className="event";
-
-        event.textContent=
-          (
-            e.type==="Examen"
-            ?"📝 "
-            :"📌 "
-          )+
-          e.title;
-
-        cell.appendChild(
-          event
-        );
-
-      });
-
-
-    calendar.appendChild(
-      cell
-    );
-
-  }
-
-}
-
-
-function changeMonth(amount){
-
-  calendarDate.setMonth(
-    calendarDate.getMonth()+
-    amount
-  );
-
-  renderCalendar();
-
-}
-
-
-/* =========================
-   PLAN DE ESTUDIO
-========================= */
-
-function createStudyPlan(
-  date,
-  title
-){
-
-  const container=
-    document.getElementById(
-      "studyPlan"
-    );
-
-
-  const examDate=
-    new Date(
-      date+"T12:00:00"
-    );
-
-
-  const today=
-    new Date();
-
-
-  const daysLeft=
-    Math.ceil(
-      (
-        examDate-
-        today
-      )/
-      (1000*60*60*24)
-    );
-
-
-  if(daysLeft<=0){
-
-    container.innerHTML=
-      "El examen es hoy o ya ha pasado.";
-
-    return;
-
-  }
-
-
-  const days=
-    Math.min(
-      daysLeft,
-      7
-    );
-
-
-  let html="";
-
-
-  for(
-    let i=days;
-    i>=1;
-    i--
-  ){
-
-    const d=
-      new Date(
-        examDate
-      );
-
-
-    d.setDate(
-      examDate.getDate()-i
-    );
-
-
-    let task;
-
-
-    if(i===days){
-
-      task=
-        "Lee y comprende el tema y organiza tus apuntes.";
-
-    }else if(i>2){
-
-      task=
-        "Repasa los conceptos importantes y practica con preguntas.";
-
-    }else if(i===2){
-
-      task=
-        "Haz un test de práctica y revisa todos tus errores.";
-
-    }else{
-
-      task=
-        "Haz un repaso final y descansa. Evita estudiar todo a última hora.";
-
-    }
-
-
-    html+=`
-      <div class="plan-day">
-
-        <strong>
-          ${formatDate(d)}
-        </strong>
-
-        <p>
-          <b>${title}</b><br>
-          ${task}
-        </p>
-
-      </div>
-    `;
-
-  }
-
-
-  html+=`
-    <div class="plan-day">
+    day.innerHTML=`
 
       <strong>
-        📝 Día del examen
+        ${date.getDate()}/${date.getMonth()+1}
       </strong>
 
-      <p>
-        Repaso ligero y después realiza el examen
-        con tranquilidad.
-      </p>
+      ${
+        event
+        ?`<small>${event.name}</small>`
+        :""
+      }
 
-    </div>
-  `;
+    `;
 
-
-  container.innerHTML=
-    html;
-
-
-  document.getElementById(
-    "nextExamText"
-  ).textContent=
-    title+
-    " · "+
-    formatDate(examDate);
-
-}
-
-
-function formatDate(date){
-
-  return date.toLocaleDateString(
-    "es-ES",
-    {
-      weekday:"long",
-      day:"numeric",
-      month:"long"
-    }
-  );
-
-}
-
-
-/* =========================
-   RACHA
-========================= */
-
-function todayString(){
-
-  const d=
-    new Date();
-
-  return d.getFullYear()+
-    "-"+
-    String(
-      d.getMonth()+1
-    ).padStart(2,"0")+
-    "-"+
-    String(
-      d.getDate()
-    ).padStart(2,"0");
-
-}
-
-
-function registerStudy(){
-
-  let data=
-    JSON.parse(
-      localStorage.getItem(
-        "studyAIRacha"
-      ) ||
-      '{"streak":0,"last":"","days":[]}'
-    );
-
-
-  const today=
-    todayString();
-
-
-  if(
-    !data.days.includes(today)
-  ){
-
-    data.days.push(today);
+    calendar.appendChild(day);
 
   }
-
-
-  if(data.last===today){
-
-    localStorage.setItem(
-      "studyAIRacha",
-      JSON.stringify(data)
-    );
-
-    updateStreak();
-
-    return;
-
-  }
-
-
-  const yesterday=
-    new Date();
-
-
-  yesterday.setDate(
-    yesterday.getDate()-1
-  );
-
-
-  const y=
-    yesterday.getFullYear()+
-    "-"+
-    String(
-      yesterday.getMonth()+1
-    ).padStart(2,"0")+
-    "-"+
-    String(
-      yesterday.getDate()
-    ).padStart(2,"0");
-
-
-  if(data.last===y){
-
-    data.streak++;
-
-  }else{
-
-    data.streak=1;
-
-  }
-
-
-  data.last=today;
-
-
-  localStorage.setItem(
-    "studyAIRacha",
-    JSON.stringify(data)
-  );
-
-
-  updateStreak();
 
 }
 
 
 function updateStreak(){
 
-  const data=
-    JSON.parse(
-      localStorage.getItem(
-        "studyAIRacha"
-      ) ||
-      '{"streak":0,"last":"","days":[]}'
+  const today=
+    new Date().toISOString().split("T")[0];
+
+  const last=
+    localStorage.getItem("studyLastDay");
+
+  let streak=
+    Number(
+      localStorage.getItem("studyStreak")||0
     );
 
-
-  const streak=
-    data.streak||0;
-
-
-  document.getElementById(
-    "bigStreak"
-  ).textContent=
-    streak;
-
-
-  document.getElementById(
-    "miniStreak"
-  ).textContent=
-    "🔥 "+
-    streak+
-    " días";
-
-
-  document.getElementById(
-    "totalStudyDays"
-  ).textContent=
-    data.days.length;
-
-
-  document.getElementById(
-    "statDays"
-  ).textContent=
-    data.days.length;
-
-}
-
-
-/* =========================
-   ESTADÍSTICAS
-========================= */
-
-function updateStats(){
-
-  const stats=
-    JSON.parse(
-      localStorage.getItem(
-        "studyAIStats"
-      ) ||
-      '{"tests":0,"correct":0,"questions":0}'
-    );
-
-
-  const percentage=
-    stats.questions>0
-    ?Math.round(
-      stats.correct/
-      stats.questions*
-      100
-    )
-    :0;
-
-
-  const a=
-    document.getElementById(
-      "statTests"
-    );
-
-  const b=
-    document.getElementById(
-      "statCorrect"
-    );
-
-  const c=
-    document.getElementById(
-      "totalTests"
-    );
-
-  const d=
-    document.getElementById(
-      "totalQuestions"
-    );
-
-
-  if(a)
-    a.textContent=
-      stats.tests;
-
-  if(b)
-    b.textContent=
-      percentage+"%";
-
-  if(c)
-    c.textContent=
-      stats.tests;
-
-  if(d)
-    d.textContent=
-      stats.questions;
-
-
-  updateStreak();
-
-}
-
-
-/* =========================
-   REGISTRO / CUENTA
-========================= */
-
-function openRegister(){
-
-  document.getElementById(
-    "registerModal"
-  ).style.display="flex";
-
-}
-
-
-function registerUser(){
-
-  const name=
-    document.getElementById(
-      "registerName"
-    ).value.trim();
-
-  const email=
-    document.getElementById(
-      "registerEmail"
-    ).value.trim();
-
-  const password=
-    document.getElementById(
-      "registerPassword"
-    ).value;
-
-
-  if(!name || !email || !password){
-
-    alert(
-      "Completa todos los campos."
-    );
-
+  if(last===today){
     return;
-
   }
 
-
-  /*
-    DEMO LOCAL.
-
-    No se guardan contraseñas reales
-    en una aplicación definitiva.
-  */
-
-  localStorage.setItem(
-    "studyAIUser",
-    JSON.stringify({
-      name:name,
-      email:email
-    })
-  );
-
-
-  closeModal(
-    "registerModal"
-  );
-
-
-  updateAccount();
-
-
-  alert(
-    "Cuenta creada correctamente."
-  );
-
-}
-
-
-function openLogin(){
-
-  document.getElementById(
-    "loginModal"
-  ).style.display="flex";
-
-}
-
-
-function loginUser(){
-
-  const email=
-    document.getElementById(
-      "loginEmail"
-    ).value.trim();
-
-
-  if(!email){
-
-    alert(
-      "Introduce tu correo."
-    );
-
-    return;
-
-  }
-
-
-  const user=
-    JSON.parse(
-      localStorage.getItem(
-        "studyAIUser"
-      )||"null"
-    );
-
-
-  if(!user){
-
-    alert(
-      "No existe una cuenta en esta versión. Regístrate primero."
-    );
-
-    return;
-
-  }
-
-
-  if(user.email!==email){
-
-    alert(
-      "El correo no coincide con la cuenta guardada."
-    );
-
-    return;
-
-  }
-
-
-  closeModal(
-    "loginModal"
-  );
-
-
-  updateAccount();
-
-
-  alert(
-    "Sesión iniciada."
-  );
-
-}
-
-
-function updateAccount(){
-
-  const user=
-    JSON.parse(
-      localStorage.getItem(
-        "studyAIUser"
-      )||"null"
-    );
-
-
-  const box=
-    document.getElementById(
-      "accountDashboard"
-    );
-
-
-  if(!box)
-    return;
-
-
-  if(user){
-
-    box.innerHTML=`
-
-      <h3>
-        👤 Mi cuenta
-      </h3>
-
-      <p class="description">
-        Has iniciado sesión como
-        <b>${escapeHtml(user.name)}</b>.
-      </p>
-
-      <div class="account-card">
-
-        <strong>
-          Plan actual: ${escapeHtml(getPlan())}
-        </strong>
-
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-function escapeHtml(text){
-
-  const div=
-    document.createElement(
-      "div"
-    );
-
-  div.textContent=text;
-
-  return div.innerHTML;
-
-}
-
-
-/* =========================
-   PLANES
-========================= */
-
-function selectPlan(plan){
-
-  document.getElementById(
-    "planModalTitle"
-  ).textContent=
-    "Plan "+plan;
-
-
-  let description="";
-
-
-  if(plan==="Pro"){
-
-    description=
-      "5,99 € al mes · 20 fotos cada 24 horas y más herramientas para estudiar.";
+  if(last){
+
+    const oldDate=new Date(last);
+
+    const newDate=new Date(today);
+
+    const difference=
+      Math.round(
+        (newDate-oldDate)/
+        (1000*60*60*24)
+      );
+
+    if(difference===1){
+      streak++;
+    }else{
+      streak=1;
+    }
 
   }else{
-
-    description=
-      "9,99 € al mes · Fotos ilimitadas y la experiencia más completa.";
-
+    streak=1;
   }
 
+  localStorage.setItem(
+    "studyStreak",
+    streak
+  );
 
-  document.getElementById(
-    "planModalDescription"
-  ).textContent=
-    description;
-
-
-  document.getElementById(
-    "planModal"
-  ).style.display="flex";
-
-}
-
-
-/* =========================
-   MODALES
-========================= */
-
-function closeModal(id){
-
-  document.getElementById(
-    id
-  ).style.display="none";
+  localStorage.setItem(
+    "studyLastDay",
+    today
+  );
 
 }
 
 
-/* =========================
-   INICIO
-========================= */
+document.addEventListener(
+  "DOMContentLoaded",
+  ()=>{
 
-updateCounter();
+    updateStreak();
 
-updateStreak();
+    updateStats();
 
-updateStats();
+    updateUser();
+
+    updatePlan();
+
+  }
+);
 
 </script>
 
