@@ -3,31 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>StudyLearning</title>
 
 <style>
-
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
 
-html{
-    scroll-behavior:auto;
+:root{
+    --navy:#102a43;
+    --navy2:#173f5f;
+    --blue:#2f80ed;
+    --lightblue:#eaf3ff;
+    --bg:#f5f7fa;
+    --white:#ffffff;
+    --text:#172b4d;
+    --muted:#6b7c93;
+    --border:#e1e7ef;
+    --green:#18a957;
+    --red:#e5484d;
+    --yellow:#f5b700;
+    --shadow:0 8px 30px rgba(16,42,67,.08);
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f6f8fb;
-    color:#102a43;
+    font-family:Inter,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
 }
 
-button,
-input,
-select,
-textarea{
+button,input,textarea,select{
     font:inherit;
 }
 
@@ -35,121 +42,174 @@ button{
     cursor:pointer;
 }
 
-button:disabled{
-    cursor:not-allowed;
-    opacity:.6;
+.app{
+    display:flex;
+    min-height:100vh;
 }
 
-a{
-    text-decoration:none;
-    color:inherit;
+/* SIDEBAR */
+
+.sidebar{
+    width:250px;
+    background:white;
+    border-right:1px solid var(--border);
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    padding:22px 14px;
+    z-index:20;
 }
 
-/* =================================
-   TOPBAR
-================================= */
+.logo{
+    font-size:24px;
+    font-weight:800;
+    color:var(--navy);
+    padding:10px 14px 25px;
+}
+
+.logo span{
+    color:var(--blue);
+}
+
+.nav-title{
+    font-size:11px;
+    text-transform:uppercase;
+    color:#98a6b5;
+    font-weight:700;
+    padding:14px;
+}
+
+.nav button{
+    width:100%;
+    border:0;
+    background:transparent;
+    padding:11px 14px;
+    border-radius:10px;
+    text-align:left;
+    color:#506176;
+    margin-bottom:3px;
+    transition:.2s;
+}
+
+.nav button:hover{
+    background:#f1f5f9;
+    color:var(--navy);
+}
+
+.nav button.active{
+    background:var(--lightblue);
+    color:var(--navy);
+    font-weight:700;
+}
+
+.nav-icon{
+    width:25px;
+    display:inline-block;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:250px;
+    width:calc(100% - 250px);
+    min-height:100vh;
+}
 
 .topbar{
     height:70px;
     background:white;
-    border-bottom:1px solid #e3eaf2;
+    border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 5%;
+    padding:0 32px;
     position:sticky;
     top:0;
-    z-index:1000;
+    z-index:10;
 }
 
-.logo{
-    border:none;
-    background:none;
-    color:#102a43;
-    font-size:24px;
-    font-weight:800;
+.search{
+    width:320px;
+    position:relative;
 }
 
-.logo span{
-    color:#2f80ed;
+.search input{
+    width:100%;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:11px 15px;
+    outline:none;
+}
+
+.search input:focus{
+    border-color:var(--blue);
 }
 
 .top-actions{
     display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.icon-btn{
+    border:1px solid var(--border);
+    background:white;
+    width:40px;
+    height:40px;
+    border-radius:10px;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
     gap:10px;
 }
 
-.btn{
-    border:none;
-    border-radius:10px;
-    padding:12px 18px;
+.avatar{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:var(--navy);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     font-weight:700;
-    transition:.18s;
 }
 
-.btn:hover{
-    transform:translateY(-1px);
-}
-
-.btn-primary{
-    background:#102a43;
-    color:white;
-}
-
-.btn-secondary{
-    background:white;
-    color:#102a43;
-    border:1px solid #d8e1ea;
-}
-
-.btn-blue{
-    background:#2f80ed;
-    color:white;
-}
-
-.btn-danger{
-    background:#fff1f1;
-    color:#c0392b;
-    border:1px solid #f1cccc;
-}
-
-.full{
-    width:100%;
-}
+/* PAGES */
 
 .page{
     display:none;
-    min-height:calc(100vh - 70px);
+    padding:32px;
+    max-width:1500px;
+    margin:auto;
 }
 
 .page.active{
     display:block;
 }
 
-.container{
-    width:min(1150px,92%);
-    margin:auto;
-    padding:45px 0;
+.page-title{
+    font-size:30px;
+    font-weight:800;
+    margin-bottom:7px;
 }
 
-.page-header{
-    margin-bottom:30px;
+.page-subtitle{
+    color:var(--muted);
+    margin-bottom:28px;
 }
 
-.page-header h1{
-    font-size:40px;
-    margin-bottom:8px;
-}
-
-.page-header p{
-    color:#627d98;
-}
+/* CARDS */
 
 .card{
     background:white;
-    border:1px solid #e1e8f0;
-    border-radius:18px;
-    padding:25px;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:22px;
+    box-shadow:var(--shadow);
 }
 
 .grid{
@@ -169,591 +229,467 @@ a{
     grid-template-columns:repeat(4,1fr);
 }
 
-.muted{
-    color:#627d98;
-}
-
-.small{
-    color:#829ab1;
-    font-size:13px;
-}
-
-.icon-box{
-    width:48px;
-    height:48px;
-    background:#eaf3ff;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-    margin-bottom:15px;
-}
-
-/* =================================
-   HOME
-================================= */
-
-.hero{
-    text-align:center;
-    padding:85px 20px 70px;
-}
-
-.badge{
-    display:inline-block;
-    padding:8px 14px;
-    background:#eaf3ff;
-    color:#2f80ed;
-    border-radius:30px;
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:20px;
-}
-
-.hero h1{
-    font-size:clamp(44px,7vw,75px);
-    line-height:1.03;
-    letter-spacing:-3px;
-    margin-bottom:22px;
-}
-
-.hero h1 span{
-    color:#2f80ed;
-}
-
-.hero p{
-    max-width:700px;
-    margin:auto;
-    color:#627d98;
-    font-size:18px;
-    line-height:1.7;
-}
-
-.hero-buttons{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:30px;
-}
-
-.hero-buttons .btn{
-    padding:15px 25px;
-}
-
-.home-section{
-    padding:25px 0 80px;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:35px;
-}
-
-.section-title h2{
-    font-size:34px;
-    margin-bottom:8px;
-}
-
-.feature{
-    transition:.18s;
-}
-
-.feature:hover{
-    transform:translateY(-3px);
-    border-color:#2f80ed;
-}
-
-.feature h3{
-    margin-bottom:8px;
-}
-
-.feature p{
-    color:#627d98;
-    line-height:1.5;
-}
-
-/* =================================
-   APP SIDEBAR
-================================= */
-
-.app-layout{
-    display:grid;
-    grid-template-columns:235px 1fr;
-    min-height:calc(100vh - 70px);
-}
-
-.sidebar{
-    background:white;
-    border-right:1px solid #e1e8f0;
-    padding:25px 15px;
-}
-
-.sidebar-title{
-    color:#829ab1;
-    font-size:11px;
-    font-weight:800;
-    text-transform:uppercase;
-    padding:0 12px 9px;
-}
-
-.side-btn{
-    width:100%;
-    background:transparent;
-    border:none;
-    text-align:left;
-    color:#486581;
-    padding:12px;
-    border-radius:9px;
-    margin-bottom:3px;
-    font-weight:600;
-}
-
-.side-btn:hover,
-.side-btn.active-side{
-    background:#eaf3ff;
-    color:#102a43;
-}
-
-.app-content{
-    padding:35px;
-}
-
-/* =================================
-   DASHBOARD
-================================= */
+/* DASHBOARD */
 
 .welcome{
+    background:linear-gradient(120deg,#102a43,#173f5f);
+    color:white;
+    border-radius:20px;
+    padding:30px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:20px;
-    margin-bottom:25px;
+    align-items:center;
+    margin-bottom:24px;
 }
 
 .welcome h1{
-    font-size:32px;
-    margin-bottom:7px;
+    font-size:31px;
+    margin-bottom:8px;
 }
 
-.streak{
-    background:#102a43;
+.welcome p{
+    color:#d9e8f5;
+}
+
+.primary{
+    border:0;
+    background:var(--navy);
     color:white;
-    padding:14px 20px;
-    border-radius:14px;
-    text-align:center;
+    border-radius:10px;
+    padding:11px 18px;
+    font-weight:700;
 }
 
-.streak strong{
-    display:block;
-    font-size:25px;
+.primary:hover{
+    background:#173f5f;
+}
+
+.blue{
+    background:var(--blue);
+}
+
+.secondary{
+    border:1px solid var(--border);
+    background:white;
+    color:var(--navy);
+    border-radius:10px;
+    padding:11px 18px;
+    font-weight:700;
 }
 
 .stat{
-    padding:20px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.stat-icon{
+    width:48px;
+    height:48px;
+    border-radius:12px;
+    background:var(--lightblue);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
 }
 
 .stat-number{
-    font-size:30px;
+    font-size:25px;
     font-weight:800;
-    margin:8px 0;
 }
 
-.action{
-    cursor:pointer;
-    transition:.18s;
-}
-
-.action:hover{
-    transform:translateY(-3px);
-    border-color:#2f80ed;
-}
-
-/* =================================
-   FORMULARIOS
-================================= */
-
-label{
-    display:block;
+.stat-label{
+    color:var(--muted);
     font-size:13px;
-    font-weight:700;
-    margin-bottom:7px;
 }
+
+/* QUICK ACTIONS */
+
+.quick{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.quick-card{
+    background:white;
+    border:1px solid var(--border);
+    padding:20px;
+    border-radius:15px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.quick-card:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow);
+}
+
+.quick-card strong{
+    display:block;
+    margin-top:10px;
+}
+
+.quick-card small{
+    color:var(--muted);
+}
+
+/* FORMS */
 
 .form-group{
     margin-bottom:18px;
 }
 
-input,
-select,
-textarea{
+label{
+    display:block;
+    font-weight:700;
+    margin-bottom:7px;
+    font-size:14px;
+}
+
+input,textarea,select{
     width:100%;
-    padding:13px;
-    border:1px solid #d7e0e9;
+    border:1px solid var(--border);
     border-radius:10px;
-    background:white;
-    color:#102a43;
+    padding:12px;
     outline:none;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:#2f80ed;
+    background:white;
 }
 
 textarea{
-    min-height:170px;
+    min-height:130px;
     resize:vertical;
 }
 
-/* =================================
-   ESTUDIAR
-================================= */
-
-.study-options{
-    margin-top:18px;
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:var(--blue);
 }
 
-.topic-examples{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:10px;
+/* HERO TOOL */
+
+.tool-box{
+    max-width:850px;
+    margin:auto;
 }
 
-.topic-chip{
-    border:1px solid #dbe4ed;
-    background:white;
-    color:#486581;
-    border-radius:20px;
-    padding:7px 11px;
-    font-size:12px;
-}
-
-.topic-chip:hover{
-    border-color:#2f80ed;
-    color:#2f80ed;
-}
-
-.session-box{
-    margin-top:20px;
-    border-left:4px solid #2f80ed;
-}
-
-/* =================================
-   PREGUNTAS ABIERTAS
-================================= */
-
-.open-question{
-    margin-top:20px;
-}
-
-.question-number{
-    color:#2f80ed;
-    font-size:13px;
-    font-weight:800;
-    margin-bottom:8px;
-}
-
-.question-title{
-    font-size:25px;
-    line-height:1.35;
-}
-
-.answer-input{
-    margin-top:20px;
-    min-height:120px;
-}
-
-.feedback{
-    margin-top:18px;
-    padding:16px;
-    border-radius:12px;
-    line-height:1.55;
-}
-
-.feedback.correct{
-    background:#ecf9f1;
-    color:#18794e;
-    border:1px solid #c8edd8;
-}
-
-.feedback.incorrect{
-    background:#fff3f3;
-    color:#a93226;
-    border:1px solid #f0cccc;
-}
-
-.answer-reference{
-    margin-top:8px;
-    font-weight:700;
-}
-
-/* =================================
-   TEST
-================================= */
-
-.test-progress{
-    height:8px;
-    background:#e9eef4;
-    border-radius:20px;
-    overflow:hidden;
-    margin:15px 0 25px;
-}
-
-.test-progress-bar{
-    height:100%;
-    background:#2f80ed;
-    transition:.2s;
-}
-
-.test-option{
-    display:block;
-    width:100%;
-    background:white;
-    border:1px solid #dce5ee;
-    border-radius:11px;
-    text-align:left;
-    padding:16px;
-    margin:9px 0;
-    transition:.15s;
-}
-
-.test-option:hover{
-    border-color:#2f80ed;
-    background:#f7fbff;
-}
-
-.test-option.correct{
-    background:#ecf9f1;
-    border-color:#58b987;
-}
-
-.test-option.wrong{
-    background:#fff2f2;
-    border-color:#e57373;
-}
-
-.test-result{
+.tool-header{
     text-align:center;
+    margin-bottom:25px;
+}
+
+.tool-header h2{
+    font-size:26px;
+    margin-bottom:7px;
+}
+
+.tool-header p{
+    color:var(--muted);
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+/* UPLOAD */
+
+.upload{
+    border:2px dashed #cbd6e2;
     padding:35px;
+    text-align:center;
+    border-radius:14px;
+    background:#fafcff;
+    margin-bottom:20px;
 }
 
-.result-score{
-    font-size:52px;
-    font-weight:800;
-    color:#2f80ed;
+.upload strong{
+    display:block;
+    margin-bottom:6px;
 }
 
-/* =================================
-   FLASHCARDS
-================================= */
+.upload p{
+    color:var(--muted);
+    margin-bottom:15px;
+}
+
+/* FLASHCARDS */
+
+.flashcard-area{
+    max-width:750px;
+    margin:25px auto;
+}
 
 .flashcard{
-    min-height:300px;
+    min-height:330px;
+    background:white;
+    border-radius:20px;
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     text-align:center;
-    padding:30px;
-    font-size:27px;
-    font-weight:700;
+    padding:40px;
     cursor:pointer;
 }
 
-.flash-actions{
+.flashcard small{
+    color:var(--blue);
+    font-weight:700;
+}
+
+.flashcard h2{
+    font-size:30px;
+    margin:18px 0;
+}
+
+.flashcard p{
+    color:var(--muted);
+    font-size:18px;
+}
+
+.flash-controls{
     display:flex;
     justify-content:center;
-    flex-wrap:wrap;
     gap:10px;
     margin-top:15px;
 }
 
-/* =================================
-   NOTES
-================================= */
+/* TEST */
 
-.note-item{
-    border:1px solid #e0e8f0;
-    border-radius:13px;
+.question{
+    font-size:21px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.option{
+    width:100%;
+    text-align:left;
     padding:15px;
+    border:1px solid var(--border);
+    background:white;
+    border-radius:10px;
     margin-bottom:10px;
 }
 
-.note-item h3{
+.option:hover{
+    border-color:var(--blue);
+}
+
+.option.correct{
+    background:#eaf8f0;
+    border-color:var(--green);
+}
+
+.option.wrong{
+    background:#fff0f0;
+    border-color:var(--red);
+}
+
+.result{
+    margin-top:18px;
+    padding:15px;
+    border-radius:10px;
+    background:#f3f7fb;
+}
+
+/* TASKS */
+
+.task{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:16px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    margin-bottom:10px;
+}
+
+.task.done{
+    opacity:.6;
+}
+
+.task-check{
+    width:22px;
+    height:22px;
+}
+
+.task-info{
+    flex:1;
+}
+
+.task-info strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+.task-info small{
+    color:var(--muted);
+}
+
+/* WORKS */
+
+.work-card{
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:20px;
+    background:white;
+}
+
+.work-card h3{
     margin-bottom:7px;
 }
 
-.note-actions{
-    display:flex;
-    gap:7px;
-    margin-top:12px;
+.work-card p{
+    color:var(--muted);
+    margin-bottom:15px;
 }
 
-/* =================================
-   CALENDARIO
-================================= */
+/* CALENDAR */
 
 .calendar{
     display:grid;
     grid-template-columns:repeat(7,1fr);
-    gap:5px;
+    gap:8px;
+}
+
+.day-name{
+    text-align:center;
+    font-size:12px;
+    font-weight:700;
+    color:var(--muted);
+    padding:8px;
 }
 
 .day{
-    min-height:85px;
-    border:1px solid #e1e8f0;
     background:white;
-    border-radius:8px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    min-height:90px;
     padding:9px;
+}
+
+.day strong{
     font-size:13px;
 }
 
-.day-header{
-    font-weight:800;
-    color:#627d98;
-    min-height:auto;
-}
-
 .event{
-    margin-top:7px;
-    background:#eaf3ff;
-    color:#2f80ed;
-    padding:4px 6px;
+    background:var(--lightblue);
+    color:var(--navy);
+    padding:4px;
     border-radius:5px;
     font-size:10px;
+    margin-top:7px;
 }
 
-/* =================================
-   PROGRESO
-================================= */
-
-.progress{
-    height:9px;
-    background:#e9eef4;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:10px;
-}
+/* PROGRESS */
 
 .progress-bar{
+    height:10px;
+    background:#e8edf2;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress-fill{
     height:100%;
-    background:#2f80ed;
-    border-radius:20px;
+    background:var(--blue);
+    border-radius:10px;
 }
 
-/* =================================
-   PLANES
-================================= */
-
-.price-card{
-    position:relative;
-}
-
-.price-card.pro{
-    border:2px solid #2f80ed;
-}
-
-.popular{
-    position:absolute;
-    top:-13px;
-    right:20px;
-    background:#2f80ed;
-    color:white;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:10px;
-    font-weight:800;
-}
+/* PRICING */
 
 .price{
-    font-size:38px;
+    text-align:center;
+}
+
+.price h3{
+    font-size:22px;
+}
+
+.price-number{
+    font-size:36px;
     font-weight:800;
     margin:15px 0;
 }
 
-.price span{
-    color:#829ab1;
-    font-size:14px;
-    font-weight:normal;
-}
-
-.price-list{
+.price ul{
     list-style:none;
+    text-align:left;
     margin:20px 0;
 }
 
-.price-list li{
-    padding:7px 0;
-    color:#486581;
+.price li{
+    margin:10px 0;
 }
 
-/* =================================
-   MOBILE
-================================= */
+.price.featured{
+    border:2px solid var(--blue);
+}
+
+/* MOBILE NAV */
 
 .mobile-nav{
     display:none;
 }
 
-@media(max-width:850px){
+/* EMPTY */
 
-    .grid-3,
+.empty{
+    text-align:center;
+    padding:45px 20px;
+    color:var(--muted);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+    .sidebar{
+        width:210px;
+    }
+
+    .main{
+        margin-left:210px;
+        width:calc(100% - 210px);
+    }
+
     .grid-4{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .app-layout{
-        grid-template-columns:1fr;
+    .quick{
+        grid-template-columns:repeat(2,1fr);
     }
+}
 
+@media(max-width:700px){
     .sidebar{
         display:none;
     }
 
-    .app-content{
-        padding:25px 18px 90px;
+    .main{
+        margin-left:0;
+        width:100%;
+        padding-bottom:75px;
     }
-
-    .mobile-nav{
-        position:fixed;
-        display:grid;
-        grid-template-columns:repeat(4,1fr);
-        left:0;
-        right:0;
-        bottom:0;
-        background:white;
-        border-top:1px solid #e1e8f0;
-        z-index:2000;
-    }
-
-    .mobile-nav button{
-        border:none;
-        background:white;
-        padding:10px 3px;
-        color:#486581;
-        font-size:11px;
-    }
-
-}
-
-@media(max-width:600px){
 
     .topbar{
-        padding:0 17px;
+        padding:0 15px;
     }
 
-    .top-actions .btn-secondary{
-        display:none;
+    .search{
+        width:190px;
     }
 
-    .hero{
-        padding:60px 15px;
-    }
-
-    .hero h1{
-        font-size:45px;
+    .page{
+        padding:20px 15px;
     }
 
     .grid-2,
@@ -762,186 +698,223 @@ textarea{
         grid-template-columns:1fr;
     }
 
-    .page-header h1{
-        font-size:32px;
+    .quick{
+        grid-template-columns:1fr 1fr;
     }
 
     .welcome{
         flex-direction:column;
         align-items:flex-start;
+        gap:20px;
     }
 
-    .calendar{
-        grid-template-columns:repeat(2,1fr);
+    .welcome h1{
+        font-size:25px;
     }
 
+    .mobile-nav{
+        position:fixed;
+        display:flex;
+        bottom:0;
+        left:0;
+        right:0;
+        height:65px;
+        background:white;
+        border-top:1px solid var(--border);
+        z-index:50;
+        justify-content:space-around;
+    }
+
+    .mobile-nav button{
+        border:0;
+        background:white;
+        color:var(--muted);
+        font-size:11px;
+    }
+
+    .mobile-nav button strong{
+        display:block;
+        font-size:18px;
+    }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- =====================================
-     BARRA SUPERIOR
-===================================== -->
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        Study<span>Learning</span>
+    </div>
+
+    <div class="nav-title">Principal</div>
+
+    <nav class="nav">
+
+        <button onclick="go('home')" data-page="home">
+            <span class="nav-icon">🏠</span> Inicio
+        </button>
+
+        <button onclick="go('dashboard')" data-page="dashboard">
+            <span class="nav-icon">📊</span> Dashboard
+        </button>
+
+        <button onclick="go('study')" data-page="study">
+            <span class="nav-icon">📚</span> Estudiar
+        </button>
+
+        <button onclick="go('flashcards')" data-page="flashcards">
+            <span class="nav-icon">🧠</span> Flashcards
+        </button>
+
+        <button onclick="go('tests')" data-page="tests">
+            <span class="nav-icon">❓</span> Tests
+        </button>
+
+        <button onclick="go('openQuestions')" data-page="openQuestions">
+            <span class="nav-icon">✍️</span> Preguntas abiertas
+        </button>
+
+        <div class="nav-title">Crear</div>
+
+        <button onclick="go('tasks')" data-page="tasks">
+            <span class="nav-icon">📝</span> Tareas
+        </button>
+
+        <button onclick="go('works')" data-page="works">
+            <span class="nav-icon">💼</span> Trabajos
+        </button>
+
+        <button onclick="go('notes')" data-page="notes">
+            <span class="nav-icon">📖</span> Apuntes
+        </button>
+
+        <button onclick="go('tutor')" data-page="tutor">
+            <span class="nav-icon">🤖</span> Tutor IA
+        </button>
+
+        <div class="nav-title">Organización</div>
+
+        <button onclick="go('calendar')" data-page="calendar">
+            <span class="nav-icon">📅</span> Calendario
+        </button>
+
+        <button onclick="go('progress')" data-page="progress">
+            <span class="nav-icon">📈</span> Progreso
+        </button>
+
+        <button onclick="go('plans')" data-page="plans">
+            <span class="nav-icon">💳</span> Planes
+        </button>
+
+    </nav>
+
+</aside>
+
+<main class="main">
+
+<!-- TOPBAR -->
 
 <header class="topbar">
 
-    <button class="logo" onclick="go('home')">
-        Study<span>Learning</span>
-    </button>
+    <div class="search">
+        <input id="globalSearch" placeholder="Buscar en StudyLearning...">
+    </div>
 
     <div class="top-actions">
+        <button class="icon-btn" onclick="showNotification()">🔔</button>
 
-        <button class="btn btn-secondary" onclick="go('plans')">
-            💎 Planes
-        </button>
-
-        <button class="btn btn-primary"
-                onclick="alert('El sistema de cuentas reales se añadirá más adelante.')">
-            Iniciar sesión
-        </button>
-
+        <div class="profile">
+            <div class="avatar">G</div>
+            <strong>Guille</strong>
+        </div>
     </div>
 
 </header>
 
 
-<!-- =====================================
-     HOME
-===================================== -->
+<!-- HOME -->
 
 <section id="home" class="page active">
 
-    <div class="hero">
+    <div class="welcome">
 
-        <div class="badge">
-            ✨ Tu plataforma de estudio inteligente
+        <div>
+            <h1>Hola, Guille 👋</h1>
+            <p>Aprende mejor, organiza tus estudios y mejora cada día.</p>
         </div>
 
-        <h1>
-            Estudia mejor.<br>
-            <span>Aprende más.</span>
-        </h1>
+        <button class="primary blue" onclick="go('study')">
+            Estudiar ahora
+        </button>
 
-        <p>
-            Apuntes, tests, preguntas abiertas, flashcards,
-            planificación y progreso en una sola plataforma.
-        </p>
+    </div>
 
-        <div class="hero-buttons">
+    <div class="quick">
 
-            <button class="btn btn-primary"
-                    onclick="go('dashboard')">
-                🚀 Empezar a estudiar
-            </button>
+        <div class="quick-card" onclick="go('study')">
+            <div>📚</div>
+            <strong>Estudiar</strong>
+            <small>Aprende cualquier tema</small>
+        </div>
 
-            <button class="btn btn-secondary"
-                    onclick="go('plans')">
-                Ver planes
-            </button>
+        <div class="quick-card" onclick="go('flashcards')">
+            <div>🧠</div>
+            <strong>Flashcards</strong>
+            <small>Memoriza más rápido</small>
+        </div>
 
+        <div class="quick-card" onclick="go('tasks')">
+            <div>📝</div>
+            <strong>Hacer tarea</strong>
+            <small>Resuelve tus ejercicios</small>
+        </div>
+
+        <div class="quick-card" onclick="go('works')">
+            <div>💼</div>
+            <strong>Crear trabajo</strong>
+            <small>Presentaciones y proyectos</small>
         </div>
 
     </div>
 
+    <div class="grid grid-4">
 
-    <div class="container home-section">
-
-        <div class="section-title">
-
-            <h2>Todo lo que necesitas para estudiar</h2>
-
-            <p class="muted">
-                StudyLearning está pensado para acompañarte desde
-                que empiezas a estudiar hasta el examen.
-            </p>
-
+        <div class="card stat">
+            <div class="stat-icon">🔥</div>
+            <div>
+                <div class="stat-number" id="streakHome">1</div>
+                <div class="stat-label">Días de racha</div>
+            </div>
         </div>
 
-
-        <div class="grid grid-3">
-
-            <div class="card feature">
-
-                <div class="icon-box">🤖</div>
-
-                <h3>IA para estudiar</h3>
-
-                <p>
-                    Explicaciones, resúmenes y material adaptado
-                    a tu curso y dificultad.
-                </p>
-
+        <div class="card stat">
+            <div class="stat-icon">⚡</div>
+            <div>
+                <div class="stat-number" id="xpHome">0</div>
+                <div class="stat-label">XP conseguidos</div>
             </div>
+        </div>
 
-
-            <div class="card feature">
-
-                <div class="icon-box">✍️</div>
-
-                <h3>Preguntas abiertas</h3>
-
-                <p>
-                    Escribe tú mismo la respuesta y comprueba
-                    si realmente sabes el contenido.
-                </p>
-
+        <div class="card stat">
+            <div class="stat-icon">📝</div>
+            <div>
+                <div class="stat-number" id="tasksHome">0</div>
+                <div class="stat-label">Tareas pendientes</div>
             </div>
+        </div>
 
-
-            <div class="card feature">
-
-                <div class="icon-box">🧠</div>
-
-                <h3>Tests inteligentes</h3>
-
-                <p>
-                    Las preguntas se adaptan al tema que escribas.
-                </p>
-
+        <div class="card stat">
+            <div class="stat-icon">🎯</div>
+            <div>
+                <div class="stat-number">Nivel 1</div>
+                <div class="stat-label">Tu nivel</div>
             </div>
-
-
-            <div class="card feature">
-
-                <div class="icon-box">🃏</div>
-
-                <h3>Flashcards</h3>
-
-                <p>
-                    Repasa conceptos importantes de forma rápida.
-                </p>
-
-            </div>
-
-
-            <div class="card feature">
-
-                <div class="icon-box">📅</div>
-
-                <h3>Calendario</h3>
-
-                <p>
-                    Organiza tus exámenes y sesiones de estudio.
-                </p>
-
-            </div>
-
-
-            <div class="card feature">
-
-                <div class="icon-box">📊</div>
-
-                <h3>Progreso</h3>
-
-                <p>
-                    Mira tus resultados y descubre qué necesitas mejorar.
-                </p>
-
-            </div>
-
         </div>
 
     </div>
@@ -949,268 +922,78 @@ textarea{
 </section>
 
 
-<!-- =====================================
-     DASHBOARD
-===================================== -->
+<!-- DASHBOARD -->
 
 <section id="dashboard" class="page">
 
-    <div class="app-layout">
+    <h1 class="page-title">Dashboard</h1>
+    <p class="page-subtitle">Todo tu estudio en un solo lugar.</p>
 
-        <aside class="sidebar">
+    <div class="grid grid-3">
 
-            <div class="sidebar-title">Principal</div>
+        <div class="card">
+            <h3>🔥 Racha</h3>
+            <p style="font-size:35px;font-weight:800;margin:15px 0;" id="dashStreak">1 días</p>
+            <p style="color:var(--muted)">Sigue estudiando para mantenerla.</p>
+        </div>
 
-            <button class="side-btn active-side"
-                    onclick="go('dashboard')">
-                🏠 Inicio
-            </button>
+        <div class="card">
+            <h3>⚡ XP</h3>
+            <p style="font-size:35px;font-weight:800;margin:15px 0;" id="dashXP">0</p>
+            <p style="color:var(--muted)">Gana XP completando actividades.</p>
+        </div>
 
-            <button class="side-btn"
-                    onclick="go('study')">
-                📚 Estudiar ahora
-            </button>
+        <div class="card">
+            <h3>📚 Próximo</h3>
+            <p style="font-size:20px;font-weight:700;margin:15px 0;">Repasar Historia</p>
+            <button class="primary" onclick="go('flashcards')">Empezar</button>
+        </div>
 
-            <button class="side-btn"
-                    onclick="go('notes')">
-                📝 Mis apuntes
-            </button>
+    </div>
 
-            <button class="side-btn"
-                    onclick="go('tests')">
-                🧠 Tests
-            </button>
+    <br>
 
-            <button class="side-btn"
-                    onclick="go('flashcards')">
-                🃏 Flashcards
-            </button>
+    <div class="card">
 
-            <button class="side-btn"
-                    onclick="go('calendar')">
-                📅 Calendario
-            </button>
+        <h3 style="margin-bottom:15px;">🎯 Tu progreso semanal</h3>
 
-            <button class="side-btn"
-                    onclick="go('progress')">
-                📊 Progreso
-            </button>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width:58%;"></div>
+        </div>
 
-            <br>
-
-            <div class="sidebar-title">
-                Cuenta
-            </div>
-
-            <button class="side-btn"
-                    onclick="go('plans')">
-                💎 Planes
-            </button>
-
-        </aside>
-
-
-        <main class="app-content">
-
-            <div class="welcome">
-
-                <div>
-
-                    <h1>
-                        ¡Hola, estudiante! 👋
-                    </h1>
-
-                    <p class="muted">
-                        Continúa aprendiendo donde lo dejaste.
-                    </p>
-
-                </div>
-
-                <div class="streak">
-
-                    <strong>
-                        🔥 7
-                    </strong>
-
-                    días seguidos
-
-                </div>
-
-            </div>
-
-
-            <div class="grid grid-4">
-
-                <div class="card stat">
-
-                    <span class="small">
-                        XP total
-                    </span>
-
-                    <div class="stat-number">
-                        1.240
-                    </div>
-
-                    <span class="small">
-                        Nivel 5
-                    </span>
-
-                </div>
-
-
-                <div class="card stat">
-
-                    <span class="small">
-                        Tiempo estudiado
-                    </span>
-
-                    <div class="stat-number">
-                        12h
-                    </div>
-
-                    <span class="small">
-                        este mes
-                    </span>
-
-                </div>
-
-
-                <div class="card stat">
-
-                    <span class="small">
-                        Tests realizados
-                    </span>
-
-                    <div class="stat-number">
-                        28
-                    </div>
-
-                    <span class="small">
-                        esta semana
-                    </span>
-
-                </div>
-
-
-                <div class="card stat">
-
-                    <span class="small">
-                        Media
-                    </span>
-
-                    <div class="stat-number">
-                        87%
-                    </div>
-
-                    <span class="small">
-                        últimos tests
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <br><br>
-
-
-            <div class="grid grid-3">
-
-                <div class="card action"
-                     onclick="go('study')">
-
-                    <div class="icon-box">
-                        🚀
-                    </div>
-
-                    <h3>
-                        Estudiar ahora
-                    </h3>
-
-                    <p class="muted">
-                        Crea una sesión personalizada.
-                    </p>
-
-                </div>
-
-
-                <div class="card action"
-                     onclick="go('tests')">
-
-                    <div class="icon-box">
-                        🧠
-                    </div>
-
-                    <h3>
-                        Hacer un test
-                    </h3>
-
-                    <p class="muted">
-                        Pon a prueba tus conocimientos.
-                    </p>
-
-                </div>
-
-
-                <div class="card action"
-                     onclick="go('openQuestions')">
-
-                    <div class="icon-box">
-                        ✍️
-                    </div>
-
-                    <h3>
-                        Preguntas abiertas
-                    </h3>
-
-                    <p class="muted">
-                        Escribe las respuestas tú mismo.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </main>
+        <p style="margin-top:10px;color:var(--muted);">
+            Has completado aproximadamente el 58% de tu objetivo semanal.
+        </p>
 
     </div>
 
 </section>
 
 
-<!-- =====================================
-     ESTUDIAR
-===================================== -->
+<!-- STUDY -->
 
 <section id="study" class="page">
 
-    <div class="container">
+    <h1 class="page-title">Estudiar</h1>
+    <p class="page-subtitle">
+        Introduce un tema y prepara tu sesión de estudio.
+    </p>
 
-        <div class="page-header">
-
-            <h1>
-                📚 Estudiar ahora
-            </h1>
-
-            <p>
-                Dile a StudyLearning qué quieres estudiar.
-            </p>
-
-        </div>
-
+    <div class="tool-box">
 
         <div class="card">
+
+            <div class="form-group">
+                <label>Tema que quieres estudiar</label>
+                <input id="studyTopic" placeholder="Ejemplo: Descubrimiento de América">
+            </div>
 
             <div class="grid grid-2">
 
                 <div class="form-group">
+                    <label>Curso</label>
 
-                    <label>
-                        Curso
-                    </label>
-
-                    <select id="course">
-
+                    <select id="studyCourse">
                         <option>1º Primaria</option>
                         <option>2º Primaria</option>
                         <option>3º Primaria</option>
@@ -1223,284 +1006,359 @@ textarea{
                         <option>4º ESO</option>
                         <option>1º Bachillerato</option>
                         <option>2º Bachillerato</option>
+                    </select>
+                </div>
 
+                <div class="form-group">
+                    <label>Dificultad</label>
+
+                    <select id="studyDifficulty">
+                        <option>Fácil</option>
+                        <option selected>Medio</option>
+                        <option>Difícil</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button class="primary" onclick="startStudy()">
+                    🚀 Empezar sesión
+                </button>
+
+                <button class="secondary" onclick="go('flashcards')">
+                    🧠 Flashcards
+                </button>
+
+                <button class="secondary" onclick="go('tests')">
+                    ❓ Hacer test
+                </button>
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="card">
+
+            <h3>📷 Estudiar desde una foto</h3>
+
+            <div class="upload">
+
+                <strong>Sube tus apuntes o una pregunta</strong>
+
+                <p>
+                    Puedes subir una foto ahora. Más adelante la IA podrá analizarla.
+                </p>
+
+                <input type="file" accept="image/*">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FLASHCARDS -->
+
+<section id="flashcards" class="page">
+
+    <h1 class="page-title">Flashcards</h1>
+
+    <p class="page-subtitle">
+        Elige exactamente qué quieres memorizar.
+    </p>
+
+    <div class="tool-box">
+
+        <div class="card">
+
+            <div class="form-group">
+                <label>📚 Tema</label>
+                <input id="flashTopic" placeholder="Ejemplo: Descubrimiento de América">
+            </div>
+
+            <div class="grid grid-3">
+
+                <div class="form-group">
+
+                    <label>Dificultad</label>
+
+                    <select id="flashDifficulty">
+                        <option>Fácil</option>
+                        <option selected>Medio</option>
+                        <option>Difícil</option>
                     </select>
 
                 </div>
 
+                <div class="form-group">
+
+                    <label>Número de tarjetas</label>
+
+                    <select id="flashCount">
+                        <option>5</option>
+                        <option selected>10</option>
+                        <option>15</option>
+                        <option>20</option>
+                    </select>
+
+                </div>
 
                 <div class="form-group">
 
-                    <label>
-                        Asignatura
-                    </label>
+                    <label>Modo</label>
 
-                    <select id="subject">
+                    <select id="flashMode">
+                        <option>Normal</option>
+                        <option>Repaso</option>
+                        <option>Difícil</option>
+                    </select>
 
+                </div>
+
+            </div>
+
+            <button class="primary" onclick="generateFlashcards()">
+                🧠 Generar flashcards
+            </button>
+
+        </div>
+
+        <div id="flashArea" class="flashcard-area"></div>
+
+    </div>
+
+</section>
+
+
+<!-- TESTS -->
+
+<section id="tests" class="page">
+
+    <h1 class="page-title">Tests</h1>
+
+    <p class="page-subtitle">
+        Practica con preguntas específicas del tema.
+    </p>
+
+    <div class="tool-box">
+
+        <div class="card">
+
+            <div class="form-group">
+                <label>Tema</label>
+                <input id="testTopic" placeholder="Ejemplo: Revolución Francesa">
+            </div>
+
+            <div class="grid grid-2">
+
+                <div class="form-group">
+
+                    <label>Dificultad</label>
+
+                    <select id="testDifficulty">
+                        <option>Fácil</option>
+                        <option selected>Medio</option>
+                        <option>Difícil</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Número de preguntas</label>
+
+                    <select id="testCount">
+                        <option>5</option>
+                        <option selected>10</option>
+                        <option>15</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <button class="primary" onclick="startTest()">
+                Empezar test
+            </button>
+
+        </div>
+
+        <div id="testArea" style="margin-top:20px;"></div>
+
+    </div>
+
+</section>
+
+
+<!-- OPEN QUESTIONS -->
+
+<section id="openQuestions" class="page">
+
+    <h1 class="page-title">Preguntas abiertas</h1>
+
+    <p class="page-subtitle">
+        Escribe la respuesta con tus propias palabras.
+    </p>
+
+    <div class="tool-box">
+
+        <div class="card">
+
+            <div class="form-group">
+
+                <label>Tema</label>
+
+                <input id="openTopic" placeholder="Ejemplo: Fotosíntesis">
+
+            </div>
+
+            <button class="primary" onclick="startOpenQuestions()">
+                Empezar
+            </button>
+
+        </div>
+
+        <div id="openArea" style="margin-top:20px;"></div>
+
+    </div>
+
+</section>
+
+
+<!-- TASKS -->
+
+<section id="tasks" class="page">
+
+    <h1 class="page-title">Tareas</h1>
+
+    <p class="page-subtitle">
+        Organiza tus deberes y prepárate para resolverlos con ayuda de StudyLearning.
+    </p>
+
+    <div class="grid grid-2">
+
+        <div class="card">
+
+            <h3>📝 Nueva tarea</h3>
+
+            <br>
+
+            <div class="form-group">
+                <label>¿Qué tienes que hacer?</label>
+                <textarea id="taskText" placeholder="Ejemplo: Haz los ejercicios 4, 5 y 6 de matemáticas..."></textarea>
+            </div>
+
+            <div class="grid grid-2">
+
+                <div class="form-group">
+                    <label>Asignatura</label>
+
+                    <select id="taskSubject">
                         <option>Matemáticas</option>
                         <option>Lengua</option>
                         <option>Inglés</option>
                         <option>Historia</option>
                         <option>Biología</option>
-                        <option>Física y Química</option>
-                        <option>Geografía</option>
-
+                        <option>Física</option>
+                        <option>Química</option>
+                        <option>Otra</option>
                     </select>
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Dificultad
-                    </label>
+                    <label>Fecha</label>
 
-                    <select id="difficulty">
-
-                        <option>Fácil</option>
-                        <option selected>Medio</option>
-                        <option>Difícil</option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Tiempo disponible
-                    </label>
-
-                    <select>
-
-                        <option>15 minutos</option>
-                        <option>30 minutos</option>
-                        <option selected>45 minutos</option>
-                        <option>1 hora</option>
-                        <option>Más de 1 hora</option>
-
-                    </select>
+                    <input type="date" id="taskDate">
 
                 </div>
 
             </div>
 
+            <button class="primary" onclick="addTask()">
+                + Añadir tarea
+            </button>
 
-            <div class="form-group">
-
-                <label>
-                    ¿Qué tema quieres estudiar?
-                </label>
-
-                <input
-                    id="studyTopic"
-                    placeholder="Ej: Descubrimiento de América">
-
-                <div class="topic-examples">
-
-                    <button class="topic-chip"
-                            onclick="setTopic('Descubrimiento de América')">
-                        Descubrimiento de América
-                    </button>
-
-                    <button class="topic-chip"
-                            onclick="setTopic('Revolución Francesa')">
-                        Revolución Francesa
-                    </button>
-
-                    <button class="topic-chip"
-                            onclick="setTopic('Fotosíntesis')">
-                        Fotosíntesis
-                    </button>
-
-                    <button class="topic-chip"
-                            onclick="setTopic('Sistema Solar')">
-                        Sistema Solar
-                    </button>
-
-                    <button class="topic-chip"
-                            onclick="setTopic('Proporcionalidad')">
-                        Proporcionalidad
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <button class="btn btn-primary full"
-                    onclick="createStudySession()">
-
-                🚀 Crear sesión
-
+            <button class="secondary" onclick="solveTask()" style="margin-left:8px;">
+                🤖 Resolver con IA
             </button>
 
         </div>
 
-
-        <div id="studySession"></div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================
-     PREGUNTAS ABIERTAS
-===================================== -->
-
-<section id="openQuestions" class="page">
-
-    <div class="container">
-
-        <div class="page-header">
-
-            <h1>
-                ✍️ Preguntas abiertas
-            </h1>
-
-            <p>
-                Escribe la respuesta tú mismo. StudyLearning comprobará
-                si coincide con la respuesta correcta.
-            </p>
-
-        </div>
-
-
         <div class="card">
 
-            <label>
-                Tema
-            </label>
-
-            <input
-                id="openTopic"
-                placeholder="Ej: Descubrimiento de América">
-
-
-            <br><br>
-
-
-            <label>
-                Número de preguntas
-            </label>
-
-            <select id="openCount">
-
-                <option>3</option>
-                <option selected>5</option>
-                <option>10</option>
-
-            </select>
-
-
-            <br><br>
-
-
-            <button class="btn btn-primary full"
-                    onclick="startOpenQuestions()">
-
-                ✍️ Empezar preguntas
-
-            </button>
-
-        </div>
-
-
-        <div id="openQuestionArea"></div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================
-     TESTS
-===================================== -->
-
-<section id="tests" class="page">
-
-    <div class="container">
-
-        <div class="page-header">
-
-            <h1>
-                🧠 Tests
-            </h1>
-
-            <p>
-                Las preguntas estarán relacionadas con el tema que escribas.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <label>
-                Tema del test
-            </label>
-
-            <input
-                id="testTopic"
-                placeholder="Ej: Descubrimiento de América">
-
-
-            <div class="topic-examples">
-
-                <button class="topic-chip"
-                        onclick="setTestTopic('Descubrimiento de América')">
-                    Descubrimiento de América
-                </button>
-
-                <button class="topic-chip"
-                        onclick="setTestTopic('Revolución Francesa')">
-                    Revolución Francesa
-                </button>
-
-                <button class="topic-chip"
-                        onclick="setTestTopic('Fotosíntesis')">
-                    Fotosíntesis
-                </button>
-
-            </div>
-
+            <h3>📋 Mis tareas</h3>
 
             <br>
 
+            <div id="taskList"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- WORKS -->
+
+<section id="works" class="page">
+
+    <h1 class="page-title">Trabajos</h1>
+
+    <p class="page-subtitle">
+        Prepara presentaciones, exposiciones y trabajos escolares.
+    </p>
+
+    <div class="tool-box">
+
+        <div class="card">
+
+            <div class="form-group">
+
+                <label>¿Sobre qué es el trabajo?</label>
+
+                <input id="workTopic" placeholder="Ejemplo: La Segunda Guerra Mundial">
+
+            </div>
 
             <div class="grid grid-2">
 
-                <div>
+                <div class="form-group">
 
-                    <label>
-                        Preguntas
-                    </label>
+                    <label>Tipo de trabajo</label>
 
-                    <select id="testCount">
+                    <select id="workType">
+
+                        <option>Presentación</option>
+                        <option>Trabajo escrito</option>
+                        <option>Exposición oral</option>
+                        <option>Dossier</option>
+                        <option>Cartel</option>
+                        <option>Guion</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Número de páginas/diapositivas</label>
+
+                    <select id="workPages">
 
                         <option>5</option>
                         <option selected>10</option>
                         <option>15</option>
-
-                    </select>
-
-                </div>
-
-
-                <div>
-
-                    <label>
-                        Dificultad
-                    </label>
-
-                    <select id="testDifficulty">
-
-                        <option>Fácil</option>
-                        <option selected>Medio</option>
-                        <option>Difícil</option>
+                        <option>20</option>
 
                     </select>
 
@@ -1508,193 +1366,113 @@ textarea{
 
             </div>
 
+            <div class="form-group">
 
-            <br>
+                <label>Indicaciones del profesor</label>
 
-
-            <button class="btn btn-primary full"
-                    onclick="startTopicTest()">
-
-                🧠 Generar test
-
-            </button>
-
-        </div>
-
-
-        <div id="testArea"></div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================
-     FLASHCARDS
-===================================== -->
-
-<section id="flashcards" class="page">
-
-    <div class="container">
-
-        <div class="page-header">
-
-            <h1>
-                🃏 Flashcards
-            </h1>
-
-            <p>
-                Repasa conceptos importantes.
-            </p>
-
-        </div>
-
-
-        <div class="card flashcard"
-             id="flashcard"
-             onclick="flipFlashcard()">
-
-            ¿Qué es la fotosíntesis?
-
-        </div>
-
-
-        <div class="flash-actions">
-
-            <button class="btn btn-secondary"
-                    onclick="previousFlashcard()">
-                ← Anterior
-            </button>
-
-            <button class="btn btn-primary"
-                    onclick="flipFlashcard()">
-                Mostrar respuesta
-            </button>
-
-            <button class="btn btn-secondary"
-                    onclick="nextFlashcard()">
-                Siguiente →
-            </button>
-
-        </div>
-
-
-        <br>
-
-
-        <div class="card">
-
-            <strong>
-                Progreso
-            </strong>
-
-            <div class="progress">
-
-                <div
-                    id="flashProgress"
-                    class="progress-bar"
-                    style="width:20%">
-                </div>
+                <textarea id="workInstructions"
+                    placeholder="Escribe aquí las instrucciones que te haya dado el profesor..."></textarea>
 
             </div>
 
-            <p class="small"
-               style="margin-top:8px;">
-
-                Tarjeta
-                <span id="flashNumber">1</span>
-                de 5
-
-            </p>
+            <button class="primary" onclick="generateWork()">
+                💼 Crear trabajo
+            </button>
 
         </div>
+
+        <div id="workResult" style="margin-top:20px;"></div>
 
     </div>
 
 </section>
 
 
-<!-- =====================================
-     APUNTES
-===================================== -->
+<!-- NOTES -->
 
 <section id="notes" class="page">
 
-    <div class="container">
+    <h1 class="page-title">Apuntes</h1>
 
-        <div class="page-header">
+    <p class="page-subtitle">
+        Guarda tus apuntes y conviértelos posteriormente en material de estudio.
+    </p>
 
-            <h1>
-                📝 Mis apuntes
-            </h1>
+    <div class="grid grid-2">
 
-            <p>
-                Guarda tus apuntes y prepáralos para estudiar.
-            </p>
+        <div class="card">
 
-        </div>
+            <div class="form-group">
 
+                <label>Título</label>
 
-        <div class="grid grid-2">
-
-            <div class="card">
-
-                <h2>
-                    Crear apunte
-                </h2>
-
-                <br>
-
-                <label>
-                    Título
-                </label>
-
-                <input
-                    id="noteTitle"
-                    placeholder="Ej: Descubrimiento de América">
-
-                <br><br>
-
-                <label>
-                    Apuntes
-                </label>
-
-                <textarea
-                    id="noteText"
-                    placeholder="Escribe o pega tus apuntes..."></textarea>
-
-                <br><br>
-
-                <button
-                    class="btn btn-primary full"
-                    onclick="saveNote()">
-
-                    💾 Guardar
-
-                </button>
-
-                <br><br>
-
-                <button
-                    class="btn btn-secondary full"
-                    onclick="summarizeNotes()">
-
-                    🤖 Resumir con IA
-
-                </button>
+                <input id="noteTitle" placeholder="Ejemplo: Revolución Francesa">
 
             </div>
 
+            <div class="form-group">
 
-            <div class="card">
+                <label>Apuntes</label>
 
-                <h2>
-                    Apuntes guardados
-                </h2>
+                <textarea id="noteText"
+                    placeholder="Escribe o pega aquí tus apuntes..."></textarea>
 
-                <br>
+            </div>
 
-                <div id="notesList"></div>
+            <button class="primary" onclick="saveNote()">
+                Guardar apuntes
+            </button>
+
+            <button class="secondary" onclick="summarizeNote()" style="margin-left:8px;">
+                ✨ Preparar resumen
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📚 Mis apuntes</h3>
+
+            <br>
+
+            <div id="notesList"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TUTOR -->
+
+<section id="tutor" class="page">
+
+    <h1 class="page-title">Tutor IA</h1>
+
+    <p class="page-subtitle">
+        Un profesor virtual para resolver tus dudas.
+    </p>
+
+    <div class="tool-box">
+
+        <div class="card">
+
+            <div id="chatMessages">
+
+                <div style="padding:15px;background:var(--lightblue);border-radius:12px;margin-bottom:12px;">
+                    👋 Hola. Soy tu futuro Tutor IA. Aquí podrás preguntarme dudas sobre cualquier asignatura.
+                </div>
+
+            </div>
+
+            <div style="display:flex;gap:10px;">
+
+                <input id="chatInput" placeholder="Escribe tu pregunta...">
+
+                <button class="primary" onclick="sendChat()">
+                    Enviar
+                </button>
 
             </div>
 
@@ -1705,93 +1483,68 @@ textarea{
 </section>
 
 
-<!-- =====================================
-     CALENDARIO
-===================================== -->
+<!-- CALENDAR -->
 
 <section id="calendar" class="page">
 
-    <div class="container">
+    <h1 class="page-title">Calendario</h1>
 
-        <div class="page-header">
+    <p class="page-subtitle">
+        Organiza exámenes, tareas y trabajos.
+    </p>
 
-            <h1>
-                📅 Calendario
-            </h1>
+    <div class="card">
 
-            <p>
-                Organiza tus exámenes y sesiones.
-            </p>
+        <h2 style="margin-bottom:20px;">Septiembre 2026</h2>
 
-        </div>
+        <div class="calendar">
 
+            <div class="day-name">LUN</div>
+            <div class="day-name">MAR</div>
+            <div class="day-name">MIÉ</div>
+            <div class="day-name">JUE</div>
+            <div class="day-name">VIE</div>
+            <div class="day-name">SÁB</div>
+            <div class="day-name">DOM</div>
 
-        <div class="card">
+            <div class="day"></div>
+            <div class="day">1</div>
+            <div class="day">2</div>
+            <div class="day">3</div>
+            <div class="day">4</div>
+            <div class="day">5</div>
+            <div class="day">6</div>
 
-            <h2>
-                Septiembre 2026
-            </h2>
+            <div class="day">7</div>
+            <div class="day">8</div>
+            <div class="day">9</div>
+            <div class="day">10</div>
+            <div class="day">11</div>
+            <div class="day">12</div>
+            <div class="day">13</div>
 
-            <br>
-
-            <div class="calendar">
-
-                <div class="day day-header">Lun</div>
-                <div class="day day-header">Mar</div>
-                <div class="day day-header">Mié</div>
-                <div class="day day-header">Jue</div>
-                <div class="day day-header">Vie</div>
-                <div class="day day-header">Sáb</div>
-                <div class="day day-header">Dom</div>
-
-                <div class="day">1</div>
-                <div class="day">2</div>
-                <div class="day">3</div>
-                <div class="day">4</div>
-                <div class="day">5</div>
-                <div class="day">6</div>
-                <div class="day">7</div>
-
-                <div class="day">8</div>
-                <div class="day">9</div>
-                <div class="day">10</div>
-                <div class="day">11</div>
-                <div class="day">12</div>
-                <div class="day">13</div>
-                <div class="day">14</div>
-
-                <div class="day">15</div>
-                <div class="day">16</div>
-                <div class="day">17</div>
-                <div class="day">18</div>
-                <div class="day">19</div>
-                <div class="day">20</div>
-                <div class="day">21</div>
-
-                <div class="day">
-                    22
-                    <div class="event">
-                        📚 Estudiar
-                    </div>
-                </div>
-
-                <div class="day">23</div>
-
-                <div class="day">
-                    24
-                    <div class="event">
-                        📝 Examen
-                    </div>
-                </div>
-
-                <div class="day">25</div>
-                <div class="day">26</div>
-                <div class="day">27</div>
-                <div class="day">28</div>
-                <div class="day">29</div>
-                <div class="day">30</div>
-
+            <div class="day">14</div>
+            <div class="day">15</div>
+            <div class="day">16</div>
+            <div class="day">17</div>
+            <div class="day">
+                18
+                <div class="event">📚 Estudiar</div>
             </div>
+            <div class="day">19</div>
+            <div class="day">20</div>
+
+            <div class="day">21</div>
+            <div class="day">22</div>
+            <div class="day">23</div>
+            <div class="day">24</div>
+            <div class="day">25</div>
+            <div class="day">26</div>
+            <div class="day">27</div>
+
+            <div class="day">28</div>
+            <div class="day">29</div>
+            <div class="day">30</div>
 
         </div>
 
@@ -1800,148 +1553,59 @@ textarea{
 </section>
 
 
-<!-- =====================================
-     PROGRESO
-===================================== -->
+<!-- PROGRESS -->
 
 <section id="progress" class="page">
 
-    <div class="container">
+    <h1 class="page-title">Mi progreso</h1>
 
-        <div class="page-header">
+    <p class="page-subtitle">
+        Comprueba cómo estás mejorando.
+    </p>
 
-            <h1>
-                📊 Mi progreso
-            </h1>
+    <div class="grid grid-3">
 
-            <p>
-                Comprueba cómo estás mejorando.
-            </p>
-
+        <div class="card">
+            <h3>🔥 Racha</h3>
+            <p style="font-size:32px;font-weight:800;margin-top:15px;" id="progressStreak">1</p>
         </div>
 
-
-        <div class="grid grid-3">
-
-            <div class="card stat">
-
-                <span class="small">
-                    XP total
-                </span>
-
-                <div class="stat-number">
-                    1.240
-                </div>
-
-                <div class="progress">
-
-                    <div
-                        class="progress-bar"
-                        style="width:72%">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="card stat">
-
-                <span class="small">
-                    Racha
-                </span>
-
-                <div class="stat-number">
-                    🔥 7
-                </div>
-
-                <span class="small">
-                    días seguidos
-                </span>
-
-            </div>
-
-
-            <div class="card stat">
-
-                <span class="small">
-                    Media de tests
-                </span>
-
-                <div class="stat-number">
-                    87%
-                </div>
-
-                <span class="small">
-                    últimos tests
-                </span>
-
-            </div>
-
+        <div class="card">
+            <h3>⚡ XP</h3>
+            <p style="font-size:32px;font-weight:800;margin-top:15px;" id="progressXP">0</p>
         </div>
 
+        <div class="card">
+            <h3>🏆 Nivel</h3>
+            <p style="font-size:32px;font-weight:800;margin-top:15px;" id="progressLevel">1</p>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="card">
+
+        <h3>📚 Asignaturas</h3>
 
         <br>
 
+        <p>Matemáticas</p>
 
-        <div class="card">
+        <div class="progress-bar" style="margin:7px 0 18px;">
+            <div class="progress-fill" style="width:72%;"></div>
+        </div>
 
-            <h2>
-                Progreso por asignatura
-            </h2>
+        <p>Historia</p>
 
-            <br>
+        <div class="progress-bar" style="margin:7px 0 18px;">
+            <div class="progress-fill" style="width:60%;"></div>
+        </div>
 
-            <p>
-                Matemáticas — 82%
-            </p>
+        <p>Inglés</p>
 
-            <div class="progress">
-                <div
-                    class="progress-bar"
-                    style="width:82%">
-                </div>
-            </div>
-
-            <br>
-
-            <p>
-                Lengua — 74%
-            </p>
-
-            <div class="progress">
-                <div
-                    class="progress-bar"
-                    style="width:74%">
-                </div>
-            </div>
-
-            <br>
-
-            <p>
-                Inglés — 91%
-            </p>
-
-            <div class="progress">
-                <div
-                    class="progress-bar"
-                    style="width:91%">
-                </div>
-            </div>
-
-            <br>
-
-            <p>
-                Historia — 68%
-            </p>
-
-            <div class="progress">
-                <div
-                    class="progress-bar"
-                    style="width:68%">
-                </div>
-            </div>
-
+        <div class="progress-bar" style="margin:7px 0 18px;">
+            <div class="progress-fill" style="width:45%;"></div>
         </div>
 
     </div>
@@ -1949,125 +1613,76 @@ textarea{
 </section>
 
 
-<!-- =====================================
-     PLANES
-===================================== -->
+<!-- PLANS -->
 
 <section id="plans" class="page">
 
-    <div class="container">
+    <h1 class="page-title">Planes</h1>
 
-        <div class="page-header"
-             style="text-align:center;">
+    <p class="page-subtitle">
+        Elige el plan que mejor se adapte a ti.
+    </p>
 
-            <h1>
-                💎 Planes StudyLearning
-            </h1>
+    <div class="grid grid-3">
 
-            <p>
-                Empieza gratis y mejora cuando quieras.
-            </p>
+        <div class="card price">
+
+            <h3>Gratis</h3>
+
+            <div class="price-number">0€</div>
+
+            <p>Para empezar a estudiar.</p>
+
+            <ul>
+                <li>✓ Tests</li>
+                <li>✓ Flashcards</li>
+                <li>✓ Tareas</li>
+                <li>✓ 8 fotos cada 24h</li>
+            </ul>
+
+            <button class="secondary">Plan actual</button>
 
         </div>
 
+        <div class="card price featured">
 
-        <div class="grid grid-3">
+            <h3>Pro</h3>
 
-            <div class="card price-card">
+            <div class="price-number">5,99€</div>
 
-                <h2>
-                    Gratis
-                </h2>
+            <p>Para estudiar más.</p>
 
-                <div class="price">
-                    0€ <span>/mes</span>
-                </div>
+            <ul>
+                <li>✓ Todo lo de Gratis</li>
+                <li>✓ 20 fotos al día</li>
+                <li>✓ Más generación de contenido</li>
+                <li>✓ Más herramientas</li>
+            </ul>
 
-                <ul class="price-list">
+            <button class="primary" onclick="buyPlan('Pro')">
+                Comprar Pro
+            </button>
 
-                    <li>✓ 8 fotos cada 24 horas</li>
-                    <li>✓ Tests</li>
-                    <li>✓ Preguntas abiertas</li>
-                    <li>✓ Flashcards</li>
-                    <li>✓ Calendario</li>
-                    <li>✓ Progreso</li>
+        </div>
 
-                </ul>
+        <div class="card price">
 
-                <button
-                    class="btn btn-primary full">
+            <h3>Avanzado</h3>
 
-                    Plan actual
+            <div class="price-number">9,99€</div>
 
-                </button>
+            <p>Para estudiar sin límites.</p>
 
-            </div>
+            <ul>
+                <li>✓ Todo lo de Pro</li>
+                <li>✓ Fotos ilimitadas</li>
+                <li>✓ Generación avanzada</li>
+                <li>✓ Todas las herramientas</li>
+            </ul>
 
-
-            <div class="card price-card pro">
-
-                <div class="popular">
-                    MÁS POPULAR
-                </div>
-
-                <h2>
-                    Pro
-                </h2>
-
-                <div class="price">
-                    5,99€ <span>/mes</span>
-                </div>
-
-                <ul class="price-list">
-
-                    <li>✓ 20 fotos cada 24 horas</li>
-                    <li>✓ Todas las herramientas</li>
-                    <li>✓ IA avanzada</li>
-                    <li>✓ Plan de estudio personalizado</li>
-                    <li>✓ Estadísticas avanzadas</li>
-
-                </ul>
-
-                <button
-                    class="btn btn-primary full"
-                    onclick="alert('Los pagos reales se conectarán más adelante.')">
-
-                    Elegir Pro
-
-                </button>
-
-            </div>
-
-
-            <div class="card price-card">
-
-                <h2>
-                    Avanzado
-                </h2>
-
-                <div class="price">
-                    9,99€ <span>/mes</span>
-                </div>
-
-                <ul class="price-list">
-
-                    <li>✓ Fotos ilimitadas</li>
-                    <li>✓ Todas las funciones Pro</li>
-                    <li>✓ IA avanzada</li>
-                    <li>✓ Tutor personalizado</li>
-                    <li>✓ Todas las herramientas</li>
-
-                </ul>
-
-                <button
-                    class="btn btn-primary full"
-                    onclick="alert('Los pagos reales se conectarán más adelante.')">
-
-                    Elegir Avanzado
-
-                </button>
-
-            </div>
+            <button class="primary" onclick="buyPlan('Avanzado')">
+                Comprar Avanzado
+            </button>
 
         </div>
 
@@ -2076,431 +1691,120 @@ textarea{
 </section>
 
 
-<!-- =====================================
-     NAVEGACIÓN MÓVIL
-===================================== -->
+</main>
+</div>
 
-<nav class="mobile-nav">
 
-    <button onclick="go('dashboard')">
-        🏠<br>Inicio
+<!-- MOBILE NAV -->
+
+<div class="mobile-nav">
+
+    <button onclick="go('home')">
+        <strong>🏠</strong>
+        Inicio
     </button>
 
     <button onclick="go('study')">
-        📚<br>Estudiar
+        <strong>📚</strong>
+        Estudiar
     </button>
 
-    <button onclick="go('tests')">
-        🧠<br>Tests
+    <button onclick="go('flashcards')">
+        <strong>🧠</strong>
+        Cards
+    </button>
+
+    <button onclick="go('tasks')">
+        <strong>📝</strong>
+        Tareas
     </button>
 
     <button onclick="go('progress')">
-        📊<br>Progreso
+        <strong>📊</strong>
+        Progreso
     </button>
 
-</nav>
+</div>
 
 
 <script>
 
-/* =====================================================
-   NAVEGACIÓN
-===================================================== */
+/* =========================
+   DATA
+========================= */
 
-function go(page){
+const topicDatabase = {
 
-    document.querySelectorAll(".page").forEach(function(section){
+    "descubrimiento de america": {
 
-        section.classList.remove("active");
-
-    });
-
-    const target=document.getElementById(page);
-
-    if(target){
-
-        target.classList.add("active");
-
-        window.scrollTo(0,0);
-
-    }
-
-}
-
-
-/* =====================================================
-   TEMAS
-===================================================== */
-
-function normalizeText(text){
-
-    return text
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g,"")
-        .replace(/[¿?¡!.,;:()"']/g,"")
-        .replace(/\s+/g," ")
-        .trim();
-
-}
-
-
-function setTopic(topic){
-
-    document.getElementById("studyTopic").value=topic;
-
-}
-
-
-function setTestTopic(topic){
-
-    document.getElementById("testTopic").value=topic;
-
-}
-
-
-/* =====================================================
-   BASE DE PREGUNTAS POR TEMAS
-===================================================== */
-
-const topicDatabase={
-
-    america:{
-
-        keywords:[
-            "descubrimiento de america",
-            "descubrimiento america",
-            "america",
-            "colon",
-            "cristobal colon"
-        ],
-
-        questions:[
-
-            {
-                q:"¿En qué año llegó Cristóbal Colón a América?",
-                answers:[
-                    "1492",
-                    "1492"
-                ],
-                options:[
-                    "1492",
-                    "1453",
-                    "1519",
-                    "1504"
-                ]
-            },
-
-            {
-                q:"¿Cómo se llamaban las tres embarcaciones de la expedición de Colón?",
-                answers:[
-                    "La Niña, la Pinta y la Santa María",
-                    "la nina la pinta y la santa maria"
-                ],
-                options:[
-                    "La Niña, la Pinta y la Santa María",
-                    "La Victoria, la Pinta y la Niña",
-                    "La Santa Ana, la Niña y la Victoria",
-                    "La Pinta, la Victoria y la Santa Ana"
-                ]
-            },
-
-            {
-                q:"¿Quién dirigió la expedición que llegó a América en 1492?",
-                answers:[
-                    "Cristóbal Colón",
-                    "cristobal colon"
-                ],
-                options:[
-                    "Cristóbal Colón",
-                    "Fernando de Magallanes",
-                    "Hernán Cortés",
-                    "Vasco da Gama"
-                ]
-            },
-
-            {
-                q:"¿Qué reyes financiaron el viaje de Colón?",
-                answers:[
-                    "Los Reyes Católicos",
-                    "Isabel de Castilla y Fernando de Aragon",
-                    "Isabel y Fernando"
-                ],
-                options:[
-                    "Los Reyes Católicos",
-                    "Carlos I y Juana",
-                    "Felipe II e Isabel",
-                    "Los Reyes de Portugal"
-                ]
-            },
-
-            {
-                q:"¿Qué reina apoyó especialmente el proyecto de Colón?",
-                answers:[
-                    "Isabel I de Castilla",
-                    "Isabel la Catolica",
-                    "Isabel de Castilla"
-                ],
-                options:[
-                    "Isabel I de Castilla",
-                    "Isabel II",
-                    "María Tudor",
-                    "Juana de Castilla"
-                ]
-            },
-
-            {
-                q:"¿Qué océano atravesó Colón durante su viaje hacia el oeste?",
-                answers:[
-                    "Océano Atlántico",
-                    "Atlantico"
-                ],
-                options:[
-                    "Océano Atlántico",
-                    "Océano Pacífico",
-                    "Océano Índico",
-                    "Océano Ártico"
-                ]
-            },
-
-            {
-                q:"¿Qué buscaba Colón principalmente al navegar hacia el oeste?",
-                answers:[
-                    "Una ruta hacia Asia",
-                    "llegar a asia",
-                    "una ruta hacia las indias"
-                ],
-                options:[
-                    "Una ruta hacia Asia",
-                    "Una ruta hacia África",
-                    "Conquistar Europa",
-                    "Encontrar Australia"
-                ]
-            },
-
-            {
-                q:"¿Qué nombre recibió inicialmente el territorio al que llegó Colón según su interpretación?",
-                answers:[
-                    "Las Indias",
-                    "las indias"
-                ],
-                options:[
-                    "Las Indias",
-                    "Nueva España",
-                    "Castilla",
-                    "El Nuevo Reino"
-                ]
-            }
-
+        flashcards:[
+            ["¿En qué año llegó Cristóbal Colón a América?","1492"],
+            ["¿Qué tres barcos utilizó Colón?","La Niña, la Pinta y la Santa María."],
+            ["¿Quién financió el viaje de Colón?","Los Reyes Católicos."],
+            ["¿Qué buscaba Colón inicialmente?","Una nueva ruta hacia Asia."],
+            ["¿Quién era Cristóbal Colón?","Un navegante que dirigió la expedición que llegó a América en 1492."],
+            ["¿Desde dónde partió Colón?","Desde Palos de la Frontera."],
+            ["¿Cuándo comenzó el primer viaje?","El 3 de agosto de 1492."],
+            ["¿Qué isla alcanzó Colón el 12 de octubre?","Guanahaní, en las Bahamas."],
+            ["¿Cuántos viajes realizó Colón a América?","Cuatro."],
+            ["¿Qué consecuencias tuvo el descubrimiento?","El contacto permanente entre Europa y América y grandes cambios económicos, sociales y culturales."]
         ]
 
     },
 
+    "revolucion francesa": {
 
-    revolucionfrancesa:{
-
-        keywords:[
-            "revolucion francesa",
-            "revolucion francesa 1789",
-            "francia 1789"
-        ],
-
-        questions:[
-
-            {
-                q:"¿En qué año comenzó la Revolución Francesa?",
-                answers:["1789"],
-                options:["1789","1812","1776","1804"]
-            },
-
-            {
-                q:"¿Qué prisión fue tomada el 14 de julio de 1789?",
-                answers:["La Bastilla","Bastilla"],
-                options:["La Bastilla","Versalles","El Louvre","La Conciergerie"]
-            },
-
-            {
-                q:"¿Quién fue una figura destacada del periodo del Terror?",
-                answers:["Robespierre","Maximilien Robespierre"],
-                options:["Robespierre","Napoleón","Luis XIV","Voltaire"]
-            },
-
-            {
-                q:"¿Qué rey fue ejecutado durante la Revolución Francesa?",
-                answers:["Luis XVI","Luis 16"],
-                options:["Luis XVI","Luis XIV","Carlos X","Felipe IV"]
-            },
-
-            {
-                q:"¿Cuál fue uno de los principios asociados a la Revolución Francesa?",
-                answers:["Libertad, igualdad y fraternidad"],
-                options:[
-                    "Libertad, igualdad y fraternidad",
-                    "Orden, guerra y conquista",
-                    "Fe, obediencia y monarquía",
-                    "Imperio, nobleza y clero"
-                ]
-            }
-
+        flashcards:[
+            ["¿En qué año comenzó la Revolución Francesa?","1789."],
+            ["¿Cuál fue una de sus principales causas?","La desigualdad social y económica."],
+            ["¿Qué acontecimiento ocurrió el 14 de julio de 1789?","La toma de la Bastilla."],
+            ["¿Quién era el rey de Francia?","Luis XVI."],
+            ["¿Qué documento defendía los derechos y libertades?","La Declaración de los Derechos del Hombre y del Ciudadano."],
+            ["¿Qué grupo social pertenecía al Tercer Estado?","La burguesía, los campesinos y las clases populares."],
+            ["¿Qué fue la Bastilla?","Una fortaleza y prisión de París."],
+            ["¿Qué lema se asocia con la Revolución Francesa?","Libertad, igualdad y fraternidad."]
         ]
 
     },
 
+    "fotosintesis": {
 
-    fotosintesis:{
-
-        keywords:[
-            "fotosintesis",
-            "fotosintesis plantas"
-        ],
-
-        questions:[
-
-            {
-                q:"¿Qué necesitan principalmente las plantas para realizar la fotosíntesis?",
-                answers:[
-                    "Luz solar, agua y dióxido de carbono",
-                    "luz agua y dioxido de carbono"
-                ],
-                options:[
-                    "Luz solar, agua y dióxido de carbono",
-                    "Oxígeno y sal",
-                    "Solo agua",
-                    "Solo dióxido de carbono"
-                ]
-            },
-
-            {
-                q:"¿Qué gas absorben las plantas durante la fotosíntesis?",
-                answers:[
-                    "Dióxido de carbono",
-                    "CO2"
-                ],
-                options:[
-                    "Dióxido de carbono",
-                    "Oxígeno",
-                    "Nitrógeno",
-                    "Hidrógeno"
-                ]
-            },
-
-            {
-                q:"¿Qué gas liberan las plantas como resultado de la fotosíntesis?",
-                answers:[
-                    "Oxígeno",
-                    "O2"
-                ],
-                options:[
-                    "Oxígeno",
-                    "Dióxido de carbono",
-                    "Nitrógeno",
-                    "Metano"
-                ]
-            },
-
-            {
-                q:"¿En qué orgánulo de las células vegetales ocurre la fotosíntesis?",
-                answers:[
-                    "Cloroplastos",
-                    "cloroplasto"
-                ],
-                options:[
-                    "Cloroplastos",
-                    "Mitocondrias",
-                    "Núcleo",
-                    "Ribosomas"
-                ]
-            }
-
+        flashcards:[
+            ["¿Qué es la fotosíntesis?","El proceso por el que las plantas producen materia orgánica utilizando luz, agua y dióxido de carbono."],
+            ["¿Dónde ocurre principalmente?","En los cloroplastos."],
+            ["¿Qué pigmento permite captar la luz?","La clorofila."],
+            ["¿Qué gas absorben las plantas?","Dióxido de carbono."],
+            ["¿Qué gas liberan?","Oxígeno."],
+            ["¿Qué necesitan además de luz?","Agua y dióxido de carbono."],
+            ["¿Qué producen?","Glucosa y oxígeno."],
+            ["¿Por qué es importante?","Porque produce materia orgánica y libera oxígeno."]
         ]
 
     },
 
+    "sistema solar": {
 
-    sistemasolar:{
-
-        keywords:[
-            "sistema solar",
-            "planetas",
-            "sistema solar planetas"
-        ],
-
-        questions:[
-
-            {
-                q:"¿Cuál es el planeta más cercano al Sol?",
-                answers:["Mercurio"],
-                options:["Mercurio","Venus","Marte","Tierra"]
-            },
-
-            {
-                q:"¿Cuál es el planeta más grande del Sistema Solar?",
-                answers:["Júpiter"],
-                options:["Júpiter","Saturno","Neptuno","Tierra"]
-            },
-
-            {
-                q:"¿Qué planeta es conocido como el planeta rojo?",
-                answers:["Marte"],
-                options:["Marte","Venus","Mercurio","Saturno"]
-            },
-
-            {
-                q:"¿Qué planeta tiene unos anillos especialmente visibles?",
-                answers:["Saturno"],
-                options:["Saturno","Marte","Venus","Mercurio"]
-            },
-
-            {
-                q:"¿En qué planeta vivimos?",
-                answers:["La Tierra","Tierra"],
-                options:["La Tierra","Marte","Venus","Júpiter"]
-            }
-
+        flashcards:[
+            ["¿Qué estrella está en el centro del Sistema Solar?","El Sol."],
+            ["¿Cuántos planetas hay?","Ocho."],
+            ["¿Cuál es el planeta más cercano al Sol?","Mercurio."],
+            ["¿Cuál es el planeta más grande?","Júpiter."],
+            ["¿Cuál es el planeta conocido por sus anillos?","Saturno."],
+            ["¿Cuál es nuestro planeta?","La Tierra."],
+            ["¿Qué planeta está más alejado del Sol?","Neptuno."],
+            ["¿Qué planeta tiene una gran mancha roja?","Júpiter."]
         ]
 
     },
 
+    "proporcionalidad": {
 
-    proporcionalidad:{
-
-        keywords:[
-            "proporcionalidad",
-            "proporcionalidad directa",
-            "proporcionalidad inversa",
-            "regla de tres"
-        ],
-
-        questions:[
-
-            {
-                q:"¿Qué ocurre en una proporcionalidad directa?",
-                answers:[
-                    "Si una magnitud aumenta, la otra aumenta en la misma proporción",
-                    "las dos aumentan o disminuyen proporcionalmente"
-                ],
-                options:[
-                    "Si una magnitud aumenta, la otra aumenta en la misma proporción",
-                    "Una siempre aumenta y la otra disminuye",
-                    "Las dos son siempre iguales",
-                    "Ninguna cambia"
-                ]
-            },
-
-            {
-                q:"¿Qué operación se utiliza habitualmente para resolver una regla de tres?",
-                answers:[
-                    "Multiplicar en cruz y dividir",
-                    "multiplicacion en cruz"
-                ],
-                options:[
-                    "Multiplicar en cruz y dividir",
-                    "Sumar todos los datos",
-                    "Restar los extremos",
-                    "Multiplicar todos los números"
-                ]
-            }
-
+        flashcards:[
+            ["¿Qué es una proporción?","Una igualdad entre dos razones."],
+            ["¿Qué ocurre en una proporcionalidad directa?","Cuando una magnitud aumenta, la otra aumenta en la misma proporción."],
+            ["¿Qué ocurre en una proporcionalidad inversa?","Cuando una magnitud aumenta, la otra disminuye proporcionalmente."],
+            ["¿Qué es una razón?","El cociente entre dos cantidades."],
+            ["¿Qué método se puede usar para resolver proporciones?","La regla de tres."]
         ]
 
     }
@@ -2508,28 +1812,151 @@ const topicDatabase={
 };
 
 
-/* =====================================================
-   DETECTAR TEMA
-===================================================== */
+/* =========================
+   NAVIGATION
+========================= */
 
-function findTopicData(topic){
+function go(page){
 
-    const normalized=normalizeText(topic);
+    document.querySelectorAll(".page").forEach(p=>{
+        p.classList.remove("active");
+    });
+
+    const target=document.getElementById(page);
+
+    if(target){
+        target.classList.add("active");
+    }
+
+    document.querySelectorAll(".nav button").forEach(btn=>{
+        btn.classList.remove("active");
+
+        if(btn.dataset.page===page){
+            btn.classList.add("active");
+        }
+    });
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =========================
+   STORAGE
+========================= */
+
+let state=JSON.parse(localStorage.getItem("studyLearningState")) || {
+
+    xp:0,
+    streak:1,
+    tasks:[],
+    notes:[]
+
+};
+
+function saveState(){
+
+    localStorage.setItem(
+        "studyLearningState",
+        JSON.stringify(state)
+    );
+
+    updateStats();
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+function updateStats(){
+
+    document.getElementById("streakHome").textContent=state.streak;
+    document.getElementById("xpHome").textContent=state.xp;
+
+    document.getElementById("dashStreak").textContent=
+        state.streak+" días";
+
+    document.getElementById("dashXP").textContent=
+        state.xp;
+
+    document.getElementById("progressStreak").textContent=
+        state.streak;
+
+    document.getElementById("progressXP").textContent=
+        state.xp;
+
+    document.getElementById("tasksHome").textContent=
+        state.tasks.filter(t=>!t.done).length;
+
+    document.getElementById("progressLevel").textContent=
+        Math.floor(state.xp/100)+1;
+
+    renderTasks();
+    renderNotes();
+
+}
+
+
+/* =========================
+   STUDY
+========================= */
+
+function startStudy(){
+
+    const topic=document.getElementById("studyTopic").value.trim();
+
+    if(!topic){
+
+        alert("Escribe primero un tema.");
+
+        return;
+
+    }
+
+    document.getElementById("flashTopic").value=topic;
+    document.getElementById("testTopic").value=topic;
+    document.getElementById("openTopic").value=topic;
+
+    go("flashcards");
+
+    alert(
+        "Sesión preparada para: "+topic+
+        "\n\nAhora puedes empezar con flashcards, tests o preguntas abiertas."
+    );
+
+}
+
+
+/* =========================
+   TOPIC SEARCH
+========================= */
+
+function normalize(text){
+
+    return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .trim();
+
+}
+
+function findTopic(topic){
+
+    const t=normalize(topic);
 
     for(const key in topicDatabase){
 
-        const data=topicDatabase[key];
+        if(
+            t.includes(key) ||
+            key.includes(t) ||
+            t.split(" ").some(word=>word.length>4 && key.includes(word))
+        ){
 
-        for(const keyword of data.keywords){
-
-            if(
-                normalized.includes(normalizeText(keyword)) ||
-                normalizeText(keyword).includes(normalized)
-            ){
-
-                return data;
-
-            }
+            return topicDatabase[key];
 
         }
 
@@ -2540,148 +1967,20 @@ function findTopicData(topic){
 }
 
 
-/* =====================================================
-   CREAR SESIÓN
-===================================================== */
+/* =========================
+   FLASHCARDS
+========================= */
 
-function createStudySession(){
+let flashData=[];
+let flashIndex=0;
+let flashShowingAnswer=false;
 
-    const topic=document.getElementById("studyTopic").value.trim();
+function generateFlashcards(){
 
-    const course=document.getElementById("course").value;
-
-    const subject=document.getElementById("subject").value;
-
-    const difficulty=document.getElementById("difficulty").value;
-
-    if(!topic){
-
-        alert("Escribe primero el tema que quieres estudiar.");
-
-        return;
-
-    }
-
-    const known=findTopicData(topic);
-
-    document.getElementById("studySession").innerHTML=`
-
-        <div class="card session-box">
-
-            <div class="icon-box">
-                🤖
-            </div>
-
-            <h2>
-                Sesión preparada
-            </h2>
-
-            <br>
-
-            <p class="muted">
-                <strong>Curso:</strong> ${course}
-            </p>
-
-            <p class="muted">
-                <strong>Asignatura:</strong> ${subject}
-            </p>
-
-            <p class="muted">
-                <strong>Dificultad:</strong> ${difficulty}
-            </p>
-
-            <p class="muted">
-                <strong>Tema:</strong> ${topic}
-            </p>
-
-            <br>
-
-            ${
-                known
-                ?
-                `<p>
-                    Hemos encontrado contenido específico para este tema.
-                    Puedes practicar con preguntas abiertas o un test.
-                 </p>`
-                :
-                `<p>
-                    Este tema todavía no tiene preguntas específicas
-                    en la versión sin IA. Cuando conectemos la IA,
-                    StudyLearning podrá generar preguntas sobre cualquier tema.
-                 </p>`
-            }
-
-            <br>
-
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-
-                <button
-                    class="btn btn-primary"
-                    onclick="prepareOpenFromStudy()">
-
-                    ✍️ Preguntas abiertas
-
-                </button>
-
-                <button
-                    class="btn btn-secondary"
-                    onclick="prepareTestFromStudy()">
-
-                    🧠 Test tipo test
-
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
-   PREPARAR DESDE ESTUDIO
-===================================================== */
-
-function prepareOpenFromStudy(){
-
-    const topic=document.getElementById("studyTopic").value;
-
-    document.getElementById("openTopic").value=topic;
-
-    go("openQuestions");
-
-}
-
-
-function prepareTestFromStudy(){
-
-    const topic=document.getElementById("studyTopic").value;
-
-    document.getElementById("testTopic").value=topic;
-
-    go("tests");
-
-}
-
-
-/* =====================================================
-   PREGUNTAS ABIERTAS
-===================================================== */
-
-let openQuestions=[];
-
-let openIndex=0;
-
-let openScore=0;
-
-function startOpenQuestions(){
-
-    const topic=document.getElementById("openTopic").value.trim();
+    const topic=document.getElementById("flashTopic").value.trim();
 
     const count=parseInt(
-        document.getElementById("openCount").value
+        document.getElementById("flashCount").value
     );
 
     if(!topic){
@@ -2692,34 +1991,19 @@ function startOpenQuestions(){
 
     }
 
-    const data=findTopicData(topic);
+    const data=findTopic(topic);
 
     if(!data){
 
-        document.getElementById("openQuestionArea").innerHTML=`
+        document.getElementById("flashArea").innerHTML=`
 
-            <div class="card" style="margin-top:20px;">
+            <div class="card empty">
 
-                <h2>
-                    Todavía no tenemos preguntas específicas
-                </h2>
+                <h3>🤖 Este tema está preparado para la IA</h3>
 
-                <br>
-
-                <p class="muted">
-                    Prueba con un tema como:
-                    <strong>Descubrimiento de América</strong>,
-                    <strong>Revolución Francesa</strong>,
-                    <strong>Fotosíntesis</strong>,
-                    <strong>Sistema Solar</strong>
-                    o <strong>Proporcionalidad</strong>.
-                </p>
-
-                <br>
-
-                <p class="muted">
-                    En la versión con IA podrás escribir cualquier tema
-                    y StudyLearning generará automáticamente las preguntas.
+                <p style="margin-top:10px;">
+                    Cuando conectemos la IA, StudyLearning podrá generar
+                    automáticamente flashcards sobre cualquier tema que escribas.
                 </p>
 
             </div>
@@ -2730,574 +2014,81 @@ function startOpenQuestions(){
 
     }
 
-    openQuestions=[...data.questions]
+    flashData=[...data.flashcards]
         .sort(()=>Math.random()-.5)
         .slice(0,count);
 
-    openIndex=0;
+    flashIndex=0;
+    flashShowingAnswer=false;
 
-    openScore=0;
-
-    showOpenQuestion();
-
-}
-
-
-function showOpenQuestion(){
-
-    const area=document.getElementById("openQuestionArea");
-
-    const question=openQuestions[openIndex];
-
-    area.innerHTML=`
-
-        <div class="card open-question">
-
-            <div class="question-number">
-                PREGUNTA ${openIndex+1} DE ${openQuestions.length}
-            </div>
-
-            <h2 class="question-title">
-                ${question.q}
-            </h2>
-
-            <textarea
-                id="userOpenAnswer"
-                class="answer-input"
-                placeholder="Escribe tu respuesta aquí..."></textarea>
-
-            <br><br>
-
-            <button
-                id="checkOpenButton"
-                class="btn btn-primary full"
-                onclick="checkOpenAnswer()">
-
-                Comprobar respuesta
-
-            </button>
-
-            <div id="openFeedback"></div>
-
-        </div>
-
-    `;
+    renderFlashcard();
 
 }
 
+function renderFlashcard(){
 
-/* =====================================================
-   COMPARAR RESPUESTAS
-===================================================== */
+    if(flashIndex>=flashData.length){
 
-function similarity(a,b){
+        document.getElementById("flashArea").innerHTML=`
 
-    a=normalizeText(a);
+            <div class="card empty">
 
-    b=normalizeText(b);
+                <h2>🎉 ¡Has terminado!</h2>
 
-    if(!a || !b){
-        return 0;
-    }
-
-    if(a===b){
-        return 1;
-    }
-
-    if(a.includes(b) || b.includes(a)){
-        return .92;
-    }
-
-    const wordsA=new Set(a.split(" ").filter(Boolean));
-
-    const wordsB=new Set(b.split(" ").filter(Boolean));
-
-    let common=0;
-
-    wordsA.forEach(function(word){
-
-        if(wordsB.has(word)){
-            common++;
-        }
-
-    });
-
-    const total=Math.max(wordsA.size,wordsB.size);
-
-    return total===0 ? 0 : common/total;
-
-}
-
-
-function isAnswerCorrect(userAnswer,correctAnswers){
-
-    const normalizedUser=normalizeText(userAnswer);
-
-    if(!normalizedUser){
-        return false;
-    }
-
-    for(const correct of correctAnswers){
-
-        const score=similarity(
-            normalizedUser,
-            correct
-        );
-
-        /*
-          0.70 o más = respuesta suficientemente parecida.
-          Así se aceptan respuestas como:
-          "Cristobal Colon"
-          "Cristóbal Colón fue quien dirigió..."
-        */
-
-        if(score>=0.70){
-            return true;
-        }
-
-    }
-
-    return false;
-
-}
-
-
-/* =====================================================
-   COMPROBAR RESPUESTA ABIERTA
-===================================================== */
-
-function checkOpenAnswer(){
-
-    const input=document.getElementById("userOpenAnswer");
-
-    const answer=input.value.trim();
-
-    if(!answer){
-
-        alert("Escribe una respuesta primero.");
-
-        return;
-
-    }
-
-    const question=openQuestions[openIndex];
-
-    const correct=isAnswerCorrect(
-        answer,
-        question.answers
-    );
-
-    const feedback=document.getElementById("openFeedback");
-
-    if(correct){
-
-        openScore++;
-
-        feedback.innerHTML=`
-
-            <div class="feedback correct">
-
-                <strong>
-                    ✅ ¡Correcto!
-                </strong>
-
-                <p>
-                    Tu respuesta es suficientemente similar
-                    a la respuesta correcta.
+                <p style="margin:12px 0;">
+                    Has repasado ${flashData.length} flashcards.
                 </p>
+
+                <button class="primary" onclick="generateFlashcards()">
+                    🔄 Repetir
+                </button>
 
             </div>
 
         `;
 
-    }else{
+        state.xp+=20;
 
-        feedback.innerHTML=`
-
-            <div class="feedback incorrect">
-
-                <strong>
-                    ❌ No exactamente
-                </strong>
-
-                <p>
-                    La respuesta esperada era:
-                </p>
-
-                <div class="answer-reference">
-                    ${question.answers[0]}
-                </div>
-
-            </div>
-
-        `;
-
-    }
-
-    document.getElementById("checkOpenButton").outerHTML=`
-
-        <button
-            class="btn btn-primary full"
-            onclick="nextOpenQuestion()">
-
-            ${
-                openIndex<openQuestions.length-1
-                ? "Siguiente pregunta →"
-                : "Ver resultado"
-            }
-
-        </button>
-
-    `;
-
-}
-
-
-/* =====================================================
-   SIGUIENTE PREGUNTA ABIERTA
-===================================================== */
-
-function nextOpenQuestion(){
-
-    openIndex++;
-
-    if(openIndex>=openQuestions.length){
-
-        showOpenResult();
+        saveState();
 
         return;
 
     }
 
-    showOpenQuestion();
+    const card=flashData[flashIndex];
 
-}
+    document.getElementById("flashArea").innerHTML=`
 
+        <div class="flashcard" onclick="flipFlashcard()">
 
-function showOpenResult(){
+            <div>
 
-    const percentage=Math.round(
-        (openScore/openQuestions.length)*100
-    );
-
-    let message="Sigue practicando.";
-
-    if(percentage>=90){
-        message="¡Excelente! Dominas bastante bien el tema. 🔥";
-    }else if(percentage>=70){
-        message="¡Muy bien! Ya tienes una buena base. 💪";
-    }else if(percentage>=50){
-        message="Vas por buen camino. Repasa los errores.";
-    }
-
-    document.getElementById("openQuestionArea").innerHTML=`
-
-        <div class="card test-result">
-
-            <div class="icon-box"
-                 style="margin:auto auto 15px;">
-                🏆
-            </div>
-
-            <h2>
-                Preguntas terminadas
-            </h2>
-
-            <div class="result-score">
-                ${percentage}%
-            </div>
-
-            <p>
-                ${openScore} de ${openQuestions.length}
-                respuestas correctas
-            </p>
-
-            <br>
-
-            <p class="muted">
-                ${message}
-            </p>
-
-            <br>
-
-            <button
-                class="btn btn-primary"
-                onclick="startOpenQuestions()">
-
-                Volver a practicar
-
-            </button>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
-   TEST TIPO TEST
-===================================================== */
-
-let testQuestions=[];
-
-let testIndex=0;
-
-let testScore=0;
-
-function startTopicTest(){
-
-    const topic=document.getElementById("testTopic").value.trim();
-
-    const count=parseInt(
-        document.getElementById("testCount").value
-    );
-
-    if(!topic){
-
-        alert("Escribe un tema para generar el test.");
-
-        return;
-
-    }
-
-    const data=findTopicData(topic);
-
-    if(!data){
-
-        document.getElementById("testArea").innerHTML=`
-
-            <div class="card" style="margin-top:20px;">
+                <small>
+                    TARJETA ${flashIndex+1} / ${flashData.length}
+                </small>
 
                 <h2>
-                    No encontramos un banco específico para ese tema
+                    ${flashShowingAnswer ? card[1] : card[0]}
                 </h2>
 
-                <br>
-
-                <p class="muted">
-                    Prueba con:
-                    <strong>Descubrimiento de América</strong>,
-                    <strong>Revolución Francesa</strong>,
-                    <strong>Fotosíntesis</strong>,
-                    <strong>Sistema Solar</strong>
-                    o <strong>Proporcionalidad</strong>.
-                </p>
-
-                <br>
-
-                <p class="muted">
-                    Cuando conectemos la IA, esta parte podrá generar
-                    preguntas sobre prácticamente cualquier tema que escribas.
+                <p>
+                    ${flashShowingAnswer
+                        ? "Pulsa para volver a la pregunta"
+                        : "Pulsa para ver la respuesta"}
                 </p>
 
             </div>
-
-        `;
-
-        return;
-
-    }
-
-    /*
-      Mezclamos las preguntas para que no salgan siempre
-      en el mismo orden.
-    */
-
-    testQuestions=[...data.questions]
-        .sort(()=>Math.random()-.5)
-        .slice(0,count);
-
-    /*
-      Mezclamos también las respuestas de cada pregunta.
-      Así la correcta no aparece siempre en la misma posición.
-    */
-
-    testQuestions=testQuestions.map(function(question){
-
-        const options=[...question.options];
-
-        options.sort(()=>Math.random()-.5);
-
-        return{
-            ...question,
-            shuffledOptions:options
-        };
-
-    });
-
-    testIndex=0;
-
-    testScore=0;
-
-    showTestQuestion();
-
-}
-
-
-function showTestQuestion(){
-
-    const area=document.getElementById("testArea");
-
-    const question=testQuestions[testIndex];
-
-    const progress=
-        ((testIndex)/testQuestions.length)*100;
-
-    let html=`
-
-        <div class="card" style="margin-top:20px;">
-
-            <div class="small">
-                Pregunta ${testIndex+1}
-                de ${testQuestions.length}
-            </div>
-
-            <div class="test-progress">
-
-                <div
-                    class="test-progress-bar"
-                    style="width:${progress}%">
-                </div>
-
-            </div>
-
-            <h2 style="line-height:1.4;">
-                ${question.q}
-            </h2>
-
-            <br>
-
-    `;
-
-    question.shuffledOptions.forEach(function(option){
-
-        html+=`
-
-            <button
-                class="test-option"
-                onclick='answerTest(${JSON.stringify(option)})'>
-
-                ${option}
-
-            </button>
-
-        `;
-
-    });
-
-    html+=`
 
         </div>
 
-    `;
+        <div class="flash-controls">
 
-    area.innerHTML=html;
+            <button class="secondary" onclick="previousFlashcard()">
+                ← Anterior
+            </button>
 
-}
-
-
-function answerTest(selected){
-
-    const question=testQuestions[testIndex];
-
-    const correct=isAnswerCorrect(
-        selected,
-        question.answers
-    );
-
-    if(correct){
-
-        testScore++;
-
-        alert("✅ ¡Correcto!");
-
-    }else{
-
-        alert(
-            "❌ Incorrecto.\n\nRespuesta correcta: "
-            +question.answers[0]
-        );
-
-    }
-
-    testIndex++;
-
-    if(testIndex<testQuestions.length){
-
-        showTestQuestion();
-
-    }else{
-
-        showTestResult();
-
-    }
-
-}
-
-
-function showTestResult(){
-
-    const percentage=Math.round(
-        (testScore/testQuestions.length)*100
-    );
-
-    let message="";
-
-    if(percentage>=90){
-
-        message="¡Excelente resultado! 🔥";
-
-    }else if(percentage>=70){
-
-        message="¡Muy bien! 💪";
-
-    }else if(percentage>=50){
-
-        message="Buen comienzo. Repasa los errores.";
-
-    }else{
-
-        message="Necesitas repasar un poco más este tema.";
-
-    }
-
-    document.getElementById("testArea").innerHTML=`
-
-        <div class="card test-result">
-
-            <div class="icon-box"
-                 style="margin:auto auto 15px;">
-                🏆
-            </div>
-
-            <h2>
-                Test terminado
-            </h2>
-
-            <div class="result-score">
-                ${percentage}%
-            </div>
-
-            <p>
-                ${testScore} de ${testQuestions.length}
-                correctas
-            </p>
-
-            <br>
-
-            <p class="muted">
-                ${message}
-            </p>
-
-            <br>
-
-            <button
-                class="btn btn-primary"
-                onclick="startTopicTest()">
-
-                Repetir test
-
+            <button class="primary" onclick="nextFlashcard()">
+                Siguiente →
             </button>
 
         </div>
@@ -3305,156 +2096,77 @@ function showTestResult(){
     `;
 
 }
-
-
-/* =====================================================
-   FLASHCARDS
-===================================================== */
-
-const flashcards=[
-
-    {
-        front:"¿Qué es la fotosíntesis?",
-        back:"Es el proceso mediante el cual las plantas producen materia orgánica utilizando la energía de la luz."
-    },
-
-    {
-        front:"¿En qué año llegó Colón a América?",
-        back:"En 1492."
-    },
-
-    {
-        front:"¿Cómo se llamaban las tres embarcaciones de Colón?",
-        back:"La Niña, la Pinta y la Santa María."
-    },
-
-    {
-        front:"¿En qué año comenzó la Revolución Francesa?",
-        back:"En 1789."
-    },
-
-    {
-        front:"¿Cuál es el planeta más grande?",
-        back:"Júpiter."
-    }
-
-];
-
-let flashIndex=0;
-
-let flashBack=false;
-
 
 function flipFlashcard(){
 
-    flashBack=!flashBack;
+    flashShowingAnswer=!flashShowingAnswer;
 
-    document.getElementById("flashcard").innerText=
-        flashBack
-        ?flashcards[flashIndex].back
-        :flashcards[flashIndex].front;
+    renderFlashcard();
 
 }
-
 
 function nextFlashcard(){
 
     flashIndex++;
 
-    if(flashIndex>=flashcards.length){
-        flashIndex=0;
-    }
+    flashShowingAnswer=false;
 
-    flashBack=false;
-
-    updateFlashcard();
+    renderFlashcard();
 
 }
-
 
 function previousFlashcard(){
 
-    flashIndex--;
+    if(flashIndex>0){
 
-    if(flashIndex<0){
-        flashIndex=flashcards.length-1;
+        flashIndex--;
+
     }
 
-    flashBack=false;
+    flashShowingAnswer=false;
 
-    updateFlashcard();
-
-}
-
-
-function updateFlashcard(){
-
-    document.getElementById("flashcard").innerText=
-        flashcards[flashIndex].front;
-
-    document.getElementById("flashNumber").innerText=
-        flashIndex+1;
-
-    document.getElementById("flashProgress").style.width=
-        ((flashIndex+1)/flashcards.length*100)+"%";
+    renderFlashcard();
 
 }
 
 
-/* =====================================================
-   APUNTES
-===================================================== */
+/* =========================
+   TESTS
+========================= */
 
-let notes=[];
+let testQuestions=[];
+let testIndex=0;
+let testScore=0;
 
+function startTest(){
 
-function saveNote(){
+    const topic=document.getElementById("testTopic").value.trim();
 
-    const title=
-        document.getElementById("noteTitle")
-        .value
-        .trim();
+    if(!topic){
 
-    const text=
-        document.getElementById("noteText")
-        .value
-        .trim();
-
-    if(!title || !text){
-
-        alert(
-            "Completa el título y los apuntes."
-        );
+        alert("Escribe un tema.");
 
         return;
 
     }
 
-    notes.push({
-        title:title,
-        text:text
-    });
+    const data=findTopic(topic);
 
-    renderNotes();
+    if(!data){
 
-    document.getElementById("noteTitle").value="";
-    document.getElementById("noteText").value="";
+        document.getElementById("testArea").innerHTML=`
 
-}
+            <div class="card empty">
 
+                <h3>🤖 La IA generará este test</h3>
 
-function renderNotes(){
+                <p style="margin-top:10px;">
+                    Este tema todavía no está en la base de demostración.
+                    Cuando conectemos la IA podrá crear preguntas específicas
+                    sobre cualquier tema.
+                </p>
 
-    const list=
-        document.getElementById("notesList");
-
-    if(notes.length===0){
-
-        list.innerHTML=`
-
-            <p class="muted">
-                Todavía no tienes apuntes guardados.
-            </p>
+            </div>
 
         `;
 
@@ -3462,101 +2174,738 @@ function renderNotes(){
 
     }
 
-    list.innerHTML=
-        notes.map(function(note,index){
+    testQuestions=data.flashcards
+        .map(item=>{
 
-            return`
+            return {
+                question:item[0],
+                correct:item[1],
+                options:generateOptions(item[1],data.flashcards)
+            };
 
-                <div class="note-item">
+        })
+        .sort(()=>Math.random()-.5)
+        .slice(
+            0,
+            parseInt(document.getElementById("testCount").value)
+        );
 
-                    <h3>
-                        ${note.title}
-                    </h3>
+    testIndex=0;
+    testScore=0;
 
-                    <p class="muted">
-                        ${
-                            note.text.substring(0,150)
-                        }${note.text.length>150?"...":""}
-                    </p>
+    renderTest();
 
-                    <div class="note-actions">
+}
 
-                        <button
-                            class="btn btn-secondary"
-                            onclick="readNote(${index})">
+function generateOptions(correct,data){
 
-                            Ver
+    let options=data
+        .map(x=>x[1])
+        .filter(x=>x!==correct);
 
-                        </button>
+    options=options
+        .sort(()=>Math.random()-.5)
+        .slice(0,3);
 
-                        <button
-                            class="btn btn-danger"
-                            onclick="deleteNote(${index})">
+    options.push(correct);
 
-                            Eliminar
+    return options.sort(()=>Math.random()-.5);
 
-                        </button>
+}
 
-                    </div>
+function renderTest(){
 
-                </div>
+    if(testIndex>=testQuestions.length){
 
-            `;
+        const percentage=Math.round(
+            (testScore/testQuestions.length)*100
+        );
 
-        }).join("");
+        state.xp+=testScore*10;
+
+        saveState();
+
+        document.getElementById("testArea").innerHTML=`
+
+            <div class="card empty">
+
+                <h2>🎉 Test terminado</h2>
+
+                <p style="font-size:30px;font-weight:800;margin:15px;">
+                    ${testScore}/${testQuestions.length}
+                </p>
+
+                <p>
+                    Has conseguido un ${percentage}%.
+                </p>
+
+                <button class="primary" onclick="startTest()" style="margin-top:15px;">
+                    🔄 Repetir test
+                </button>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    const q=testQuestions[testIndex];
+
+    document.getElementById("testArea").innerHTML=`
+
+        <div class="card">
+
+            <p style="color:var(--muted);margin-bottom:10px;">
+                Pregunta ${testIndex+1} de ${testQuestions.length}
+            </p>
+
+            <div class="question">
+                ${q.question}
+            </div>
+
+            <div id="options">
+
+                ${q.options.map((option,i)=>`
+
+                    <button
+                        class="option"
+                        onclick="answerTest(${i})">
+
+                        ${String.fromCharCode(65+i)}.
+                        ${option}
+
+                    </button>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+function answerTest(index){
+
+    const q=testQuestions[testIndex];
+
+    const buttons=document.querySelectorAll(".option");
+
+    buttons.forEach(b=>b.disabled=true);
+
+    const selected=q.options[index];
+
+    if(selected===q.correct){
+
+        buttons[index].classList.add("correct");
+
+        testScore++;
+
+    }else{
+
+        buttons[index].classList.add("wrong");
+
+        buttons.forEach((b,i)=>{
+
+            if(q.options[i]===q.correct){
+                b.classList.add("correct");
+            }
+
+        });
+
+    }
+
+    setTimeout(()=>{
+
+        testIndex++;
+
+        renderTest();
+
+    },900);
 
 }
 
 
-function readNote(index){
+/* =========================
+   OPEN QUESTIONS
+========================= */
 
-    alert(
-        notes[index].title+
-        "\n\n"+
-        notes[index].text
-    );
+let openQuestions=[];
+let openIndex=0;
+let openScore=0;
+
+function startOpenQuestions(){
+
+    const topic=document.getElementById("openTopic").value.trim();
+
+    const data=findTopic(topic);
+
+    if(!topic){
+
+        alert("Escribe un tema.");
+
+        return;
+
+    }
+
+    if(!data){
+
+        document.getElementById("openArea").innerHTML=`
+
+            <div class="card empty">
+
+                <h3>🤖 Preguntas abiertas con IA</h3>
+
+                <p style="margin-top:10px;">
+                    Cuando conectemos la IA podrás escribir cualquier tema
+                    y StudyLearning generará preguntas abiertas nuevas.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    openQuestions=data.flashcards
+        .sort(()=>Math.random()-.5)
+        .slice(0,5);
+
+    openIndex=0;
+    openScore=0;
+
+    renderOpenQuestion();
+
+}
+
+function renderOpenQuestion(){
+
+    if(openIndex>=openQuestions.length){
+
+        state.xp+=openScore*10;
+
+        saveState();
+
+        document.getElementById("openArea").innerHTML=`
+
+            <div class="card empty">
+
+                <h2>🎉 Terminaste</h2>
+
+                <p style="font-size:28px;font-weight:800;margin:15px;">
+                    ${openScore}/${openQuestions.length}
+                </p>
+
+                <button class="primary" onclick="startOpenQuestions()">
+                    🔄 Repetir
+                </button>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    const q=openQuestions[openIndex];
+
+    document.getElementById("openArea").innerHTML=`
+
+        <div class="card">
+
+            <p style="color:var(--muted);margin-bottom:12px;">
+                Pregunta ${openIndex+1}/${openQuestions.length}
+            </p>
+
+            <div class="question">
+                ${q[0]}
+            </div>
+
+            <textarea id="openAnswer"
+                placeholder="Escribe tu respuesta aquí..."></textarea>
+
+            <button class="primary"
+                onclick="checkOpenAnswer()"
+                style="margin-top:12px;">
+                Comprobar respuesta
+            </button>
+
+            <div id="openResult"></div>
+
+        </div>
+
+    `;
+
+}
+
+function normalizeAnswer(text){
+
+    return normalize(text)
+        .replace(/[^\w\s]/g,"")
+        .split(/\s+/)
+        .filter(Boolean);
+
+}
+
+function similarity(a,b){
+
+    const A=normalizeAnswer(a);
+    const B=normalizeAnswer(b);
+
+    if(a.trim()==="" || b.trim()===""){
+        return 0;
+    }
+
+    if(normalize(a)===normalize(b)){
+        return 1;
+    }
+
+    let matches=0;
+
+    A.forEach(word=>{
+
+        if(word.length>3 && B.includes(word)){
+            matches++;
+        }
+
+    });
+
+    return matches/Math.max(B.length,1);
+
+}
+
+function checkOpenAnswer(){
+
+    const answer=document.getElementById("openAnswer").value.trim();
+
+    const correct=openQuestions[openIndex][1];
+
+    const score=similarity(answer,correct);
+
+    const result=document.getElementById("openResult");
+
+    if(score>=.55){
+
+        openScore++;
+
+        result.innerHTML=`
+
+            <div class="result" style="border-left:4px solid var(--green);">
+
+                ✅ <strong>Correcto</strong>
+
+                <p style="margin-top:8px;">
+                    Tu respuesta coincide suficientemente con la respuesta esperada.
+                </p>
+
+            </div>
+
+            <button class="primary"
+                onclick="nextOpenQuestion()"
+                style="margin-top:10px;">
+                Siguiente
+            </button>
+
+        `;
+
+    }else{
+
+        result.innerHTML=`
+
+            <div class="result" style="border-left:4px solid var(--red);">
+
+                ❌ <strong>No del todo</strong>
+
+                <p style="margin-top:8px;">
+                    <strong>Respuesta esperada:</strong><br>
+                    ${correct}
+                </p>
+
+            </div>
+
+            <button class="primary"
+                onclick="nextOpenQuestion()"
+                style="margin-top:10px;">
+                Siguiente
+            </button>
+
+        `;
+
+    }
+
+}
+
+function nextOpenQuestion(){
+
+    openIndex++;
+
+    renderOpenQuestion();
 
 }
 
 
-function deleteNote(index){
+/* =========================
+   TASKS
+========================= */
 
-    notes.splice(index,1);
+function addTask(){
 
-    renderNotes();
-
-}
-
-
-function summarizeNotes(){
-
-    const text=
-        document.getElementById("noteText")
-        .value
-        .trim();
+    const text=document.getElementById("taskText").value.trim();
 
     if(!text){
 
-        alert(
-            "Escribe unos apuntes primero."
-        );
+        alert("Escribe la tarea.");
+
+        return;
+
+    }
+
+    state.tasks.push({
+
+        id:Date.now(),
+        text,
+        subject:document.getElementById("taskSubject").value,
+        date:document.getElementById("taskDate").value,
+        done:false
+
+    });
+
+    document.getElementById("taskText").value="";
+
+    saveState();
+
+}
+
+function renderTasks(){
+
+    const container=document.getElementById("taskList");
+
+    if(!container) return;
+
+    if(state.tasks.length===0){
+
+        container.innerHTML=`
+            <div class="empty">
+                No tienes tareas todavía.
+            </div>
+        `;
+
+        return;
+
+    }
+
+    container.innerHTML=state.tasks.map(task=>`
+
+        <div class="task ${task.done ? "done":""}">
+
+            <input
+                class="task-check"
+                type="checkbox"
+                ${task.done?"checked":""}
+                onchange="toggleTask(${task.id})">
+
+            <div class="task-info">
+
+                <strong>${task.text}</strong>
+
+                <small>
+                    ${task.subject}
+                    ${task.date ? " · "+task.date : ""}
+                </small>
+
+            </div>
+
+            <button class="secondary"
+                onclick="deleteTask(${task.id})">
+                🗑️
+            </button>
+
+        </div>
+
+    `).join("");
+
+}
+
+function toggleTask(id){
+
+    const task=state.tasks.find(t=>t.id===id);
+
+    if(task){
+
+        task.done=!task.done;
+
+        if(task.done){
+            state.xp+=10;
+        }
+
+    }
+
+    saveState();
+
+}
+
+function deleteTask(id){
+
+    state.tasks=state.tasks.filter(t=>t.id!==id);
+
+    saveState();
+
+}
+
+function solveTask(){
+
+    const text=document.getElementById("taskText").value.trim();
+
+    if(!text){
+
+        alert("Escribe primero la tarea.");
 
         return;
 
     }
 
     alert(
-        "Aquí conectaremos la IA para crear un resumen automático de tus apuntes."
+        "🤖 Aquí conectaremos la IA.\n\n"+
+        "La IA analizará tu tarea y podrá resolverla paso a paso."
     );
 
 }
 
 
-/* =====================================================
-   INICIO
-===================================================== */
+/* =========================
+   WORKS
+========================= */
 
-renderNotes();
+function generateWork(){
+
+    const topic=document.getElementById("workTopic").value.trim();
+
+    if(!topic){
+
+        alert("Escribe el tema del trabajo.");
+
+        return;
+
+    }
+
+    const type=document.getElementById("workType").value;
+
+    const pages=document.getElementById("workPages").value;
+
+    document.getElementById("workResult").innerHTML=`
+
+        <div class="card">
+
+            <h2>💼 ${topic}</h2>
+
+            <p style="color:var(--muted);margin:8px 0 20px;">
+                ${type} · ${pages} páginas/diapositivas
+            </p>
+
+            <div style="background:var(--lightblue);padding:18px;border-radius:12px;">
+
+                <h3>🤖 Generador preparado</h3>
+
+                <p style="margin-top:8px;line-height:1.6;">
+                    Cuando conectemos la IA, aquí se generará automáticamente
+                    el trabajo completo, organizado y adaptado al curso.
+                </p>
+
+            </div>
+
+            <br>
+
+            <button class="secondary"
+                onclick="alert('Más adelante podremos exportarlo como PDF o presentación.')">
+                📥 Exportar
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   NOTES
+========================= */
+
+function saveNote(){
+
+    const title=document.getElementById("noteTitle").value.trim();
+
+    const text=document.getElementById("noteText").value.trim();
+
+    if(!title || !text){
+
+        alert("Completa el título y los apuntes.");
+
+        return;
+
+    }
+
+    state.notes.push({
+
+        id:Date.now(),
+        title,
+        text
+
+    });
+
+    document.getElementById("noteTitle").value="";
+    document.getElementById("noteText").value="";
+
+    saveState();
+
+}
+
+function renderNotes(){
+
+    const container=document.getElementById("notesList");
+
+    if(!container) return;
+
+    if(state.notes.length===0){
+
+        container.innerHTML=`
+            <div class="empty">
+                Todavía no tienes apuntes guardados.
+            </div>
+        `;
+
+        return;
+
+    }
+
+    container.innerHTML=state.notes.map(note=>`
+
+        <div class="task">
+
+            <div class="task-info">
+
+                <strong>${note.title}</strong>
+
+                <small>
+                    ${note.text.substring(0,100)}
+                    ${note.text.length>100 ? "..." : ""}
+                </small>
+
+            </div>
+
+        </div>
+
+    `).join("");
+
+}
+
+function summarizeNote(){
+
+    const text=document.getElementById("noteText").value.trim();
+
+    if(!text){
+
+        alert("Escribe primero los apuntes.");
+
+        return;
+
+    }
+
+    alert(
+        "✨ Más adelante la IA podrá convertir estos apuntes en:\n\n"+
+        "• Resumen\n"+
+        "• Conceptos clave\n"+
+        "• Flashcards\n"+
+        "• Test\n"+
+        "• Preguntas abiertas\n"+
+        "• Plan de estudio"
+    );
+
+}
+
+
+/* =========================
+   CHAT
+========================= */
+
+function sendChat(){
+
+    const input=document.getElementById("chatInput");
+
+    const text=input.value.trim();
+
+    if(!text) return;
+
+    const chat=document.getElementById("chatMessages");
+
+    chat.innerHTML+=`
+
+        <div style="
+            padding:15px;
+            background:#f3f5f8;
+            border-radius:12px;
+            margin-bottom:12px;
+            text-align:right;
+        ">
+
+            ${text}
+
+        </div>
+
+        <div style="
+            padding:15px;
+            background:var(--lightblue);
+            border-radius:12px;
+            margin-bottom:12px;
+        ">
+
+            🤖 El Tutor IA estará disponible cuando conectemos la inteligencia artificial.
+
+        </div>
+
+    `;
+
+    input.value="";
+
+}
+
+
+/* =========================
+   OTHER
+========================= */
+
+function showNotification(){
+
+    alert(
+        "🔔 No tienes nuevas notificaciones."
+    );
+
+}
+
+function buyPlan(plan){
+
+    alert(
+        "💳 Has seleccionado el plan "+plan+
+        ".\n\nEl sistema de pago se conectará más adelante."
+    );
+
+}
+
+
+/* =========================
+   INIT
+========================= */
+
+updateStats();
+
+go("home");
 
 </script>
 
