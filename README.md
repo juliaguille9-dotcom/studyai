@@ -1,1 +1,1 @@
-# studyai
+# StudyLearning
